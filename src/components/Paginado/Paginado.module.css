@@ -1,0 +1,16 @@
+.container{
+    background-color: #176B87;
+   list-style: none;
+   display: flex;
+   flex-direction: row;
+   margin-left: 100px;
+   align-items: center;
+   justify-content:  space-around;
+   border-radius: 10px;
+}
+
+
+.container p:hover {
+
+    background-color: white;
+}
