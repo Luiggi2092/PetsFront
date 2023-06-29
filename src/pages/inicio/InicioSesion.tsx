@@ -1,8 +1,10 @@
-import React from 'react'
+import './inicioSesion.css'
 
 const InicioSesion = () => {
   return (
+    <div>
     <div>InicioSesion</div>
+    </div>
   )
 }
 

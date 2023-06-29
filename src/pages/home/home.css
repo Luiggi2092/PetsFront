@@ -1,3 +1,19 @@
-body{
-    background-image:rgb(236, 225, 225) ;
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    /* Ajusta el valor de padding según tus necesidades */
+    margin-top: 10px;
+    /* Ajusta el valor de margin-top según tus necesidades */
+}
+/* .card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} */
+
+button {
+    margin: 0 10px;
 }
