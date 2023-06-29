@@ -1,3 +1,26 @@
 .container{
+    background-color: white;
+    font-family: 'Acme', sans-serif;
+    color: rgba(0, 28, 48, 1);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
     background-color: rgba(100, 204, 197, 1);
+    width: 50%;
+    height: 60%;
+    padding: 3rem;
+    border-radius: 3rem;
+}
+
+.registrarmeInp{
+    color: white;
+}
+
+.error{
+    color: red;
 }
