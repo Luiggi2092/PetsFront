@@ -1,51 +1,105 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'
-import logo from '../../assets/sinfondo blanco.png';
-
-import { Home, Storefront, Person, Search, Room, Instagram, Facebook, WhatsApp } from '@mui/icons-material';
-
+import React, { useState } from 'react';
+import { Collapse } from 'react-bootstrap';
+import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
+import Logo from '../../assets/logo.png';
+import './navbar.css'
+import {Link} from "react-router-dom"
 
 const Navbar: React.FC = () => {
-    return (
-<nav className="navbar">
-  
-<div className="container">
-<div className="nav-links">
- <div className="logo">
-   <img src={logo} alt="Logo de la empresa" />
-</div>
-   <Link to="/">
-   <Home />Home</Link>
-   <Link to="/nosotros"><Person />Se parte de nosotros</Link>
-   <Link to="/tienda"><Storefront />PetShop</Link>
-   <Link to="/inicio-sesion"><Person />Inicio Sesión</Link>
-   <Link to="/registrate"><Person />Regístrate</Link>
-<div className="search-bar">
-{/* Inserta aquí el código o componente para la barra de búsqueda */}
-   <Search />
-</div>
-<div className="social-icons">
- <a href="https://www.instagram.com">
-   <Instagram />
- </a>
- <a href="https://www.facebook.com">
-   <Facebook />
- </a>
- <a href="https://www.whatsapp.com">
-   <WhatsApp />
- </a>
- <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">
-  <i className="fas fa-map-marker-alt"></i>
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-   <Room />
- </a>
-{/* Inserta aquí el código o componente para los iconos de redes sociales */}
-</div>
-</div>
-</div>
-</nav>
-);
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('Search query:', searchQuery);
+    // Agregar lógica para realizar la búsqueda de productos
+  };
+
+  const handleCart = () => {
+    console.log('Mostrando carrito de compras...');
+    // Agregar lógica para mostrar el carrito de compras
+  };
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark ">
+      <div className="container">
+        <Link to="/home" className="navbar-brand">
+          <img src={Logo} alt="Logo" />
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded={isCollapsed}
+          aria-label="Toggle navigation"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <Collapse in={isCollapsed}>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a href="/" className="nav-link">
+                  <BsHouseDoorFill /> Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/join" className="nav-link">
+                  <BsPersonPlus /> Unete a nosotros
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/petmatch" className="nav-link">
+                  <BsHeartFill /> Petmatch
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/petshop" className="nav-link">
+                  <BsBagFill /> PetShop
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link">
+                  <BsBoxArrowInRight /> Inicio
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/register" className="nav-link">
+                  <BsPersonPlus /> Registro
+                </a>
+              </li>
+            </ul>
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <form className="d-flex" onSubmit={handleSearch}>
+                  <input
+                    className="form-control me-2"
+                    type="search"
+                    name="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <button className="btn btn-outline-light" type="submit">
+                    <BsSearch />
+                  </button>
+                </form>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-outline-light" onClick={handleCart}>
+                  <BsCart3 />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </Collapse>
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;
