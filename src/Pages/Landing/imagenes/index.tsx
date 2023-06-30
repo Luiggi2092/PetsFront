@@ -2,6 +2,7 @@ import iconoPatita from './iconoPatita.png'
 import sinFondoNegro from './sinfondonegro.png'
 import sinFondoBlanco from './sinfondoblanco.png'
 import fondo from './landing.jpg'
+import quienesSomos from './quienesSomos.png'
 import nuestrosServ from './nuestrosServ.jpg'
 import Magali from './Magali.jpg'
 import Amberlis from './Amberlis.jpg'
@@ -9,6 +10,7 @@ import John from './John.jpg'
 import Luis from './Luis.jpg'
 import Matheus from './Matheus.jpg'
 import Ricardo from './Ricardo.jpg'
-import Persona from './Persona.jpg'
+import Nelson from './Nelson.jpg'
+import David from './David.jpg'
 
-export {iconoPatita, sinFondoBlanco, sinFondoNegro, fondo, nuestrosServ, Magali, Amberlis, John, Luis, Matheus, Ricardo, Persona}
+export { iconoPatita, sinFondoBlanco, quienesSomos, sinFondoNegro, fondo, nuestrosServ, Magali, Amberlis, John, David, Luis, Matheus, Ricardo, Nelson }
