@@ -6,12 +6,12 @@ import Navbar from './components/navbar/Navbar';
 import Home from './Pages/home/Home';
 import UneteANosotros from './Pages/nosotros/UneteANosotros';
 import PetShop from './Pages/Tienda/PetShop';
-import InicioSesion from './Pages/inicio/InicioSesion';
 import Registrate from './Pages/registro/FormRegistrate';
 import SocialIcons from './Pages/socialIcons/SocialIcons';
 import Landing from './Pages/Landing/Landing'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PetDetail from '../src/Pages/PetDetail/PetDetail';
+import Login from './Pages/inicio/InicioSesion';
 
 
 const App: React.FC = () => {
@@ -25,7 +25,7 @@ const App: React.FC = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/nosotros" element={<UneteANosotros />} />
                 <Route path="/petshop" element={<PetShop />} />
-                <Route path="/inicio-sesion" element={<InicioSesion />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/registrato" element={<Registrate />} />
                 <Route path="/pet/:id" element={<Registrate />} />
                 <Route path="/pets/:id" element={<PetDetail/>} />

@@ -1,0 +1,9 @@
+.containerForm {
+    display: flex;
+    justify-content: center;
+    /* width: 500px; */
+    height: 500px;
+    flex-direction: column;
+    background-color: #0e3f50;
+    align-items: center;
+}
