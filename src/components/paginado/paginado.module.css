@@ -1,16 +1,32 @@
 .container {
-    background-color: #176B87;
-    list-style: none;
     display: flex;
-    flex-direction: row;
-    margin-left: 100px;
     align-items: center;
-    justify-content: space-around;
-    border-radius: 10px;
+    justify-content: center;
+    margin-left: 85px;
+    gap:15px;
+    list-style: none;
+    
+    
+  
+
+    
+    
 }
 
 
-.container p:hover {
 
-    background-color: white;
+
+.container li {
+    
+        padding: 10px;
+        /*border: 1px solid white;*/
+        color: black;
+        cursor: pointer;
+        
+}
+
+.container li.active {
+    background-color: #176B87;
+    color: black;
+    
 }

@@ -16,7 +16,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #080224;
+    background-color: #333;
     /* Ajusta el color de fondo de los iconos según tus necesidades */
     color: #fff;
     /* Ajusta el color de los iconos según tus necesidades */
@@ -25,9 +25,9 @@
 }
 
 .social-icons a:hover {
-    background-color: #15d6bd;
+    background-color: #64CCC5;
     /* Ajusta el color de fondo en el hover de los iconos según tus necesidades */
-    color: #050116;
+    color: #333;
     /* Ajusta el color de los iconos en el hover según tus necesidades */
     transform: scale(1.2);
     /* Ajusta la escala de los iconos en el hover según tus necesidades */

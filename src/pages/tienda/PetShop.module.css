@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.titulo {
+    text-align:center;
+    margin-left: 5rem;
+    padding: 2rem;
+}
+
+

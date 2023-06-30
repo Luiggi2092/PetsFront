@@ -2,16 +2,35 @@ import React, { useState } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
+import { useSelector,useDispatch } from 'react-redux';
+import {FillName,Fill,SetPagina} from '../../redux/actions'
 import './navbar.css'
-import {Link} from "react-router-dom"
+import {Link, Outlet} from "react-router-dom"
 
-const Navbar: React.FC = () => {
+interface Props {
+  setPagina?: (value: number) => void;
+}
+
+
+const Navbar: React.FC<Props> = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const count = useSelector((state:any)=> state.count);
+  const dispatch = useDispatch();
+  
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Search query:', searchQuery);
+    if(searchQuery){
+    dispatch(FillName(searchQuery));
+    dispatch(Fill(true));
+    dispatch(SetPagina(1));
+    
+    }else{
+      dispatch(Fill(false));
+    }
+
+    
     // Agregar lógica para realizar la búsqueda de productos
   };
 
@@ -92,6 +111,7 @@ const Navbar: React.FC = () => {
               <li className="nav-item">
                 <button className="btn btn-outline-light" onClick={handleCart}>
                   <BsCart3 />
+                  <span className='cart-count'>{count}</span>
                 </button>
               </li>
             </ul>

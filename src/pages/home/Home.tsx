@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../../components/card/Card';
+import Card from '../../components/Card/Card';
 import Pagination from '../../components/pagination/Pagination';
 import './home.css';
 
@@ -156,44 +156,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

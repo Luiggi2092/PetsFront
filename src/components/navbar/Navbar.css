@@ -86,6 +86,10 @@
     
 }
 
+.cart-count{
+    padding-left:5px;
+   }
+
 @media (max-width: 767.98px) {
     .navbar-brand img {
         width: 30px;
