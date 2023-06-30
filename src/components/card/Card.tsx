@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaHeart, FaStar, FaInfoCircle, FaCheckCircle, FaBook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './petCards.css';
+// import {Pet} from '../../interfaces/Pets';
 
 interface CardProps {
     name: string;

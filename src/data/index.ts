@@ -1,5 +1,5 @@
 
-import { Product } from "../redux/types"
+import { Product } from "../interfaces/Products"
 
 export const items: Product[] = [
 

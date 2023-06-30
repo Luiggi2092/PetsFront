@@ -22,6 +22,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "mercadopago": "^1.5.16",
+    "petmatch": "file:",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0-beta.1",
     "react-dom": "^18.2.0",

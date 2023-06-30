@@ -1,15 +1,47 @@
-.container{
+.container {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    
+    margin-top: -30px;
 }
 
 .titulo {
-    text-align:center;
+    text-align: center;
     margin-left: 5rem;
     padding: 2rem;
 }
 
+.cat {
+    margin-left: 15rem;
+    width: 200px;
+    position: absolute;
+    margin-top: 12px;
+}
 
+.titCat {
+    margin-left: 16rem;
+}
+
+.containerCat {
+    background-color: #DAFFFB;
+    width: 200px;
+    display: inline-block;
+}
+
+.containerCat li {
+    list-style: none;
+}
+
+.newProd {
+    display: flex;
+    align-items: center;
+}
+
+.butNew {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -80px;
+    left: 30px
+}
