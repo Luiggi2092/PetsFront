@@ -22,7 +22,9 @@ const Landing = () => {
 
     const [hoveredImage, setHoveredImage] = useState('');
 
-    const handleMouseEnter = (nombre) => {
+
+    const handleMouseEnter = (nombre:string) => {
+
         setHoveredImage(nombre);
     };
 

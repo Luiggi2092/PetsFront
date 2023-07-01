@@ -1,14 +1,5 @@
 {
-  "name": "petmatch",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
+  
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -29,6 +20,24 @@
     "slick-carousel": "^1.8.1",
     "stripe": "^12.10.0"
   },
+  
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.6",
+    "bootstrap": "^5.3.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
+    "react-multi-carousel": "^2.8.4",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.14.0",
+    "slick-carousel": "^1.8.1"
+  },
   "devDependencies": {
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
@@ -41,4 +50,4 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }
-}
+

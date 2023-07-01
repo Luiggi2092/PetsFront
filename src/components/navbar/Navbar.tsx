@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/sinfondo.png';
 import './navbar.css'
 import {Link} from "react-router-dom"
 
