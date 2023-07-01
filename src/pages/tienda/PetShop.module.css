@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: -30px;
+    margin-top: -250px;
 }
 
 .titulo {
@@ -21,6 +21,7 @@
 
 .titCat {
     margin-left: 16rem;
+    margin-top: 50px;
 }
 
 .containerCat {
@@ -36,12 +37,14 @@
 .newProd {
     display: flex;
     align-items: center;
+    width: fit-content;
 }
 
 .butNew {
     display: flex;
-    justify-content: center;
-    position: relative;
-    top: -80px;
-    left: 30px
+    justify-content: right;
+    width: fit-content;
+    margin-top: 50px;
+    left: 30px;
+    margin-left: 16rem;
 }

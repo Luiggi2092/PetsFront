@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { FaHeart, FaStar, FaInfoCircle, FaCheckCircle, FaBook } from 'react-icons/fa';
+import { FaHeart, FaStar, FaInfoCircle, /*FaCheckCircle,*/ FaBook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './petCards.css';
 // import {Pet} from '../../interfaces/Pets';
 
 interface CardProps {
+    id:string;
     name: string;
     age: number;
-    certified: boolean;
-    images: string[];
+    //certified: boolean;
+    breed?:string;
+    image: string;
 }
 
-const Card: React.FC<CardProps> = ({ name, age, certified, images }) => {
-    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
+    //const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [likes, setLikes] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
@@ -30,42 +32,41 @@ const Card: React.FC<CardProps> = ({ name, age, certified, images }) => {
         console.log(`Redirigiendo al detalle de ${name}`);
     };
 
-    const handlePrevClick = () => {
-        setSelectedImageIndex((prevIndex) => {
-            if (prevIndex === 0) {
-                return images.length - 1;
-            }
-            return prevIndex - 1;
-        });
-    };
+    // const handlePrevClick = () => {
+    //     setSelectedImageIndex((prevIndex) => {
+    //         if (prevIndex === 0) {
+    //             return image.length - 1;
+    //         }
+    //         return prevIndex - 1;
+    //     });
+    // };
 
-    const handleNextClick = () => {
-        setSelectedImageIndex((prevIndex) => {
-            if (prevIndex === images.length - 1) {
-                return 0;
-            }
-            return prevIndex + 1;
-        });
-    };
+    // const handleNextClick = () => {
+    //     setSelectedImageIndex((prevIndex) => {
+    //         if (prevIndex === image.length - 1) {
+    //             return 0;
+    //         }
+    //         return prevIndex + 1;
+    //     });
+    // };
 
     return (
         <div className="card">
             <div id={`carousel-${name}`} className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                    {images.map((image, index) => (
-                        <div key={index} className={`carousel-item${index === selectedImageIndex ? ' active' : ''}`}>
+                         <div > 
                             <img src={image} className="d-block w-100 pet-image" alt={name} />
                         </div>
-                    ))}
+                    
                 </div>
-                {images.length > 1 && (
+                {image.length > 1 && (
                     <>
                         <button
                             className="carousel-control-prev"
                             type="button"
                             data-bs-target={`#carousel-${name}`}
                             data-bs-slide="prev"
-                            onClick={handlePrevClick}
+                            //onClick={handlePrevClick}
                         >
                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span className="visually-hidden">Previous</span>
@@ -75,7 +76,7 @@ const Card: React.FC<CardProps> = ({ name, age, certified, images }) => {
                             type="button"
                             data-bs-target={`#carousel-${name}`}
                             data-bs-slide="next"
-                            onClick={handleNextClick}
+                            //onClick={handleNextClick}
                         >
                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
                             <span className="visually-hidden">Next</span>
@@ -85,12 +86,12 @@ const Card: React.FC<CardProps> = ({ name, age, certified, images }) => {
             </div>
             <div className="details">
                 <div className="name">
-                    {certified && (
+                    {/* {certified && (
                         <span className="certified">
                             <FaCheckCircle className="fa-check-circle" />
                             <span className="certification-text"></span>
                         </span>
-                    )}
+                    )} */}
                     {name}
                 </div>
                 <div className="age">Edad: {age}</div>
@@ -98,7 +99,7 @@ const Card: React.FC<CardProps> = ({ name, age, certified, images }) => {
                     <FaHeart className={`icon ${isLiked ? 'liked' : ''}`} onClick={handleLikeClick} />
                     <FaStar className={`icon ${isFavorite ? 'favorite' : ''}`} onClick={handleFavoriteClick} />
                     <FaInfoCircle className="icon" onClick={handleDetailClick} />
-                    <Link to="/detalle-mascota" className="detail-link">
+                    <Link to={`/detail/${id}`} className="detail-link">
                         <FaBook />
                     </Link>
                 </div>

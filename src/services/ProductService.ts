@@ -7,6 +7,7 @@ export class ProductService {
     }
     
     public static getProductsxName(name:string):Promise<any>{
+                 
         return axios.get(`/product?name=${name}`)
     }
 

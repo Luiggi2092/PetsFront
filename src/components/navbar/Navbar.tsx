@@ -26,6 +26,7 @@ const Navbar: React.FC<Props> = () => {
     dispatch(Fill(true));
     dispatch(SetPagina(1));
     
+    
     }else{
       dispatch(Fill(false));
     }

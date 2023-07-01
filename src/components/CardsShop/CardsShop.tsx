@@ -12,7 +12,7 @@ const Cards: React.FC<Props> = ({ products, firstIndex, lastIndex }) => {
 
     return (
         <div className={style.container}>
-            {products?.map((products: Product) => (
+            {products.length > 0 && products?.map((products: Product) => (
                 <CardShop key={products.id} {...products} />
             )).slice(firstIndex, lastIndex)}
         </div>

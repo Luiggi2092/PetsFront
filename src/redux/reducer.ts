@@ -1,6 +1,6 @@
 import { Product, TypeProduct } from "../interfaces/Products";
 import { Pet } from "../interfaces/Pets"
-import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT } from "./actions"
+import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1 } from "./actions"
 
 interface State {
     count: number;
@@ -12,6 +12,8 @@ interface State {
     Fil: boolean,
     Pets: Pet[],
     PetsFill: Pet[],
+    Filters:Product[],
+    Filters1:Product[],
 }
 
 const initialState: State = {
@@ -24,6 +26,9 @@ const initialState: State = {
     Fil: false,
     Pets: [],
     PetsFill: [],
+    Filters:[],
+    Filters1:[],
+
 }
 
 const counterReducer = (state = initialState, action: any): State => {
@@ -83,8 +88,31 @@ const counterReducer = (state = initialState, action: any): State => {
             })
             return {
                 ...state,
-                productsxName: Cat
+                productsxName:Cat
             }
+
+          case FILTERS: 
+               const FilCatnombre = state.productsxName.filter((e:any)=> 
+                {
+                    for(let dato in e.TypeProduct){
+                           if(e.TypeProduct[dato] == action.payload){
+                               return action.payload;
+                           } 
+                          
+                    }})
+               
+                 return {
+                    ...state,
+                    Filters:FilCatnombre
+                 } 
+          case FILTERS1:
+                const FillxnombreCat = 
+                state.productsxName.filter((e:any)=> e.name.toLowerCase().includes(action.payload.toLowerCase()));  
+                console.log(FillxnombreCat);
+                return {
+                    ...state,
+                    Filters1: FillxnombreCat
+                } 
         default:
             return state;
     }

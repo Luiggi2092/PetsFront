@@ -1,20 +1,17 @@
-//import React, { useState } from "react";
-//import {items} from "../../data/index"
 import CardsShop from "../../components/CardsShop/CardsShop";
 import style from "./PetShop.module.css"
 import Modal from "../../components/Modal/Modal"
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import { ProductService } from '../../services/ProductService'
-import { getProductos, getProductosxName, getTypesProducts, getProdType, Fill } from "../../redux/actions"
+import { getProductos, getProductosxName, getTypesProducts, getProdType, Fill,filters,filters1 } from "../../redux/actions"
 import Paginado from "../../components/Paginado/Paginado";
 import { useDispatch } from "react-redux";
-//import { Product } from '../../redux/types';
+import Product from "../../interfaces/Products";
 
 const PetShop: React.FC = () => {
   const numPage = useSelector((state: any) => state.numPage);
-  //  const [pagina,setPagina] = useState<number>(numPage);
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const [openModal, setOpenModal] = useState(false);
   const [porPagina] = useState<number>(9);
   const lastIndex = numPage * porPagina //10
@@ -24,9 +21,23 @@ const PetShop: React.FC = () => {
   const Fil = useSelector((state: any) => state.Fil);
   let products = useSelector((state: any) => state.products);
   let prodName = useSelector((state: any) => state.productsxName);
-  let SearchName = useSelector((state: any) => state.name);
-  let TypesProducts = useSelector((state: any) => state.productTypes);
+  let CateProd = useSelector((state:any)=> state.productTypes);
+  let [filtro,setFiltro]= useState(false);
+  let [filtecom,setFiltecom]=useState(false);
+  let [filtercom1,setFillcom1]= useState(false);
+  let FILTROS = useSelector((state:any)=> state.Filters);
+  let FILTROS1 = useSelector((state:any)=> state.Filters1);
+  let [items,SetItems] = useState({
+     item:[]
+  })
 
+
+  const [Search,setSearch]= useState({
+        name:"",
+        categoria:"",
+        
+  })
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,36 +52,104 @@ const PetShop: React.FC = () => {
   }, [])
 
 
-  useEffect(() => {
-    if (Fil) {
-      (async function () {
-        const response = await ProductService.getProductsxName(SearchName);
-        dispatch(getProductosxName(response.data))
-      }
-      )();
-    }
-  }, [Fil])
-
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedOption = event.currentTarget.value;
-    dispatch(getProdType(selectedOption));
-    dispatch(Fill(true));
+  const AllProducts=()=>{
+    (async function () {
+      const response = await ProductService.getProducts();
+      dispatch(getProductos(response.data))
+    })();
+    setFiltro(false);
+    SetItems({...items,item:[]})
+    inputRef.current ? inputRef.current.value = " " : " ";
   }
+
+
 
   const handleModal = () => {
     setOpenModal(!openModal);
   }
 
+   const handleCat = (event: React.ChangeEvent<HTMLSelectElement>)=> {
+
+      if(Search.name){
+         setFiltro(false);
+         dispatch(filters(event.currentTarget.value))
+         SetItems({...items,item:[]})
+         setFiltecom(true)
+         setFillcom1(false);
+
+        
+
+      }else{
+    
+      const SearchCat = event.currentTarget.value;
+      if(SearchCat !== "0"){
+      dispatch(getProdType(SearchCat));
+      SetItems({...items,item:prodName});
+      SetItems({...items,item:[]})
+      setSearch({...Search,categoria:event.currentTarget.value});
+       setFiltro(true)
+      }else{
+        AllProducts();
+        setSearch({...Search,name:"",categoria:""});
+        
+        
+
+      }
+    }
+   }
+
+
+  const handleName= (event: React.ChangeEvent<HTMLInputElement>)=> 
+  {
+     
+    if(Search.categoria){
+      setFiltro(false);
+      dispatch(filters1(event.currentTarget.value))
+      SetItems({...items,item:[]})
+      setFiltecom(false);
+      setFillcom1(true);
+       
+        
+    } else{
+
+
+    
+    const SeachName = event.currentTarget.value;
+    if(event.currentTarget.value !== ""){
+    (async function () {
+      const response = await ProductService.getProductsxName(SeachName)
+      .catch(response => alert(response.data.errors.error));
+      dispatch(getProductosxName(response.data))
+    }
+    )();
+    setSearch({...Search,name:event.currentTarget.value})
+    setFiltro(true)}
+    else{
+      AllProducts();
+      setSearch({...Search,name:""});
+      setFiltro(true);
+      
+    }
+    
+  }
+}
+
   return (
     <div>
       <h1 className={style.titulo}>Pets Shop</h1>
-      <h1 className={style.titCat}>Categoria</h1>
-      <aside className={style.cat}>
-        <div className={style.containerCat}>
-          {TypesProducts.map((e: any, index: number) => <li key={index}>
-            <input type="radio" name="grupo" value={e.name} onChange={handleRadioChange} />{e.name}</li>)}
-        </div>
-      </aside>
+      <div className={style.titCat}>
+      <h5>Nombre :</h5>
+      <input type="text" onChange={handleName} ref={inputRef} />
+      </div>
+      <div className={style.titCat}>
+        <h5>Categorias: </h5>
+        <select onChange={handleCat}>
+          <option value="0">Seleccion :</option>
+           {CateProd.map((e:Product,index:any)=> {
+            return <option key={index}>{e.name}</option>
+           })}
+        </select>
+      </div>
       <div className={style.butNew}>
         <button className={style.newProd} onClick={handleModal}>New Product</button>
         <Modal openModal={openModal} cambiarEstado={setOpenModal}></Modal>
@@ -78,7 +157,9 @@ const PetShop: React.FC = () => {
 
       <div className={style.container}>
 
-        {Fil ? <CardsShop products={prodName} firstIndex={firstIndex} lastIndex={lastIndex} /> :
+        {filtro ? <CardsShop products={items.item.length == 0 ? prodName: items.item} firstIndex={firstIndex} lastIndex={lastIndex} /> :
+         filtecom ? <CardsShop products={FILTROS} firstIndex={firstIndex} lastIndex={lastIndex} />:  
+         filtercom1 ? <CardsShop products={FILTROS1} firstIndex={firstIndex} lastIndex={lastIndex} />: 
           <CardsShop products={products} firstIndex={firstIndex} lastIndex={lastIndex} />}
       </div>
       <Paginado pagina={numPage}

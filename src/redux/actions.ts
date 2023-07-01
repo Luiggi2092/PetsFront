@@ -12,6 +12,8 @@ export const GET_PETS = 'GET_PETS';
 export const FILL_ID = 'FILL_ID';
 export const GET_PETSID = 'GET_PETSID';
 export const GET_CAT = 'GET_CAT';
+export const FILTERS = 'FILTERS';
+export const FILTERS1 = 'FILTERS1';
 
 export const increment = () => {
     return {
@@ -81,4 +83,18 @@ export const getProdType = (fill: string) => {
         type: 'GET_CAT',
         payload: fill
     }
+}
+
+export const filters = (fill:string)=> {
+     return {
+          type: 'FILTERS',
+          payload: fill
+     }
+}
+
+export const filters1=(fill:string)=>{
+      return {
+          type: 'FILTERS1',
+          payload:fill,
+      }
 }
