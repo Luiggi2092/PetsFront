@@ -1,0 +1,202 @@
+/* Estilos generales */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos del mensaje de bienvenida */
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-message h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Estilos del tipo de cuenta */
+.account-type {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.account-type p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Estilos de la sección de la mascota adoptada */
+.right-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.adopted-pet-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.adopted-pet-card img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.adopted-pet-card p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Estilos de la sección de mascotas en adopción */
+.center-section {
+    margin-bottom: 20px;
+}
+
+.center-section h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.carousel-container {
+    margin: 0 -10px;
+}
+
+.pet-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.pet-card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Estilos de la sección de artículos */
+.articles-section {
+    margin-bottom: 20px;
+}
+
+.articles-section h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.article-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.article-card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.article-card p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.article-card button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.article-card button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos de la sección de artículos y mascotas recientes */
+.recent-items-section {
+    margin-bottom: 20px;
+}
+
+.recent-items-section h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recent-item-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.recent-item-card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.recent-item-card p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Estilos del footer */
+.footer {
+    background-color: #f5f5f5;
+    padding: 20px;
+    text-align: center;
+}
+
+.contact,
+.social-media,
+.copyright {
+    margin-bottom: 10px;
+}
+
+.contact p,
+.social-media p,
+.social-media a {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #333;
+    margin: 0 5px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+
+    .pet-card,
+    .article-card,
+    .recent-item-card {
+        margin: 0 5px;
+    }
+}

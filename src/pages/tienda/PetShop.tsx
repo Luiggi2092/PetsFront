@@ -1,25 +1,9 @@
-import React from "react";
-import Cards from "../../components/cards/Cards";
-import style from "./PetShop.module.css"
-import Paginado from "../../components/paginado/Paginado";
+import React from 'react'
 
-
-const PetShop: React.FC = () => {
-
+const PetShop = () => {
   return (
-
-    <div>
-      <h1 className={style.titulo}>Pets Shop</h1>
-
-      <div className={style.container}>
-        <Cards />
-      </div>
-      <Paginado />
-    </div>
-
+    <div>PetShop</div>
   )
-
-
 }
 
-export default PetShop;
+export default PetShop
