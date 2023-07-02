@@ -1,0 +1,62 @@
+
+
+.titulo{
+    position: relative;
+    margin: 20px ;
+    padding: 20px 0;
+    color: #00539F;
+    text-shadow: 3px 3px 1px black;
+    text-align: center;
+    
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: -175px;
+    
+}
+
+.titulo {
+    text-align:center;
+    margin-left: 5rem;
+    padding: 2rem;
+}
+
+
+.cat{
+    margin-left: 15rem;
+    width: 200px;
+    position: absolute;
+    margin-top: 12px;
+
+}
+
+.titCat{
+    margin-left: 16rem;
+}
+
+
+.containerCat{
+    background-color: #DAFFFB ;
+    width: 200px;
+    display: inline-block;
+}
+
+.containerCat li {
+    list-style: none;
+}
+
+
+.newProd{
+    display: flex;
+    align-items: center;
+}
+
+.butNew{
+    margin-left: 16rem;
+    margin-top: 5px;
+}
+
