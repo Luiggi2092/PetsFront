@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
+import ModalShop from "../../components/ModalShop/ModalShop"
 import { useSelector,useDispatch } from 'react-redux';
 import {FillName,Fill,SetPagina} from '../../redux/actions'
 import './navbar.css'
-import {Link, Outlet} from "react-router-dom"
+import {Link} from "react-router-dom"
 
 interface Props {
   setPagina?: (value: number) => void;
@@ -14,8 +15,10 @@ interface Props {
 
 const Navbar: React.FC<Props> = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [openModal, setOpenModal] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const count = useSelector((state:any)=> state.count);
+  const Car = useSelector((state:any)=> state.Shop);
   const dispatch = useDispatch();
   
 
@@ -36,9 +39,11 @@ const Navbar: React.FC<Props> = () => {
   };
 
   const handleCart = () => {
-    console.log('Mostrando carrito de compras...');
+    setOpenModal(!openModal);
     // Agregar lógica para mostrar el carrito de compras
   };
+
+  
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark ">
@@ -46,6 +51,7 @@ const Navbar: React.FC<Props> = () => {
         <Link to="/home" className="navbar-brand">
           <img src={Logo} alt="Logo" />
         </Link>
+        <ModalShop openModal={openModal} cambiarEstado={setOpenModal} Car={Car} />
         <button
           className="navbar-toggler"
           type="button"

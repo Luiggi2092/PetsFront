@@ -4,7 +4,7 @@ import Modal from "../../components/Modal/Modal"
 import { useSelector } from "react-redux";
 import { useEffect, useState,useRef } from "react";
 import { ProductService } from '../../services/ProductService'
-import { getProductos, getProductosxName, getTypesProducts, getProdType, Fill,filters,filters1 } from "../../redux/actions"
+import { getProductos, getProductosxName, getTypesProducts, getProdType,filters,filters1 } from "../../redux/actions"
 import Paginado from "../../components/Paginado/Paginado";
 import { useDispatch } from "react-redux";
 import Product from "../../interfaces/Products";
@@ -85,7 +85,6 @@ const PetShop: React.FC = () => {
       if(SearchCat !== "0"){
       dispatch(getProdType(SearchCat));
       SetItems({...items,item:prodName});
-      SetItems({...items,item:[]})
       setSearch({...Search,categoria:event.currentTarget.value});
        setFiltro(true)
       }else{
@@ -134,6 +133,7 @@ const PetShop: React.FC = () => {
   }
 }
 
+
   return (
     <div>
       <h1 className={style.titulo}>Pets Shop</h1>
@@ -152,7 +152,7 @@ const PetShop: React.FC = () => {
       </div>
       <div className={style.butNew}>
         <button className={style.newProd} onClick={handleModal}>New Product</button>
-        <Modal openModal={openModal} cambiarEstado={setOpenModal}></Modal>
+        <Modal openModal={openModal} cambiarEstado={setOpenModal} CateProd={CateProd}></Modal>
       </div>
 
       <div className={style.container}>

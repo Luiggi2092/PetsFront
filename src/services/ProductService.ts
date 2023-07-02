@@ -15,6 +15,10 @@ export class ProductService {
         return axios.get(`/typeProduct`)
     }
 
+    public static PostProduct(pro:any):Promise<any>{
+        return axios.post(`/product`,pro) 
+    }
+
 }
 
 

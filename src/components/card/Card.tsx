@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { FaHeart, FaStar, FaInfoCircle, /*FaCheckCircle,*/ FaBook } from 'react-icons/fa';
+import { FaHeart, FaStar, FaInfoCircle, FaBook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './petCards.css';
-// import {Pet} from '../../interfaces/Pets';
 
 interface CardProps {
     id:string;
     name: string;
     age: number;
-    //certified: boolean;
-    breed?:string;
+    breed:string;
     image: string;
 }
 
@@ -32,10 +30,10 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
         console.log(`Redirigiendo al detalle de ${name}`);
     };
 
-    // const handlePrevClick = () => {
+   // const handlePrevClick = () => {
     //     setSelectedImageIndex((prevIndex) => {
     //         if (prevIndex === 0) {
-    //             return image.length - 1;
+    //             return images.length - 1;
     //         }
     //         return prevIndex - 1;
     //     });
@@ -43,7 +41,7 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
 
     // const handleNextClick = () => {
     //     setSelectedImageIndex((prevIndex) => {
-    //         if (prevIndex === image.length - 1) {
+    //         if (prevIndex === images.length - 1) {
     //             return 0;
     //         }
     //         return prevIndex + 1;
@@ -54,19 +52,18 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
         <div className="card">
             <div id={`carousel-${name}`} className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                         <div > 
+                        <div>
                             <img src={image} className="d-block w-100 pet-image" alt={name} />
                         </div>
                     
                 </div>
-                {image.length > 1 && (
                     <>
                         <button
                             className="carousel-control-prev"
                             type="button"
                             data-bs-target={`#carousel-${name}`}
                             data-bs-slide="prev"
-                            //onClick={handlePrevClick}
+                           // onClick={handlePrevClick}
                         >
                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span className="visually-hidden">Previous</span>
@@ -82,7 +79,7 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
                             <span className="visually-hidden">Next</span>
                         </button>
                     </>
-                )}
+                
             </div>
             <div className="details">
                 <div className="name">
@@ -110,25 +107,3 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
 };
 
 export default Card;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

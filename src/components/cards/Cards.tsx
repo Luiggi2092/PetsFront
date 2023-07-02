@@ -1,33 +1,71 @@
-import Card from '../../components/card/Card';
-import style from './cards.module.css'
+import React, { useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import './petCards.css'
+import {Pet} from "../../interfaces/Pets"
+import {Link} from "react-router-dom"
 
-const items = [
-
-    { id: 1, nombre: 'Mesa PetMascota', imagen: 'https://promart.vteximg.com.br/arquivos/ids/645043-1000-1000/image-17a2f3c48c2240fc90c9c7ef96fcd7db.jpg?v=637443430504530000' },
-    { id: 2, nombre: 'Cortadora Pet', imagen: 'https://promart.vteximg.com.br/arquivos/ids/5979937-1000-1000/image-b90f723df6f845a2ba4daf6e9a727dad.jpg?v=637931841477370000' },
-    { id: 3, nombre: 'Pack Juguete', imagen: 'https://promart.vteximg.com.br/arquivos/ids/2567338-1000-1000/image-60691779b8da48db800809b00c9c63b0.jpg?v=637705364409200000' },
-    { id: 4, nombre: 'Mesa PetMascota', imagen: 'https://promart.vteximg.com.br/arquivos/ids/645043-1000-1000/image-17a2f3c48c2240fc90c9c7ef96fcd7db.jpg?v=637443430504530000' },
-    { id: 5, nombre: 'Cortadora Pet', imagen: 'https://promart.vteximg.com.br/arquivos/ids/5979937-1000-1000/image-b90f723df6f845a2ba4daf6e9a727dad.jpg?v=637931841477370000' },
-    { id: 6, nombre: 'Pack Juguete', imagen: 'https://promart.vteximg.com.br/arquivos/ids/2567338-1000-1000/image-60691779b8da48db800809b00c9c63b0.jpg?v=637705364409200000' },
-    { id: 7, nombre: 'Mesa PetMascota', imagen: 'https://promart.vteximg.com.br/arquivos/ids/645043-1000-1000/image-17a2f3c48c2240fc90c9c7ef96fcd7db.jpg?v=637443430504530000' },
-    { id: 8, nombre: 'Cortadora Pet', imagen: 'https://promart.vteximg.com.br/arquivos/ids/5979937-1000-1000/image-b90f723df6f845a2ba4daf6e9a727dad.jpg?v=637931841477370000' },
-    { id: 9, nombre: 'Pack Juguete', imagen: 'https://promart.vteximg.com.br/arquivos/ids/2567338-1000-1000/image-60691779b8da48db800809b00c9c63b0.jpg?v=637705364409200000' },
-
-]
-
-
-
-const Cards = () => {
-
-    return (
-        <div className={style.container}>
-            {items.map((item, index) => (
-                <Card key={index} {...item} />
-            ))}
-        </div>
-    )
-
+interface Props {
+    Pets:[];
 }
 
 
-export default Cards
+const Card: React.FC<Props> = ({Pets}) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    
+    const handleSlideChange = (index: number) => {
+        setCurrentSlide(index);
+    };
+
+   
+    return (
+        <div className="pet-card">
+            <Carousel activeIndex={currentSlide} onSelect={handleSlideChange}>
+                {Pets.map((item:Pet, index) => (
+                    <Carousel.Item key={index}>
+                        <Link to={`/detail/${item.id}`}>
+                        <img className="d-block w-100" src={item.image} alt={item.name} />
+                        <div className="pet-card-content">
+                            <br/>   
+                        <h2>{item.name}</h2>
+                        </div>
+                        <div className="pet-card-content">
+                 {/* <div className="likes">
+                    <button className="like-button" onClick={handleLike}>
+                        <FontAwesomeIcon icon={faHeart} color="red" />
+                         {currentLikes} Likes 
+                    </button>
+                </div>  */}
+                <button className="detail-button">
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                    Ver detalle
+                </button>
+            </div>
+                        </Link>
+                    </Carousel.Item>
+                ))}
+            </Carousel>
+
+            
+        </div>
+    );
+};
+
+export default Card;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

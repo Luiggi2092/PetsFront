@@ -19,4 +19,14 @@ export interface TypeProduct {
     name: string
 }
 
+export interface Carrito {
+    imagen: string,
+    name:string,
+    precio:number,
+    cantidad: number
+}
+
+
+
+
 export default Product
