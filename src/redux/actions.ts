@@ -37,10 +37,10 @@ export const getProductosxName = (products: Product[]) => {
     }
 }
 
-export const FillName = (name: string) => {
+export const FillName = (nombre: string) => {
     return {
         type: 'FILL_NAME',
-        payload: name
+        payload: nombre
     }
 }
 

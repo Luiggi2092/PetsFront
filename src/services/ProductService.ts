@@ -8,7 +8,7 @@ export class ProductService {
     
     public static getProductsxName(name:string):Promise<any>{
                  
-        return axios.get(`/product?name=${name}`)
+        return axios.get(`/product/?name=${name}`)
     }
 
     public static getTypesProducts():Promise<any>{

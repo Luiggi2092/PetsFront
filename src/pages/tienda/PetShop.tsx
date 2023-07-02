@@ -22,7 +22,9 @@ const PetShop: React.FC = () => {
   let products = useSelector((state: any) => state.products);
   let prodName = useSelector((state: any) => state.productsxName);
   let CateProd = useSelector((state:any)=> state.productTypes);
+  let ProdCat = useSelector((state:any)=> state.ProdCat);
   let [filtro,setFiltro]= useState(false);
+   let [filCat,setfilCat]= useState(false);
   let [filtecom,setFiltecom]=useState(false);
   let [filtercom1,setFillcom1]= useState(false);
   let FILTROS = useSelector((state:any)=> state.Filters);
@@ -32,11 +34,11 @@ const PetShop: React.FC = () => {
   })
 
 
-  const [Search,setSearch]= useState({
-        name:"",
-        categoria:"",
-        
-  })
+   const [Search,setSearch]= useState({
+           name:"",
+           categoria:"",
+         
+   })
   
   const dispatch = useDispatch();
 
@@ -52,16 +54,6 @@ const PetShop: React.FC = () => {
   }, [])
 
 
-  const AllProducts=()=>{
-    (async function () {
-      const response = await ProductService.getProducts();
-      dispatch(getProductos(response.data))
-    })();
-    setFiltro(false);
-    SetItems({...items,item:[]})
-    inputRef.current ? inputRef.current.value = " " : " ";
-  }
-
 
 
   const handleModal = () => {
@@ -70,69 +62,77 @@ const PetShop: React.FC = () => {
 
    const handleCat = (event: React.ChangeEvent<HTMLSelectElement>)=> {
 
-      if(Search.name){
-         setFiltro(false);
-         dispatch(filters(event.currentTarget.value))
-         SetItems({...items,item:[]})
-         setFiltecom(true)
-         setFillcom1(false);
+         if(Search.name){
+            setFiltro(false);
+              dispatch(filters(event.currentTarget.value))
+              SetItems({...items,item:[]})
+              setFiltecom(true)
+            setFillcom1(false);
 
         
 
-      }else{
+         }else{
     
       const SearchCat = event.currentTarget.value;
       if(SearchCat !== "0"){
       dispatch(getProdType(SearchCat));
-      SetItems({...items,item:prodName});
-      setSearch({...Search,categoria:event.currentTarget.value});
-       setFiltro(true)
+      setFiltro(false)
+      setfilCat(true)
+
+       setSearch({...Search,categoria:event.currentTarget.value});
+       
       }else{
-        AllProducts();
-        setSearch({...Search,name:"",categoria:""});
         
-        
+        setFiltro(false);
+        setFillcom1(false);
+        setfilCat(false);
+        setFiltecom(false);
 
       }
     }
-   }
-
+   
+  }
 
   const handleName= (event: React.ChangeEvent<HTMLInputElement>)=> 
   {
      
-    if(Search.categoria){
-      setFiltro(false);
-      dispatch(filters1(event.currentTarget.value))
-      SetItems({...items,item:[]})
-      setFiltecom(false);
-      setFillcom1(true);
+    //  if(Search.categoria){
+    //    setFiltro(false);
+    //    dispatch(filters1(event.currentTarget.value))
+    //    SetItems({...items,item:[]})
+    //    setFiltecom(false);
+    //    setFillcom1(true);
        
         
-    } else{
+    //  } else{
 
 
     
     const SeachName = event.currentTarget.value;
+    console.log(SeachName);
     if(event.currentTarget.value !== ""){
     (async function () {
       const response = await ProductService.getProductsxName(SeachName)
       .catch(response => alert(response.data.errors.error));
+      console.log(response.data)
+      setfilCat(false)
+      setFiltro(true)
+      
       dispatch(getProductosxName(response.data))
     }
     )();
-    setSearch({...Search,name:event.currentTarget.value})
-    setFiltro(true)}
+     setSearch({...Search,name:event.currentTarget.value})
+    }
     else{
-      AllProducts();
+      //AllProducts();
       setSearch({...Search,name:""});
-      setFiltro(true);
+      //setFiltro(true);
       
     }
     
-  }
-}
+ // }
 
+  }
 
   return (
     <div>
@@ -157,10 +157,11 @@ const PetShop: React.FC = () => {
 
       <div className={style.container}>
 
-        {filtro ? <CardsShop products={items.item.length == 0 ? prodName: items.item} firstIndex={firstIndex} lastIndex={lastIndex} /> :
-         filtecom ? <CardsShop products={FILTROS} firstIndex={firstIndex} lastIndex={lastIndex} />:  
-         filtercom1 ? <CardsShop products={FILTROS1} firstIndex={firstIndex} lastIndex={lastIndex} />: 
-          <CardsShop products={products} firstIndex={firstIndex} lastIndex={lastIndex} />}
+        {filtro ? <CardsShop products={prodName} firstIndex={firstIndex} lastIndex={lastIndex} /> :
+        filCat ? <CardsShop products={ProdCat} firstIndex={firstIndex} lastIndex={lastIndex} />:
+        filtecom ? <CardsShop products={FILTROS} firstIndex={firstIndex} lastIndex={lastIndex} />:  
+        filtercom1 ? <CardsShop products={FILTROS1} firstIndex={firstIndex} lastIndex={lastIndex} />: 
+         <CardsShop products={products} firstIndex={firstIndex} lastIndex={lastIndex} />}
       </div>
       <Paginado pagina={numPage}
         maxPageNumberLimit={maxPageNumberLimit}

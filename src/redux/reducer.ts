@@ -16,6 +16,7 @@ interface State {
     Filters1:Product[],
     PostProduct:Product[],
     Shop:Carrito[],
+    ProdCat:Product[]
     
 }
 
@@ -33,6 +34,7 @@ const initialState: State = {
     Filters1:[],
     PostProduct:[],
     Shop:[],
+    ProdCat:[],
 
     
 
@@ -85,18 +87,18 @@ const counterReducer = (state = initialState, action: any): State => {
                 ...state,
                 PetsFill: action.payload
             }
-        case GET_CAT:
-            const Cat = state.products.filter((e: any) => {
-                for (let f in e.TypeProduct) {
-                    if (e.TypeProduct[f] == action.payload) {
-                        return e.TypeProduct;
-                    };
-                }
-            })
-            return {
-                ...state,
-                productsxName:Cat
-            }
+         case GET_CAT:
+             const Cat = state.products.filter((e: any) => {
+                 for (let f in e.TypeProduct) {
+                     if (e.TypeProduct[f] == action.payload) {
+                         return e.TypeProduct;
+                     };
+                 }
+                })
+              return {
+                 ...state,
+                 ProdCat:Cat
+                 }
 
           case FILTERS: 
                const FilCatnombre = state.productsxName.filter((e:any)=> 
