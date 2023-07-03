@@ -153,18 +153,18 @@ const submitHandler=(event:any)=> {
                 <div className={style.contenedor}>
                        <input type="file" onChange={handleImageUpload}></input>
                        <button onClick={cargarImagen}>UPLOAD</button>
-                       <br/>
+                       {/* <br/> */}
                       <label>Nombre :</label>
                       <input type="text" onChange={ChangeHandle} name="name"></input>
-                      <br/>
+                      {/* <br/> */}
                       <label>Age :</label>
                       <input type="number" onChange={ChangeHandle} name="age"></input>
-                      <br/>
+                      {/* <br/> */}
                       <label>breed :</label>
                      <input type="string" onChange={ChangeHandle} name="breed"></input>
                      <label>Sterization</label>
                       <input type="checkbox" onChange={ChangeHandleCheked} name="sterilization" />
-                      <br/>
+                      {/* <br/> */}
                      <label>Vaccines</label>
                      <select onChange={changeHandleCombo}>
                           <option>Rabia</option>
@@ -172,9 +172,9 @@ const submitHandler=(event:any)=> {
                           <option>Parvovirosis</option>
                           <option>Hepatitis</option>
                      </select>
-                     <br/>
+                     {/* <br/>
                      <br/> 
-                     <br/>   
+                     <br/>    */}
                      <label>Tipo Mascota</label>
                      <select onChange={changeHandleCombo} name="typeId">
                         {petTypes?.map((e:any)=> {
@@ -186,8 +186,8 @@ const submitHandler=(event:any)=> {
                  <div className={style.BotonCerrar} onClick={()=> cambiarEstado(false)}>
                          X
               </div> 
-              <br/> 
-              <br/>        
+              {/* <br/> 
+              <br/>         */}
               <button type="submit"  onClick={submitHandler}>
                 Create Pet
               </button>

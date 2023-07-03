@@ -72,16 +72,16 @@ const Navbar: React.FC<Props> = () => {
                   <BsHouseDoorFill /> Home
                 </a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a href="/join" className="nav-link">
                   <BsPersonPlus /> Unete a nosotros
                 </a>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <a href="/petmatch" className="nav-link">
                   <BsHeartFill /> Petmatch
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <a href="/petshop" className="nav-link">
                   <BsBagFill /> PetShop
@@ -101,7 +101,7 @@ const Navbar: React.FC<Props> = () => {
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <form className="d-flex" onSubmit={handleSearch}>
-                  <input
+                  {/* <input
                     className="form-control me-2"
                     type="search"
                     name="search"
@@ -109,10 +109,10 @@ const Navbar: React.FC<Props> = () => {
                     aria-label="Search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <button className="btn btn-outline-light" type="submit">
+                  /> */}
+                  {/* <button className="btn btn-outline-light" type="submit">
                     <BsSearch />
-                  </button>
+                  </button> */}
                 </form>
               </li>
               <li className="nav-item">

@@ -150,11 +150,12 @@ const PetShop: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={style.shopContain}>
       <h1 className={style.titulo}>Pets Shop</h1>
+      
       <div className={style.titCat}>
-      <h5>Nombre :</h5>
-      <input type="text" onChange={handleName} ref={inputRef} />
+        <h5>Nombre :</h5>
+        <input type="text" onChange={handleName} ref={inputRef} />
       </div>
       <div className={style.titCat}>
         <h5>Categorias: </h5>

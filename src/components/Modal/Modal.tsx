@@ -126,14 +126,23 @@ const cargarImagen =  (event:any)=>{
                         </div>
                         <div className={style.contendor}>
                             <input type="file" onChange={handleImageUpload}></input>
+                            <br/>
                             <button onClick={cargarImagen}>UPLOAD</button>
-                            <label>Producto</label>
+                            <br/>
+                            <label>Producto:</label>
+                            <br/>
                             <input type="text" name="name" onChange={ChangeHandle}></input>
-                            <label>Price :</label>
+                            <br/>
+                            <label>Precio:</label>
+                            <br/>
                             <input type="number" name="price" onChange={ChangeHandle}></input>
-                            <label>Available</label>
+                            <br/>
+                            <label>Unidades dispobibles:</label>
+                            <br/>
                             <input type="number" name="available" onChange={ChangeHandle}></input>
-                            <label>Categoría</label>
+                            <br/>
+                            <label>Categoría:</label>
+                            <br/>
                             <select name="TypeProductId" onChange={ChangeHandleSelect} >
                                 <option>Seleccione</option>
                                 {CateProd?.map((e:any)=>{

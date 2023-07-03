@@ -1,17 +1,18 @@
 .Overlay {
     width: 100vw;
-    height: 100vh;
+    height:max-content;
     position: fixed;
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, .5);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    overflow: scroll;
 }
 
 .ContenedorModal {
-    width: 600px;
+    width: 240px;
     min-height: 100px;
     background: #fff;
     position: relative;
@@ -51,4 +52,9 @@ h3 {
 
 .BotonCerrar:hover {
     background: #F2F2F2;
+}
+
+.imageProd{
+    width: 220px;
+
 }

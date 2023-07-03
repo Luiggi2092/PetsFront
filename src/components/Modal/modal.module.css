@@ -7,11 +7,11 @@
     background: rgba(0, 0, 0, .5);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .ContenedorModal {
-    width: 600px;
+    width: 240px;
     min-height: 100px;
     background: #fff;
     position: relative;

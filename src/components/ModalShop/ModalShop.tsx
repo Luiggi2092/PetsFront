@@ -29,7 +29,7 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
 
                             {Car?.map((e:Carrito,index)=>(
                                  <div>
-                                 <img key={index} src={e.imagen}/>
+                                 <img className='imageProd' key={index} src={e.imagen}/>
                                  <p>{e.name}</p>
                                  <p>{e.precio}</p>
                                  <p>{e.cantidad}</p>
