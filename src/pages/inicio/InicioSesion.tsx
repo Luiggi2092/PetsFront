@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios';
 import { useNavigate,Link } from 'react-router-dom';
 import style from './inicioSesion.module.css'
+import {UserService} from "../../services/UserService"; 
 import {useEffect} from "react"
 import jwt_decode from "jwt-decode";
 
@@ -18,6 +19,14 @@ const Login = () => {
     iss?:string,
     picture?:string
   }
+
+  const [form,setForm]= useState({
+      email:"",
+      password:"",  
+  }) 
+
+
+
 
 
   const [user,setUser] = useState<any>({})
@@ -50,6 +59,9 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [Exito,setExito] = useState({
+      name:""
+  });
 
   const handleLogin = () => {
     axios
@@ -77,13 +89,41 @@ const Login = () => {
   }
 
 
+  const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>)=> {
+    let property = evt.target.name;
+    let value = evt.target.value;
+
+    setForm({
+      ...form,
+       [property]:value
+    })
+
+}
+
+const submitHandler =(event:any)=> {
+   event.preventDefault();
+   if(form.email &&
+      form.password){
+        (async function(){
+           const response = await UserService.PostLogueo(form);
+           if(response.data){
+              console.log("GUUUA");
+              navigate('/home');
+           }
+        })();
+
+      }
+}
+
+
 
   return (
+    <form onSubmit={submitHandler} >
     <div className={style.containerForm}>
       <h2>Inicio de sesión</h2>
-      <input type='email' placeholder='ejemplo@hotmail.com' value={email} onChange={e => setEmail(e.target.value)} />
-      <input type='password' placeholder='Contraseña' value={password} onChange={e => setPassword(e.target.value)} />
-      <button onClick={handleLogin}>Iniciar sesión</button>
+      <input type='email' placeholder='ejemplo@hotmail.com' name="email" onChange={ChangeHandle} />
+      <input type='password' placeholder='Contraseña'  name="password" onChange={ChangeHandle} />
+      <button type="submit" onClick={submitHandler}>Iniciar sesión</button>
 {      
       <div id="signInDiv" onClick={handleHome} >
           
@@ -95,6 +135,7 @@ const Login = () => {
       </div>
       <p>¿No tienes cuenta?</p> <Link to='/registrato'><button>Registrate</button></Link>
     </div>
+    </form>
   )
 }
 
