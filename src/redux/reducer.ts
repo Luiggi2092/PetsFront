@@ -116,7 +116,7 @@ const counterReducer = (state = initialState, action: any): State => {
                  } 
           case FILTERS1:
                 const FillxnombreCat = 
-                state.productsxName.filter((e:any)=> e.name.toLowerCase().includes(action.payload.toLowerCase()));  
+                state.ProdCat.filter((e:any)=> e.name.toLowerCase().includes(action.payload.toLowerCase()));  
                 console.log(FillxnombreCat);
                 return {
                     ...state,
