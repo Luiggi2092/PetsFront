@@ -33,9 +33,13 @@ const PetDetail: React.FC = () => {
         age:Pe.age,
         breed:Pe.breed,
         sterilization:Pe.sterilization,
-        image:Pe.image
+        image:Pe.image,
+        Vaccines:Pe.Vaccines?.map((e:any)=> e.name && e.name + " ")
 
     }
+
+
+    console.log(obj);
      
 
 
@@ -60,10 +64,10 @@ const PetDetail: React.FC = () => {
                             { <p>{obj.breed}</p> }
                         </div>
                     
-                        {/* <div>
+                         <div>
                             <h3>Vacunado:</h3>
-                            <p>{pet[0].vaccines}</p> }
-    </div> */}
+                            <p>{obj.Vaccines}</p>
+    </div> 
                 </div>
                 <div className={styles.btns}>
                     <button>Donativo</button>

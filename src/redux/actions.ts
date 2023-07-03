@@ -1,5 +1,5 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
-import { Pet } from '../interfaces/Pets'
+import { Pet,TypePet } from '../interfaces/Pets'
 
 export const INCREMENT = 'INCREMENT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -16,6 +16,8 @@ export const FILTERS = 'FILTERS';
 export const FILTERS1 = 'FILTERS1';
 export const POST_PRODUCT = 'POST_PRODUCT'
 export const CARSHOP = 'CARSHOP';
+export const TYPEPET = 'TYPEPET';
+export const POSTPET = 'POSTPET';
 
 export const increment = () => {
     return {
@@ -114,4 +116,23 @@ export const CarritoCompas=(Car:Carrito)=>{
              type: 'CARSHOP',
              payload: Car
        }
+}
+
+
+export const getTypesPet=(Type:TypePet)=>{
+      return  {
+          type: 'TYPEPET',
+          payload : Type
+      } 
+    
+     
+}
+
+
+export const PostPet=(Pet:any)=> {
+       return {
+            type: 'POSTPET',
+            payload: Pet
+       }
+
 }

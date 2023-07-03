@@ -1,5 +1,9 @@
 import style from "./Modalpet.module.css"
-import {useState} from "react";
+import {useState,useEffect} from "react";
+import {useSelector,useDispatch} from "react-redux"
+import {getTypesPet,PostPet,getPets}  from "../../redux/actions" 
+import { PetsService } from '../../services/PetsService';
+import {Pet} from "../../interfaces/Pets"
 
 interface Props {
     
@@ -12,14 +16,31 @@ interface Props {
 const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
 
     const [image,setImage] = useState<string | Blob>('');
+    const petTypes = useSelector((state:any)=> state.TypePet);
 
-    const [form,setForm]= useState({
-        name: "",
-        imagen:"",
-        Age: 0,
-        breed:"",
+    const dispatch = useDispatch();
+
+    
+
+     const [form,setForm]= useState({
+         name: "",
+         image:"",
+         age: 0,
+         breed:"",
+         sterilization:false,
+         vaccine:[],
+         typeId:""
  
- })
+  })
+
+ useEffect (()=> {
+    (async function(){
+        const response = await PetsService.getPetsTypes();
+          dispatch(getTypesPet(response.data))   
+       })();
+ },[])
+
+
 
  const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (evt.target.files != null) {
@@ -37,6 +58,43 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
     })
 
 }
+
+const ChangeHandleCheked = (evt: React.ChangeEvent<HTMLInputElement>)=> {
+    let property = evt.target.name;
+    let value = evt.target.checked;
+
+    setForm({
+      ...form,
+       [property]:value
+    })
+
+}
+
+
+
+const changeHandleCombo = (evt: React.ChangeEvent<HTMLSelectElement>)=>{
+      
+    let property = evt.target.name;
+    let value = evt.target.value;
+
+    if(property !== "typeId" && value!=="0" &&
+        property !== "sterization" && value!=="0"){
+        let arr:any=[];
+        arr.push(...form.vaccine,value);
+        console.log(arr);
+        setForm({...form,vaccine:arr});
+    }
+
+   
+
+    if(property == "typeId" && value!=="0"){
+        let arr = value;
+        console.log(arr);
+        setForm({...form,typeId:arr});
+    }
+
+}
+
  
  const cargarImagen =  (event:any)=>{
     event.preventDefault();
@@ -53,7 +111,7 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
    })
    .then((res)=> res.json())
    .then(data => {
-       setForm({...form,imagen:data.url})
+       setForm({...form,image:data.url})
        
    })
    .catch(error => {
@@ -63,11 +121,30 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
 };
 
 
+const submitHandler=(event:any)=> {
+      event.preventDefault();
+      console.log(form);
+      if(form.name && 
+         form.image &&
+         form.breed &&
+         form.age &&
+         form.sterilization &&
+         form.vaccine
+         && form.typeId ){
+            (async function(){
+                const response = await PetsService.PostPets(form);
+                const response1 = await PetsService.getPets();
+                dispatch(getPets(response1.data)); 
+                dispatch(PostPet(response.data))
+            })()
+         }
+}
+
     
    
     return (
         <>
-        { openModal && 
+        { openModal && <form onSubmit={submitHandler}>
              <div className={style.Overlay}>
             <div className={style.ContenedorModal}>
                 <div className={style.EncabezadoModal}>
@@ -78,20 +155,41 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
                        <button onClick={cargarImagen}>UPLOAD</button>
                        <br/>
                       <label>Nombre :</label>
-                      <input type="text" onChange={ChangeHandle}></input>
+                      <input type="text" onChange={ChangeHandle} name="name"></input>
                       <br/>
                       <label>Age :</label>
-                      <input type="number" onChange={ChangeHandle}></input>
+                      <input type="number" onChange={ChangeHandle} name="age"></input>
                       <br/>
                       <label>breed :</label>
-                     <input type="string" onChange={ChangeHandle}></input> 
+                     <input type="string" onChange={ChangeHandle} name="breed"></input>
+                     <label>Sterization</label>
+                      <input type="checkbox" onChange={ChangeHandleCheked} name="sterilization" />
+                      <br/>
+                     <label>Vaccines</label>
+                     <select onChange={changeHandleCombo}>
+                          <option>Rabia</option>
+                          <option>Moquillo</option>
+                          <option>Parvovirosis</option>
+                          <option>Hepatitis</option>
+                     </select>
+                     <br/>
+                     <br/> 
+                     <br/>   
+                     <label>Tipo Mascota</label>
+                     <select onChange={changeHandleCombo} name="typeId">
+                        {petTypes?.map((e:any)=> {
+                            return <option key={e.id} value={e.id}>{e.type}</option>
+                             
+                        })}  
+                     </select>
                 </div>
                  <div className={style.BotonCerrar} onClick={()=> cambiarEstado(false)}>
                          X
               </div> 
-
-              <button type="submit">
-                Create Product
+              <br/> 
+              <br/>        
+              <button type="submit"  onClick={submitHandler}>
+                Create Pet
               </button>
 
 
@@ -106,7 +204,7 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
             
             
             
-            }
+            </form>}
           
         </>
     )
