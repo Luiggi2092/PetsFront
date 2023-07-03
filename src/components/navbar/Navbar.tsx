@@ -93,7 +93,7 @@ const Navbar: React.FC<Props> = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/register" className="nav-link">
+                <a href="/registrato" className="nav-link">
                   <BsPersonPlus /> Registro
                 </a>
               </li>
