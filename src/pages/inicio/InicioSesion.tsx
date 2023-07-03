@@ -93,7 +93,7 @@ const Login = () => {
         <img  src={user.picture} alt=""/>
         </Link>}
       </div>
-      <p>¿No tienes cuenta?</p> <Link to='/registro'><button>Registrate</button></Link>
+      <p>¿No tienes cuenta?</p> <Link to='/registrato'><button>Registrate</button></Link>
     </div>
   )
 }
