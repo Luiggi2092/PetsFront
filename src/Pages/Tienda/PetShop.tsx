@@ -36,9 +36,14 @@ const PetShop: React.FC = () => {
 
    const [Search,setSearch]= useState({
            name:"",
-           categoria:"",
+           
          
    })
+
+   const [Category,setCategory]= useState({
+          category: "",
+   })
+
   
   const dispatch = useDispatch();
 
@@ -63,23 +68,27 @@ const PetShop: React.FC = () => {
    const handleCat = (event: React.ChangeEvent<HTMLSelectElement>)=> {
 
          if(Search.name){
-            setFiltro(false);
-              dispatch(filters(event.currentTarget.value))
-              SetItems({...items,item:[]})
-              setFiltecom(true)
-            setFillcom1(false);
+             setFiltro(false);
+               dispatch(filters(event.currentTarget.value))
+               SetItems({...items,item:[]})
+               setFiltecom(true)
+             setFillcom1(false);
+             setfilCat(false)
 
         
 
-         }else{
+          }else{
     
       const SearchCat = event.currentTarget.value;
       if(SearchCat !== "0"){
       dispatch(getProdType(SearchCat));
       setFiltro(false)
+      setFillcom1(false);
+      setFiltecom(false);
+
       setfilCat(true)
 
-       setSearch({...Search,categoria:event.currentTarget.value});
+       setCategory({...Category,category:event.currentTarget.value});
        
       }else{
         
@@ -87,7 +96,8 @@ const PetShop: React.FC = () => {
         setFillcom1(false);
         setfilCat(false);
         setFiltecom(false);
-
+        
+       setCategory({...Category,category:""}); 
       }
     }
    
@@ -96,15 +106,15 @@ const PetShop: React.FC = () => {
   const handleName= (event: React.ChangeEvent<HTMLInputElement>)=> 
   {
      
-    //  if(Search.categoria){
-    //    setFiltro(false);
-    //    dispatch(filters1(event.currentTarget.value))
-    //    SetItems({...items,item:[]})
-    //    setFiltecom(false);
-    //    setFillcom1(true);
-       
+     if(Category.category){
+          setFiltro(false);
+          dispatch(filters1(event.currentTarget.value))
+          //SetItems({...items,item:[]})
+          setFiltecom(false);
+          setFillcom1(true);
+          setfilCat(false);
         
-    //  } else{
+        } else{
 
 
     
@@ -125,12 +135,17 @@ const PetShop: React.FC = () => {
     }
     else{
       //AllProducts();
+      setFiltro(false);
+      setFillcom1(false);
+      setfilCat(false);
+      setFiltecom(false);
+
       setSearch({...Search,name:""});
       //setFiltro(true);
       
     }
     
- // }
+   }
 
   }
 
@@ -171,7 +186,13 @@ const PetShop: React.FC = () => {
         minPageNumberLimit={minPageNumberLimit}
         porPagina={porPagina}
         setMinPageNumberLimit={setMinPageNumberLimit}
-        Fil={Fil}
+        Fil={filtro}
+        FillCat={filCat}
+        productsCat={ProdCat}
+        filtecom={filtecom}
+        productsfil={FILTROS}
+        filtecom1={filtercom1}
+        productsfil1={FILTROS1}
       />
     </div>
   )

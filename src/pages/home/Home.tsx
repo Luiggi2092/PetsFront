@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
+import ModalPet from '../../components/ModalPet/ModalPet';
 import Pagination from '../../components/pagination/Pagination';
 import { useDispatch,useSelector } from 'react-redux';
 import { PetsService } from '../../services/PetsService';
@@ -29,6 +30,7 @@ const Home: React.FC = () => {
   const itemsPerPage = 6; // Cantidad de mascotas por página
   const totalPages = Math.ceil(Pets.length / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
+  const [openMolal,setOpenModal] = useState(false);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -40,8 +42,16 @@ const Home: React.FC = () => {
     return Pets.slice(startIndex, endIndex);
   };
 
+  
+  const handleModal = () => {
+    setOpenModal(!openMolal);
+ }
+
+
   return (
     <div className="home" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <button onClick={handleModal}>NEW MASCOTA</button>
+      <ModalPet openModal={openMolal} cambiarEstado={setOpenModal} />
       <div className="container">
         <h1 className="titulo">TU NUEVA MASCOTA</h1>
         <div className="pet-cards">

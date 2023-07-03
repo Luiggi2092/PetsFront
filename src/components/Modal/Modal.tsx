@@ -27,7 +27,7 @@ const [form,setForm]= useState({
        price: 0.0,
        available:0,
        averageRating:1.0,
-       typeId:""
+       TypeProductId:""
 
 })
 
@@ -55,7 +55,8 @@ const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>)=> {
 const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
         let property = evt.target.name;
         let value = evt.target.value;
-
+    
+        
 
         setForm({
             ...form,
@@ -96,13 +97,12 @@ const cargarImagen =  (event:any)=>{
     const submitHandler = (event:any)=> {
         event.preventDefault(); 
         
-        console.log("holaafuera");
         if(form.name && 
            form.imagen &&
            form.price &&
            form.available &&
            form.averageRating &&
-           form.typeId ){
+           form.TypeProductId ){
               console.log("hola");
              (async function(){
                 const response = await ProductService.PostProduct(form);
@@ -113,6 +113,7 @@ const cargarImagen =  (event:any)=>{
 
           
     }
+    console.log(CateProd);
 
 
     return (
@@ -133,10 +134,10 @@ const cargarImagen =  (event:any)=>{
                             <label>Available</label>
                             <input type="number" name="available" onChange={ChangeHandle}></input>
                             <label>Categoría</label>
-                            <select name="typeId" onChange={ChangeHandleSelect} >
+                            <select name="TypeProductId" onChange={ChangeHandleSelect} >
                                 <option>Seleccione</option>
-                                {CateProd?.map((e:any,index)=>{
-                                    return <option key={index} value={e.id}>{e.name}</option>  
+                                {CateProd?.map((e:any)=>{
+                                    return <option key={e.id} value={e.id}>{e.name}</option>  
                                 })}
                             </select>
 

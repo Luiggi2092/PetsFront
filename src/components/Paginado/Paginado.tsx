@@ -12,8 +12,14 @@ interface Props {
    setMinPageNumberLimit: (value:number)=> void; 
    porPagina:number;
    Fil:boolean;
+   FillCat:boolean;
+   filtecom:boolean;
+   filtecom1:boolean;
    products : [],
    productFill:[],
+   productsCat: [],
+   productsfil:[],
+   productsfil1:[],
 
 
 }
@@ -25,8 +31,14 @@ const Paginado: React.FC<Props> = ({pagina,
                                     setMinPageNumberLimit,
                                     porPagina,
                                     Fil,
+                                    FillCat,
+                                    filtecom,
+                                    filtecom1,
                                     products,
-                                    productFill
+                                    productFill,
+                                    productsCat,
+                                    productsfil,
+                                    productsfil1
                                     }) => {
     
 
@@ -44,8 +56,25 @@ console.log(Math.ceil(products.length/porPagina));
 if(Fil){
     for(let i=1;i<=Math.ceil(productFill.length/porPagina);i++){
         pageNumbers.push(i);
+    }}
+else if (FillCat){
+    for(let i=1;i<=Math.ceil(productsCat.length/porPagina);i++){
+        pageNumbers.push(i);
     }
-}else{
+
+}else if (filtecom){
+    for(let i=1;i<=Math.ceil(productsfil.length/porPagina);i++){
+        pageNumbers.push(i);
+    }
+
+}else if(filtecom1){
+    for(let i=1;i<=Math.ceil(productsfil1.length/porPagina);i++){
+        pageNumbers.push(i);
+    }
+
+}
+
+else{
     for(let i=1;i<=Math.ceil(products.length/porPagina);i++){
         pageNumbers.push(i);
     }

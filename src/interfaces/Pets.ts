@@ -5,6 +5,14 @@ export interface Pet {
     breed: string;
     sterilization: boolean;
     image: string;
+    Vaccines:[];
+
 }
+
+export interface TypePet {
+    id:string,
+    name:string    
+}
+
 
 export default Pet;
