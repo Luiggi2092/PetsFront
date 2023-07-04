@@ -1,66 +1,56 @@
 import { useState } from 'react'
 import axios from 'axios';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import style from './inicioSesion.module.css'
-import {UserService} from "../../services/UserService"; 
-import {useEffect} from "react"
+import { UserService } from "../../services/UserService";
+import { useEffect } from "react"
 import jwt_decode from "jwt-decode";
+import logo from '../../assets/sinfondo blanco.png'
 
 declare const google: any;
 
-
 const Login = () => {
+  const navigate = useNavigate();
 
-   const navigate = useNavigate();
-  
   interface user1 {
     name: string | null;
-    iat?:number,
-    iss?:string,
-    picture?:string
+    iat?: number,
+    iss?: string,
+    picture?: string
   }
 
-  const [form,setForm]= useState({
-      email:"",
-      password:"",  
-  }) 
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  })
 
+  const [user, setUser] = useState<any>({})
 
+  function handleCallbackResponse(response: any) {
+    console.log("Enconded JWT ID token" + response.credential)
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject)
+    setUser(userObject)
+  }
 
+  useEffect(() => {
+    // global google
+    google.accounts.id.initialize({
+      client_id: "455768951489-dpmia14fe22vcrimo4fmgbtqnngab2b7.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    })
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    )
 
-
-  const [user,setUser] = useState<any>({})
-
- 
-   function handleCallbackResponse(response:any){
-       console.log("Enconded JWT ID token" + response.credential)
-
-       const userObject = jwt_decode(response.credential);
-       console.log(userObject)
-       setUser(userObject)
-      
-
-   }
-
-
-  useEffect(()=> {
-         // global google
-         google.accounts.id.initialize({
-               client_id:"455768951489-dpmia14fe22vcrimo4fmgbtqnngab2b7.apps.googleusercontent.com",
-               callback: handleCallbackResponse
-         })
-         google.accounts.id.renderButton(
-           document.getElementById("signInDiv"),
-          {theme: "outline", size: "large"}
-         )
-
-         google.accounts.id.prompt();
-  },[])
+    google.accounts.id.prompt();
+  }, [])
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [Exito,setExito] = useState({
-      name:""
+  const [Exito, setExito] = useState({
+    name: ""
   });
 
   const handleLogin = () => {
@@ -68,7 +58,7 @@ const Login = () => {
       .post('/api/users', { email, password })
       .then(response => {
         if (response.status === 200) {
-         // loginWithRedirect();
+          // loginWithRedirect();
         } else {
           console.error('Error en el inicio de sesión');
         }
@@ -83,60 +73,73 @@ const Login = () => {
   // }
 
   const handleHome = () => {
-
-     navigate('/');
-        
+    navigate('/');
   }
 
-
-  const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>)=> {
+  const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const property = evt.target.name;
     const value = evt.target.value;
 
     setForm({
       ...form,
-       [property]:value
+      [property]: value
     })
+  }
 
-}
-
-const submitHandler =(event:any)=> {
-   event.preventDefault();
-   if(form.email &&
-      form.password){
-        (async function(){
-           const response = await UserService.PostLogueo(form);
-           if(response.data){
-              console.log("GUUUA");
-              navigate('/home');
-           }
-        })();
-
-      }
-}
-
-
+  const submitHandler = (event: any) => {
+    event.preventDefault();
+    if (form.email &&
+      form.password) {
+      (async function () {
+        const response = await UserService.PostLogueo(form);
+        if (response.data) {
+          console.log("GUUUA");
+          navigate('/home');
+        }
+      })();
+    }
+  }
 
   return (
-    <form onSubmit={submitHandler} >
-    <div className={style.containerForm}>
-      <h2>Inicio de sesión</h2>
-      <input type='email' placeholder='ejemplo@hotmail.com' name="email" onChange={ChangeHandle} />
-      <input type='password' placeholder='Contraseña'  name="password" onChange={ChangeHandle} />
-      <button type="submit" onClick={submitHandler}>Iniciar sesión</button>
-{      
-      <div id="signInDiv" onClick={handleHome} >
-          
-      </div>}
-      <div className={user? "profile":"hidden"}>
-        {user.picture && <Link to={'/home'}>
-        <img  src={user.picture} alt=""/>
-        </Link>}
+    <section>
+      <div className={style.content}>
+        <div className={style.left}>
+          <img src={logo} alt='Logotipo-PetMatch' />
+        </div>
+        <div className={style.right}>
+          <div className={style.titulo}>
+            <h2>Bienvenido de nuevo</h2>
+          </div>
+          <div className={style.form}>
+            <form onSubmit={submitHandler} >
+              <div className={style.inputBox}>
+                <label>Correo:</label>
+                <input type='email' placeholder='ejemplo@hotmail.com' name="email" onChange={ChangeHandle} required />
+              </div>
+              <div className={style.inputBox}>
+                <label>Contraseña:</label>
+                <input type='password' placeholder='Contraseña' name="password" onChange={ChangeHandle} required />
+              </div>
+              <div className={style.iniciar}>
+                <button type="submit" onClick={submitHandler}>Iniciar sesión</button>
+              </div>
+              {/* {
+                <div id="signInDiv" onClick={handleHome} >
+
+                </div>}
+              <div className={user ? "profile" : "hidden"}>
+                {user.picture && <Link to={'/home'}>
+                  <img src={user.picture} alt="" />
+                </Link>}
+              </div> */}
+              <div className={style.adicional}>
+                <p>¿No tienes cuenta? <Link to='/registrato'><span>Registrate</span></Link></p>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <p>¿No tienes cuenta?</p> <Link to='/registrato'><button>Registrate</button></Link>
-    </div>
-    </form>
+    </section>
   )
 }
-
 export default Login;
