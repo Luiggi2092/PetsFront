@@ -18,6 +18,12 @@ export const POST_PRODUCT = 'POST_PRODUCT'
 export const CARSHOP = 'CARSHOP';
 export const TYPEPET = 'TYPEPET';
 export const POSTPET = 'POSTPET';
+export const FILLPRECMIN = 'FILLPRECMIN';
+export const FILLPRECMAX = 'FILLPRECMAX';
+export const FILLPROPREC = 'FILLPROPREC';
+export const FILTERS2 = 'FILTERS2';
+export const FILTERS3 = 'FILTERS3';
+
 
 export const increment = () => {
     return {
@@ -135,4 +141,39 @@ export const PostPet=(Pet:any)=> {
             payload: Pet
        }
 
+}
+
+export const FillPrecmin=(min:number)=>{
+       return {
+          type:'FILLPRECMIN',
+          payload : min,
+       }
+}
+
+export const FillPrecmax=(max:number)=> {
+        console.log(max);
+       return {
+           type :'FILLPRECMAX',
+           payload: max,
+       }
+}
+
+export const FillPrecArray=()=>{
+      return {
+        type: 'FILLPROPREC',
+      }
+}
+
+export const filters2=(fill:string)=>{
+      return {
+        type: 'FILTERS2',
+        payload: fill
+      }
+}
+
+export const filter4=(fill:string)=>{
+     return {
+          type:'FILTERS3',
+          payload: fill
+     }
 }

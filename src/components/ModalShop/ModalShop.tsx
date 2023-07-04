@@ -1,6 +1,6 @@
 import './ModalShop.css'
 import {Carrito} from '../../interfaces/Products'
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
 
 interface Props {
     openModal: boolean;
@@ -26,17 +26,24 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
                             X
                            </div>
                            <div className='contendor'>
-
+                            <table className="table table-striped">
+                               <th>Imagen</th>
+                               <th>  Producto</th>
+                               <th>Precio</th>
+                               <th>Cantidad</th>
+                               <th>SubTotal</th>
+                             <tbody>  
                             {Car?.map((e:Carrito,index)=>(
-                                 <div>
-                                 <img className='imageProd' key={index} src={e.imagen}/>
-                                 <p>{e.name}</p>
-                                 <p>{e.precio}</p>
-                                 <p>{e.cantidad}</p>
-                                 <p>{e.precio * e.cantidad}</p>
-                                 </div>
+                                <tr>   
+                                 <td><img className='imageProd' key={index} src={e.imagen}/></td>
+                                 <td><p> {e.name}</p></td>
+                                 <td>{e.precio}</td>
+                                 <td>{e.cantidad}</td>
+                                 <td>{e.precio * e.cantidad}</td>
+                                 </tr>
                                  ))}
-                
+                                 </tbody>
+                                 </table>  
                 
                             </div>
                         </div>

@@ -145,28 +145,28 @@ const submitHandler=(event:any)=> {
     return (
         <>
         { openModal && <form onSubmit={submitHandler}>
-             <div className={style.Overlay}>
+             <div className={`${style.Overlay}`}>
+             <div className={style.contenedor}>
             <div className={style.ContenedorModal}>
                 <div className={style.EncabezadoModal}>
-                      <h2>New Pet</h2>
-                </div>
-                <div className={style.contenedor}>
-                       <input type="file" onChange={handleImageUpload}></input>
-                       <button onClick={cargarImagen}>UPLOAD</button>
-                       {/* <br/> */}
+                      <h2 className={style.h2}>New Pet</h2>
+                      <img src={form.image== "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps": form.image} className={style.imaupload}/>      
+                      <input className={style.input} type="file" onChange={handleImageUpload}></input>
+                       <button className={style.upload} onClick={cargarImagen}>UPLOAD</button>
+                       <br/>
                       <label>Nombre :</label>
-                      <input type="text" onChange={ChangeHandle} name="name"></input>
-                      {/* <br/> */}
+                      <input className={style.input} type="text" onChange={ChangeHandle} name="name"></input>
+                      <br/>
                       <label>Age :</label>
-                      <input type="number" onChange={ChangeHandle} name="age"></input>
-                      {/* <br/> */}
+                      <input  className={style.input} type="number" onChange={ChangeHandle} name="age"></input>
+                      <br/>
                       <label>breed :</label>
-                     <input type="string" onChange={ChangeHandle} name="breed"></input>
+                     <input  className={style.input} type="string" onChange={ChangeHandle} name="breed"></input>
                      <label>Sterization</label>
                       <input type="checkbox" onChange={ChangeHandleCheked} name="sterilization" />
                       {/* <br/> */}
                      <label>Vaccines</label>
-                     <select onChange={changeHandleCombo}>
+                     <select onChange={changeHandleCombo} className={style.select}>
                           <option>Rabia</option>
                           <option>Moquillo</option>
                           <option>Parvovirosis</option>
@@ -176,13 +176,16 @@ const submitHandler=(event:any)=> {
                      <br/> 
                      <br/>    */}
                      <label>Tipo Mascota</label>
-                     <select onChange={changeHandleCombo} name="typeId">
+                     <select onChange={changeHandleCombo} name="typeId" className={style.select}>
                         {petTypes?.map((e:any)=> {
                             return <option key={e.id} value={e.id}>{e.type}</option>
                              
                         })}  
                      </select>
                 </div>
+                </div>
+                
+                      
                  <div className={style.BotonCerrar} onClick={()=> cambiarEstado(false)}>
                          X
               </div> 

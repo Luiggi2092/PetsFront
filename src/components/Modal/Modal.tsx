@@ -125,6 +125,8 @@ const cargarImagen =  (event:any)=>{
                             <h2>Producto</h2>
                         </div>
                         <div className={style.contendor}>
+                            <img src={form.imagen== "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps": form.imagen} className={style.imaupload}/>
+                            <br/>
                             <input type="file" onChange={handleImageUpload}></input>
                             <br/>
                             <button onClick={cargarImagen}>UPLOAD</button>

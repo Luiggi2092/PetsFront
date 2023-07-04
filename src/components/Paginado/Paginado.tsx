@@ -15,11 +15,13 @@ interface Props {
    FillCat:boolean;
    filtecom:boolean;
    filtecom1:boolean;
+   filtercom2:boolean;
    products : [],
    productFill:[],
    productsCat: [],
    productsfil:[],
    productsfil1:[],
+   FillPrec:[],
 
 
 }
@@ -34,11 +36,13 @@ const Paginado: React.FC<Props> = ({pagina,
                                     FillCat,
                                     filtecom,
                                     filtecom1,
+                                    filtercom2,
                                     products,
                                     productFill,
                                     productsCat,
                                     productsfil,
-                                    productsfil1
+                                    productsfil1,
+                                    FillPrec
                                     }) => {
     
 
@@ -50,13 +54,19 @@ let pageNumbers=[];
 
 
 
-console.log(Math.ceil(products.length/porPagina));
 
 
 if(Fil){
     for(let i=1;i<=Math.ceil(productFill.length/porPagina);i++){
         pageNumbers.push(i);
-    }}
+    }
+
+    console.log(Math.ceil(productFill.length/porPagina));
+    console.log(pageNumbers)
+
+}
+
+
 else if (FillCat){
     for(let i=1;i<=Math.ceil(productsCat.length/porPagina);i++){
         pageNumbers.push(i);
@@ -72,6 +82,10 @@ else if (FillCat){
         pageNumbers.push(i);
     }
 
+}else if (filtercom2){
+    for(let i=1;i<=Math.ceil(FillPrec.length/porPagina);i++){
+        pageNumbers.push(i);
+    }
 }
 
 else{
@@ -81,17 +95,13 @@ else{
     
 }
 
-console.log(Math.ceil(products.length/porPagina))
-console.log(Math.ceil(productFill.length/9));
-console.log(pageNumbers.length);
-console.log(pageNumbers)
-console.log("cuanto es"  + pagina)
-
 
 
 const RendersPageItems = pageNumbers.map((number)=>{
-          
-    if(number < maxPageNumberLimit + 1 && number>minPageNumberLimit){        
+       
+    if(number < maxPageNumberLimit + 1 && number>minPageNumberLimit ||
+        number < maxPageNumberLimit + 1 && number< minPageNumberLimit){ 
+        console.log(number);       
      return (
             <li key={number}  onClick={()=>dispatch(SetPagina(number))} className={pagina == number ? style.active: "null"}>
             {number} 
