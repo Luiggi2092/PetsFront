@@ -1,0 +1,156 @@
+.containerformu {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.input {
+    background-color: #000013;
+    font-size: large;
+    color:white
+}
+
+.select{
+    background-color: #000013;
+    font-size: large;
+    color:white;
+}
+
+.option{
+display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: rgb(0, 2, 41);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(20, 147, 190);
+    width: fit-content;
+    max-width: 250px;
+    margin: 30px;
+    margin-top: 110px;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.formcontainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.formcontainer h5 {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.formcontainer input[type="text"],
+.formcontainer select,
+.butNew button {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.butNew {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+   
+}
+
+.newProd {
+    padding: 10px 20px;
+    background-color: #077e93;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.newProd:hover {
+background-color: #000013;
+}
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.containerc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.cardscontainer {
+    width: 100%;
+}
+
+.card {
+    width: 100px;
+    height:200px;
+    background-color: #ca4141;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card img {
+    width: 50%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.card h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.card p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.pagination button.active {
+    background-color: #4caf50;
+    color: white;
+}
+
+.pagination button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.modal{
+
+}
