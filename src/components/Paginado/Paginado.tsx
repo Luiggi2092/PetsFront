@@ -2,6 +2,7 @@ import style from './paginado.module.css'
 import { useState} from "react"
 import { useDispatch } from 'react-redux';
 import {SetPagina} from "../../redux/actions"  
+import React from 'react';
 
 
 interface Props {
@@ -49,7 +50,7 @@ const Paginado: React.FC<Props> = ({pagina,
 const [pageNumberLimit] = useState(5);
 const dispatch = useDispatch();
 
-let pageNumbers=[];
+let pageNumbers:any=[];
       
 
 
@@ -57,8 +58,9 @@ let pageNumbers=[];
 
 
 if(Fil){
-    for(let i=1;i<=Math.ceil(productFill.length/porPagina);i++){
-        pageNumbers.push(i);
+
+    for(let i:number=1;i<=Math.ceil(productFill.length/porPagina);i++){
+        //pageNumbers.push(i<);
     }
 
     console.log(Math.ceil(productFill.length/porPagina));
@@ -97,7 +99,7 @@ else{
 
 
 
-const RendersPageItems = pageNumbers.map((number)=>{
+const RendersPageItems = pageNumbers.map((number:number)=>{
        
     if(number < maxPageNumberLimit + 1 && number>minPageNumberLimit ||
         number < maxPageNumberLimit + 1 && number< minPageNumberLimit){ 

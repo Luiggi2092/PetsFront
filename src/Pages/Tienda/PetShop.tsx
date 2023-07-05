@@ -8,6 +8,7 @@ import { getProductos, getProductosxName, getTypesProducts, getProdType,filters,
 import Paginado from "../../components/Paginado/Paginado";
 import { useDispatch } from "react-redux";
 import Product from "../../interfaces/Products";
+import React from "react";
 
 const PetShop: React.FC = () => {
   const numPage = useSelector((state: any) => state.numPage);
