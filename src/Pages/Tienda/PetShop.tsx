@@ -19,7 +19,6 @@ const PetShop: React.FC = () => {
   const firstIndex = lastIndex - porPagina
   const [maxPageNumberLimit, setMaxpageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
-  const Fil = useSelector((state: any) => state.Fil);
   let products = useSelector((state: any) => state.products);
   let prodName = useSelector((state: any) => state.productsxName);
   let CateProd = useSelector((state:any)=> state.productTypes);
@@ -93,6 +92,7 @@ const PetShop: React.FC = () => {
   }, [])
 
 
+
    console.log(FillPrec);
 
   const handleModal = () => {
@@ -146,7 +146,6 @@ const PetShop: React.FC = () => {
   }
 
   const handleRango = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const property = event.target.value;
 
       const value = event.target.value;
       setfilCat(false)

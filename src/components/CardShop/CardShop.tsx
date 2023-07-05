@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './CardShop.module.css'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { increment, CarritoCompas } from '../../redux/actions';
 
@@ -14,7 +14,9 @@ interface Props {
 
 
 const cardShop: React.FC<Props> = ({ name, imagen, price }) => {
+  
 
+  const dispatch = useDispatch();
   const [contador, setContador] = useState(1);
   const [carrito,setCarrito] = useState({
          name:name,
@@ -23,7 +25,17 @@ const cardShop: React.FC<Props> = ({ name, imagen, price }) => {
          cantidad:contador
 
   })
-  const dispatch = useDispatch();
+
+  useEffect(()=> {
+      const storeCardItem = localStorage.getItem('cartItem');
+      if(storeCardItem){
+        dispatch(CarritoCompas(JSON.parse(storeCardItem)));
+      }
+  },[dispatch]);
+
+
+
+
 
   const incrementar = () => {
     setContador(contador + 1);
@@ -36,10 +48,13 @@ const cardShop: React.FC<Props> = ({ name, imagen, price }) => {
   }
 
 
+  
+
  const handleCarroShop = ()=> {
      
      dispatch(increment());
      dispatch(CarritoCompas(carrito))
+     //localStorage.setItem('contShop',contador.toString());
     
  }
 

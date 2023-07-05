@@ -23,7 +23,7 @@ export const FILLPRECMAX = 'FILLPRECMAX';
 export const FILLPROPREC = 'FILLPROPREC';
 export const FILTERS2 = 'FILTERS2';
 export const FILTERS3 = 'FILTERS3';
-
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 export const increment = () => {
     return {
@@ -176,4 +176,13 @@ export const filter4=(fill:string)=>{
           type:'FILTERS3',
           payload: fill
      }
+}
+
+
+export const removeCart = (name:string)=> {
+    return {
+         type: 'REMOVE_FROM_CART',
+         payload: name
+    }
+
 }

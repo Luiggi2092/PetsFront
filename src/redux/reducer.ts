@@ -1,6 +1,6 @@
 import { Product, TypeProduct,Carrito } from "../interfaces/Products";
 import { Pet,TypePet } from "../interfaces/Pets"
-import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,FILLPRECMIN,FILLPRECMAX,FILLPROPREC,FILTERS2,FILTERS3 } from "./actions"
+import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,FILLPRECMIN,FILLPRECMAX,FILLPROPREC,FILTERS2,FILTERS3,REMOVE_FROM_CART } from "./actions"
 
 interface State {
     count: number;
@@ -55,13 +55,16 @@ const initialState: State = {
 
 }
 
+const storedCartItems = localStorage.getItem('cartItems');
+if (storedCartItems) {
+  initialState.Shop = JSON.parse(storedCartItems);
+  initialState.count = initialState.Shop.length;
+}
+
+
+
 const counterReducer = (state = initialState, action: any): State => {
     switch (action.type) {
-        case INCREMENT:
-            return {
-                ...state,
-                count: state.count + 1,
-            };
         case GET_PRODUCTS:
             return {
                 ...state,
@@ -145,7 +148,8 @@ const counterReducer = (state = initialState, action: any): State => {
            case CARSHOP : 
                  return {
                     ...state,
-                    Shop: [...state.Shop , action.payload]
+                    Shop: [...state.Shop , action.payload],
+                    count : state.count + 1
                  } 
            case TYPEPET : 
              return {
@@ -198,6 +202,13 @@ const counterReducer = (state = initialState, action: any): State => {
                     ...state,
                     ProdFillPrecxName:Fill3,
                 }
+             case REMOVE_FROM_CART:
+                const filteredItems = state.Shop.filter(item=> item.name !== action.payload) 
+                return {
+                    ...state,
+                    Shop: filteredItems,
+                    count: state.count - 1,
+                }   
         
             default:
             return state;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
@@ -6,7 +6,7 @@ import ModalShop from "../../components/ModalShop/ModalShop"
 import { useSelector,useDispatch } from 'react-redux';
 import {FillName,Fill,SetPagina} from '../../redux/actions'
 import './navbar.css'
-import {Link} from "react-router-dom"
+import {Link, json} from "react-router-dom"
 
 interface Props {
   setPagina?: (value: number) => void;
@@ -20,7 +20,26 @@ const Navbar: React.FC<Props> = () => {
   const count = useSelector((state:any)=> state.count);
   const Car = useSelector((state:any)=> state.Shop);
   const dispatch = useDispatch();
-  
+
+  const [counts,setCount] = useState(count)
+  console.log(counts);
+   const getData = ()=> {
+      return localStorage.getItem('contShop')
+    
+   }
+
+
+   useEffect(()=>{
+       setCount(getData()); 
+   },[])
+ 
+   
+   useEffect(()=> {
+    if(Car){
+    localStorage.setItem('cartItems', JSON.stringify(Car))
+    }
+ },[Car])
+
 
 
   const handleCart = () => {
