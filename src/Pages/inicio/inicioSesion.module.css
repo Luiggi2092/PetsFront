@@ -34,6 +34,12 @@ section {
     background-size: cover;
 }
 
+.left img {
+    width: 210px;
+    height: 125px;
+    object-fit: cover;
+}
+
 .right {
     margin: 20px auto;
     padding: 10px;
