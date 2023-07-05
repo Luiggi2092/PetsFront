@@ -2,19 +2,21 @@
     background-color: white;
     font-family: 'Acme', sans-serif;
     color: rgba(0, 28, 48, 1);
-    width: 100vw;
-    height: 100vh;
+    width: 97vw;
+    height: 89vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+
 .form{
+    width: 50vw;
+    height: 80vh;
     background-color: rgba(100, 204, 197, 1);
-    width: 50%;
-    height: 60%;
     padding: 3rem;
     border-radius: 3rem;
+    box-sizing: border-box;
 }
 
 .registrarmeInp{
@@ -23,4 +25,18 @@
 
 .error{
     color: red;
+}
+
+.label{
+    margin-left: 2rem;
+}
+
+.h1{
+    font-size: 1rem;
+    color: white;
+}
+
+.boton{
+    background-color: rgba(23, 107, 135, 1);
+    color: white;
 }
