@@ -49,6 +49,25 @@ const HomeCliente = () => {
       organization: 'Organización',
     },
 
+    {
+      id: 2,
+      image: 'https://www.diainternacionalde.com/imagenes/dias-raros/enero/01-14_dia-internacional-vestir-mascota-2023.jpg',
+      name: 'Nombre de la mascota',
+      breed: 'Raza de la mascota',
+      age: 'Edad de la mascota',
+      organization: 'Organización',
+    },
+
+    {
+      id: 1,
+      image: 'https://www.eluniverso.com/resizer/a7NOVorxPIDXjiC3-ipw5g36UAI=/960x640/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/eluniverso/NULVDXAF55CHBGYG6XW5SSDU4E.jpg',
+      name: 'Nombre de la mascota',
+      breed: 'Raza de la mascota',
+      age: 'Edad de la mascota',
+      organization: 'Organización',
+    },
+
+
 
     
   ];
@@ -85,6 +104,14 @@ const HomeCliente = () => {
       size: 'Talle del artículo',
       price: 'Precio del artículo',
     },
+
+    {
+      id: 1,
+      image: 'https://st.depositphotos.com/1177973/2464/i/600/depositphotos_24648519-stock-photo-pet-accessories-isolated-on-white.jpg',
+      name: 'Nombre del artículo',
+      size: 'Talle del artículo',
+      price: 'Precio del artículo',
+    },
     
   ];
 
@@ -104,7 +131,7 @@ const HomeCliente = () => {
       breed: 'Raza reciente 2',
       age: '1 año',
       organization: 'Organización reciente 1',
-      image: 'https://ae01.alicdn.com/kf/H967928a7fd2e4fc3821c71a25ac166eaI/Bola-de-comida-con-fugas-para-mascotas-vaso-de-juego-autom-tico-para-gatos-y-perros.jpg',
+      image: 'https://quinto-poder.mx/u/fotografias/m/2023/5/25/f1280x720-44534_176209_5050.jpg',
     },
 
     {
@@ -124,6 +151,26 @@ const HomeCliente = () => {
       age: '1 año',
       organization: 'Organización reciente 1',
       image: 'https://hips.hearstapps.com/hmg-prod/images/accesorios-para-mascotas-1560513612.jpg?crop=0.644xw:1.00xh;0.280xw,0&resize=1200:*',
+    },
+
+    {
+      id: 4,
+      type: 'pet',
+      name: 'Mascota reciente 4',
+      breed: 'Raza reciente 4',
+      age: '1 año',
+      organization: 'Organización reciente 1',
+      image: 'https://hips.hearstapps.com/hmg-prod/images/accesorios-para-mascotas-1560513612.jpg?crop=0.644xw:1.00xh;0.280xw,0&resize=1200:*',
+    },
+
+    {
+      id: 2,
+      type: 'pet',
+      name: 'Mascota reciente 2',
+      breed: 'Raza reciente 2',
+      age: '1 año',
+      organization: 'Organización reciente 1',
+      image: 'https://quinto-poder.mx/u/fotografias/m/2023/5/25/f1280x720-44534_176209_5050.jpg',
     },
     
     // Más objetos de artículos o mascotas recientes
@@ -159,7 +206,7 @@ const HomeCliente = () => {
       <div className="center-section">
         <h3>Mascotas en adopción</h3>
         <Carousel
-          additionalTransfrom={0}
+          additionalTransfrom={1}
           arrows
           autoPlaySpeed={3000}
           centerMode={false}
@@ -180,8 +227,8 @@ const HomeCliente = () => {
                 max: 3000,
                 min: 1024
               },
-              items: 3,
-              partialVisibilityGutter: 40
+              items: 5,
+              partialVisibilityGutter: 20
             },
             mobile: {
               breakpoint: {
@@ -202,7 +249,7 @@ const HomeCliente = () => {
           }}
           showDots={false}
           sliderClass=""
-          slidesToSlide={1}
+          slidesToSlide={4}
           swipeable
         >
           {carouselPets.map((pet) => (
@@ -220,7 +267,7 @@ const HomeCliente = () => {
       <div className="articles-section">
         <h3>Artículos nuevos</h3>
         <Carousel
-          additionalTransfrom={0}
+          additionalTransfrom={1}
           arrows
           autoPlaySpeed={3000}
           centerMode={false}
@@ -241,8 +288,8 @@ const HomeCliente = () => {
                 max: 3000,
                 min: 1024
               },
-              items: 3,
-              partialVisibilityGutter: 40
+              items: 5,
+              partialVisibilityGutter: 20
             },
             mobile: {
               breakpoint: {
@@ -263,7 +310,7 @@ const HomeCliente = () => {
           }}
           showDots={false}
           sliderClass=""
-          slidesToSlide={1}
+          slidesToSlide={4}
           swipeable
         >
           {carouselArticles.map((article) => (
@@ -302,8 +349,8 @@ const HomeCliente = () => {
                 max: 3000,
                 min: 1024,
               },
-              items: 3,
-              partialVisibilityGutter: 40,
+              items: 5,
+              partialVisibilityGutter: 20,
             },
             mobile: {
               breakpoint: {
@@ -324,7 +371,7 @@ const HomeCliente = () => {
           }}
           showDots={false}
           sliderClass=""
-          slidesToSlide={1}
+          slidesToSlide={4}
           swipeable
         >
           {recentItems.map((item) =>

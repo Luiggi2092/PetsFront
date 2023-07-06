@@ -2,7 +2,7 @@
 
 .home-container {
     background-color: #f2f2f2;
-    padding: 0px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -17,68 +17,50 @@
     padding: 20px;
 }
 
+.center-section, .pet-card, .articles-section {
+    margin-left: 20px;
+    /* Ajusta el valor según sea necesario */
+    margin-right: 20px;
+    /* Ajusta el valor según sea necesario */
+}
+
 .account-type p {
-    font-size: 16px;
-    color: #666;
+    font-size: 20px;
+    color: #1a034f;
     margin-bottom: 10px;
 }
 
 .adopted-pet-card {
-    background-color: #fff;
+    background-color: #eff4f5;
     border-radius: 10px;
-    padding: 0;
+    padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 10px 25px rgba(14, 2, 85, 0.907);
 }
+
+.adopted-pet-card img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
 .pet-card,
 .article-card,
 .recent-article-card,
 .recent-pet-card {
+    width: 300px;
+        /* Ajusta el ancho de las tarjetas según tus necesidades */
+    height: 400px;
     background-color: #fff;
     border-radius: 10px;
-    padding: 10px;
-    margin-right: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
+    padding: 20px;
+    margin-right: 5px;
+    box-shadow: 0 10px 25px rgba(14, 2, 85, 0.907);
+    margin-bottom: 60px;
+    margin: 10px;
 }
-
-.adopted-pet-card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-margin: 80px;
-}
-
-.adopted-pet-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 20px;
-}
-
-.pet-details {
-  flex-grow: 1;
-}
-
-.pet-details h4 {
-  font-size: 20px;
-  color: #333333;
-  margin-bottom: 5px;
-}
-
-.pet-info {
-  font-size: 16px;
-  color: #666666;
-  margin-bottom: 5px;
-}
-
 
 .pet-card:last-child,
 .article-card:last-child,
@@ -91,8 +73,10 @@ margin: 80px;
 .article-card img,
 .recent-article-card img,
 .recent-pet-card img {
-    width: 50%;
-    height: auto;
+width: 100%;
+    height: 200px;
+    /* Ajusta la altura de las imágenes según tus necesidades */
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -101,41 +85,34 @@ margin: 80px;
 .article-card p,
 .recent-article-card p,
 .recent-pet-card p {
-    font-size: 14px;
-    color: #666;
+    font-size: 16px;
+    color: #02001a;
     margin-bottom: 5px;
-}
-
-.adopted-pet-card img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    margin-bottom: 10px;
 }
 
 .articles-section h3,
 .recent-items-section h3 {
-    font-size: 20px;
+    font-size: 30px;
     color: #333;
     text-transform: uppercase;
     margin-bottom: 10px;
-    margin-top: 10px;
-
+    margin-top: 20px;
 }
 
 .article-card button,
 .recent-article-card button {
-    background-color: #333;
+    background-color: #090237;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 19px;
     cursor: pointer;
 }
 
 .recent-pet-card button {
-    background-color: #f44336;
+    background-color: #10bfcf;
+    font-size: 19px;
 }
 
 .carousel-container {
@@ -167,33 +144,24 @@ margin: 80px;
     background-color: #333;
 }
 
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
+/* Agrega este código al archivo HomeCliente.css */
+
+.carousel-container .react-multi-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
-.footer p {
-    margin-bottom: 5px;
+.carousel-container .react-multi-carousel-arrow--left {
+    left: 10px;
+    /* Ajusta el valor según sea necesario */
 }
 
-.footer a {
-    color: #fff;
-    margin: 0 5px;
-}
-
-.social-icon {
-    font-size: 20px;
-    vertical-align: middle;
-}
-
-.footer p,
-.footer a {
-    font-size: 14px;
-}
-
-.footer .contact,
-.footer .social-media {
-    margin-bottom: 20px;
+.carousel-container .react-multi-carousel-arrow--right {
+    right: 10px;
+    /* Ajusta el valor según sea necesario */
 }

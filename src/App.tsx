@@ -3,15 +3,18 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from './components/navbar/Navbar';
-import Home from './Pages/home/Home';
-import UneteANosotros from './Pages/nosotros/UneteANosotros';
-import PetShop from './Pages/Tienda/PetShop';
-import Registrate from './Pages/registro/FormRegistrate';
-import SocialIcons from './Pages/socialIcons/SocialIcons';
-import Landing from './Pages/Landing/Landing'
+import Home from './pages/home/Home';
+import UneteANosotros from './pages/nosotros/UneteANosotros';
+import PetShop from './pages/tienda/PetShop';
+import Registrate from './pages/registro/Registrate';
+import SocialIcons from './pages/socialIcons/SocialIcons';
+import Landing from './pages/Landing/Landing'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PetDetail from '../src/Pages/PetDetail/PetDetail';
-import Login from './Pages/inicio/InicioSesion';
+import PetDetail from '../src/pages/PetDetail//PetDetail';
+import Login from './pages/inicio/InicioSesion';
+import HomeCliente from './components/ClientHome/homeCliente/HomeCliente';
+import NavbarCliente from './components/ClientHome/Navbarcient/NavbarCliente'
+import FormularioAdopcion from './components/ClientHome/formAdopcion/FormularioAdopcion';
 
 
 const App: React.FC = () => {
@@ -29,6 +32,8 @@ const App: React.FC = () => {
                 <Route path="/registrato" element={<Registrate />} />
                 <Route path="/pet/:id" element={<Registrate />} />
                 <Route path="/detail/:id" element={<PetDetail/>}/>
+                <Route path="/" element={<HomeCliente />} />
+                <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
             </Routes>
         </BrowserRouter>
     );

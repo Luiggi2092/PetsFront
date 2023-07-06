@@ -1,8 +1,25 @@
-/* navbarCliente.css */
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 .navbar {
     background-color: #176B87;
+    
+}
+
+.navbar-nav .nav-link.cart-link {
+    margin-left: auto;
+}
+
+.nav-link {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
+    margin: 0 4px;
+    /* Margen entre el icono y el texto */
+}
+
+.nav-item {
+    margin-right: 10px;
+    /* Margen entre los ítems */
 }
 
 .navbar-brand {
@@ -11,9 +28,13 @@
 }
 
 .navbar-brand img {
-    width: 50px;
+width: 60px;
     height: 50px;
-    margin-right: 10px;
+    transition: transform 0.3s;
+}
+.navbar-nav .nav-link.search-link {
+    margin-right: 1rem;
+    /* Aumenta el valor para aumentar la separación */
 }
 
 .navbar-toggler {
@@ -25,9 +46,8 @@
 }
 
 .navbar-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 1;
+        justify-content: center;
 }
 
 .nav-item {
@@ -35,18 +55,30 @@
 }
 
 .nav-link {
-    display: flex;
+display: flex;
     align-items: center;
-    color: #ffffff;
-    text-decoration: none;
+    padding: 0 1rem;
+    color: #fff;
+    font-size: large;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #e4d612;
+    transform: translateY(-3px);
+}
+
+.navbar-nav .nav-link .nav-icon {
+    margin-right: 0.5rem;
 }
 
 .dropdown-menu {
-    background-color: #010101;
+    background-color: #038394;
+    color: #000;
 }
 
 .dropdown-item {
-    color: #f7f7f6;
+    color: #070707;
     text-decoration: none;
 }
 
@@ -85,4 +117,57 @@
 
 .show {
     display: block;
+}
+
+@media (max-width: 767.98px) {
+    .navbar-brand img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .navbar-nav .nav-link .nav-icon {
+        margin-right: 0.3rem;
+    }
+
+    .navbar-nav .nav-link.search-link {
+        margin-right: 0.5rem;
+    }
+
+    .navbar-nav .nav-link.cart-link {
+        margin-left: 0.5rem;
+    }
+
+    .navbar-collapse {
+        background-color: #176B87;
+        padding: 0.5rem;
+    }
+
+    .navbar-nav {
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 0;
+        margin: 0.5rem 0;
+        transition: color 0.3s, transform 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ccc;
+        transform: translateY(-3px);
+    }
+
+    .navbar-nav .nav-link .nav-icon {
+        margin-right: 0.3rem;
+        margin-bottom: 0.2rem;
+    }
+
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+
+    .navbar-collapse .form-control {
+        width: 100px;
+    }
 }
