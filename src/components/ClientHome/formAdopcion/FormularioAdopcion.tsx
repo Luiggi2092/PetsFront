@@ -156,7 +156,7 @@ const FormularioAdopcion = () => {
                     </select>
 
                     <label htmlFor="reaccion-alergica">¿Algún miembro de la familia tiene reacción alérgica a las mascotas?</label>
-                    <div>
+                        <div className="radio-option">
                         <input
                             type="radio"
                             id="reaccion-alergica-si"
@@ -166,7 +166,8 @@ const FormularioAdopcion = () => {
                             onChange={() => setReaccionAlergica('si')}
                         />
                         <label htmlFor="reaccion-alergica-si">Sí</label>
-
+                          </div>
+                            <div className="radio-option"> 
                         <input
                             type="radio"
                             id="reaccion-alergica-no"
@@ -176,16 +177,17 @@ const FormularioAdopcion = () => {
                             onChange={() => setReaccionAlergica('no')}
                         />
                         <label htmlFor="reaccion-alergica-no">No</label>
-                    </div>
-
+                   
+                        </div>
                     <label htmlFor="hogar-adecuado">¿Cuentas con un hogar adecuado para la mascota?</label>
+                        <div className="radio-option">
                     <input
                         type="checkbox"
                         id="hogar-adecuado"
                         checked={hogarAdecuado}
                         onChange={(e) => setHogarAdecuado(e.target.checked)}
                     />
-
+                        </div>
                     <label htmlFor="tiempo-dedicado">¿Cuánto tiempo podrías dedicarle a la mascota diariamente?</label>
                     <input
                         type="text"
@@ -195,6 +197,7 @@ const FormularioAdopcion = () => {
                     />
 
                     <label>
+                        
                         <input
                             type="checkbox"
                             checked={terminosCondiciones}

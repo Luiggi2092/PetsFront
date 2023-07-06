@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import Carousel from 'react-multi-carousel';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import 'react-multi-carousel/lib/styles.css';
 import './HomeCliente.css';
 import 'react-multi-carousel/lib/styles.css';
 import { FaInstagram, FaWhatsapp, FaFacebook } from 'react-icons/fa';
