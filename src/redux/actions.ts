@@ -24,6 +24,9 @@ export const FILLPROPREC = 'FILLPROPREC';
 export const FILTERS2 = 'FILTERS2';
 export const FILTERS3 = 'FILTERS3';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const FILTERS4 = 'FILTERS4';
+export const FILTERS5 = 'FILTERS5';
+
 
 export const increment = () => {
     return {
@@ -185,4 +188,18 @@ export const removeCart = (name:string)=> {
          payload: name
     }
 
+}
+
+export const filter5 = (fill:string)=> {
+     return {
+           type: 'FILTERS4',
+           payload: fill,
+     }
+}
+
+export const filter6 = (fill:string)=> {
+     return {
+            type: 'FILTERS5',
+            payload: fill
+     }
 }

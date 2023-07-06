@@ -1,6 +1,6 @@
 import { Product, TypeProduct,Carrito } from "../interfaces/Products";
 import { Pet,TypePet } from "../interfaces/Pets"
-import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,FILLPRECMIN,FILLPRECMAX,FILLPROPREC,FILTERS2,FILTERS3,REMOVE_FROM_CART } from "./actions"
+import { GET_PRODNAME, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,FILLPRECMIN,FILLPRECMAX,FILLPROPREC,FILTERS2,FILTERS3,REMOVE_FROM_CART,FILTERS4,FILTERS5 } from "./actions"
 
 interface State {
     count: number;
@@ -24,6 +24,10 @@ interface State {
     ProdPrec:Product[],
     ProdFillPrec:Product[],
     ProdFillPrecxName:Product[],
+    ProdFillCPName: Product[],
+    ProdFillNamPrecCat: Product[],
+    
+
 
     
 }
@@ -50,6 +54,8 @@ const initialState: State = {
     ProdPrec:[],
     ProdFillPrec:[],
     ProdFillPrecxName:[],
+    ProdFillCPName:[],
+    ProdFillNamPrecCat:[],
 
     
 
@@ -197,7 +203,7 @@ const counterReducer = (state = initialState, action: any): State => {
                  }
             case FILTERS3: 
                 const Fill3 = state.ProdPrec.filter((e:any)=> e.name.toLowerCase().includes(action.payload.toLowerCase()))        
-                 
+                 console.log(Fill3);
                 return {
                     ...state,
                     ProdFillPrecxName:Fill3,
@@ -208,7 +214,30 @@ const counterReducer = (state = initialState, action: any): State => {
                     ...state,
                     Shop: filteredItems,
                     count: state.count - 1,
-                }   
+                }
+             case FILTERS4 :
+                const Fill4= state.ProdFillPrec.filter((e:any)=> e.name.toLowerCase().includes(action.payload.toLowerCase()) )
+                
+                return {
+                    ...state,
+                    ProdFillCPName: Fill4
+                }
+
+             case FILTERS5 : 
+                 console.log("yapee");
+                const Fill5= state.ProdFillPrecxName.filter((e:any)=>{
+                    for(let dato in e.TypeProduct){
+                        if(e.TypeProduct[dato] == action.payload){
+                            return action.payload;
+                        } 
+                       
+                 }
+                } )   
+                return {
+                      ...state,
+                      ProdFillNamPrecCat : Fill5
+
+                }
         
             default:
             return state;

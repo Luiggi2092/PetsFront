@@ -24,6 +24,13 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
     const handleRemove = (name:string) => {
         dispatch(removeCart(name));
     }
+
+    const calcularSubtotal = () => {
+       return Car.reduce((total:number,products:any)=>{
+            return total + products.precio * products.cantidad;
+       },0)
+    }
+
     
 
      return (
@@ -58,7 +65,7 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
                                  ))}
                                  </tbody>
                                  </table>  
-                
+                               <h3>Total : {calcularSubtotal()}</h3> 
                             </div>
                         </div>
                         

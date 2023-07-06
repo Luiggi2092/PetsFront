@@ -12,18 +12,8 @@ interface Props {
    minPageNumberLimit:number;
    setMinPageNumberLimit: (value:number)=> void; 
    porPagina:number;
-   Fil:boolean;
-   FillCat:boolean;
-   filtecom:boolean;
-   filtecom1:boolean;
-   filtercom2:boolean;
    products : [],
-   productFill:[],
-   productsCat: [],
-   productsfil:[],
-   productsfil1:[],
-   FillPrec:[],
-
+   
 
 }
 
@@ -33,17 +23,7 @@ const Paginado: React.FC<Props> = ({pagina,
                                     minPageNumberLimit,
                                     setMinPageNumberLimit,
                                     porPagina,
-                                    Fil,
-                                    FillCat,
-                                    filtecom,
-                                    filtecom1,
-                                    filtercom2,
                                     products,
-                                    productFill,
-                                    productsCat,
-                                    productsfil,
-                                    productsfil1,
-                                    FillPrec
                                     }) => {
     
 
@@ -57,44 +37,8 @@ let pageNumbers:any=[];
 
 
 
-if(Fil){
-
-    for(let i:number=1;i<=Math.ceil(productFill.length/porPagina);i++){
-        //pageNumbers.push(i<);
-    }
-
-    console.log(Math.ceil(productFill.length/porPagina));
-    console.log(pageNumbers)
-
-}
-
-
-else if (FillCat){
-    for(let i=1;i<=Math.ceil(productsCat.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-
-}else if (filtecom){
-    for(let i=1;i<=Math.ceil(productsfil.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-
-}else if(filtecom1){
-    for(let i=1;i<=Math.ceil(productsfil1.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-
-}else if (filtercom2){
-    for(let i=1;i<=Math.ceil(FillPrec.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-}
-
-else{
     for(let i=1;i<=Math.ceil(products.length/porPagina);i++){
         pageNumbers.push(i);
-    }
-    
 }
 
 

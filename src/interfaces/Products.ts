@@ -2,10 +2,10 @@ export interface Product {
     id: number,
     name: string,
     imagen: string,
-    price: number,
+    price: any,
     available: number,
     averageRating: number,
-    TypeProduct: string
+    TypeProductId: string
 }
 
 export interface FilterName {
