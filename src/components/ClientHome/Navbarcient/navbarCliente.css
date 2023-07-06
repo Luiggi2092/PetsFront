@@ -1,0 +1,88 @@
+/* navbarCliente.css */
+.navbar {
+    background-color: #176B87;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-color: #fafaf8;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    background-color: #010101;
+}
+
+.dropdown-item {
+    color: #f7f7f6;
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background-color: #0ca2ad;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+.form-control {
+    border-color: #fff;
+    background-color: transparent;
+    color: #fff;
+}
+
+.btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-link {
+    color: #fff;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.show {
+    display: block;
+}

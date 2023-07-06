@@ -1,0 +1,199 @@
+/* Agrega este código al archivo HomeCliente.css */
+
+.home-container {
+    background-color: #f2f2f2;
+    padding: 0px;
+    text-align: center;
+}
+
+.welcome-message {
+    margin-bottom: 1px;
+}
+
+.welcome-message h2 {
+    font-size: 28px;
+    color: #333;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+.account-type p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.adopted-pet-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pet-card,
+.article-card,
+.recent-article-card,
+.recent-pet-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.adopted-pet-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+margin: 80px;
+}
+
+.adopted-pet-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.pet-details {
+  flex-grow: 1;
+}
+
+.pet-details h4 {
+  font-size: 20px;
+  color: #333333;
+  margin-bottom: 5px;
+}
+
+.pet-info {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 5px;
+}
+
+
+.pet-card:last-child,
+.article-card:last-child,
+.recent-article-card:last-child,
+.recent-pet-card:last-child {
+    margin-right: 0;
+}
+
+.pet-card img,
+.article-card img,
+.recent-article-card img,
+.recent-pet-card img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.pet-card p,
+.article-card p,
+.recent-article-card p,
+.recent-pet-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.adopted-pet-card img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.articles-section h3,
+.recent-items-section h3 {
+    font-size: 20px;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+.article-card button,
+.recent-article-card button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.recent-pet-card button {
+    background-color: #f44336;
+}
+
+.carousel-container {
+    position: relative;
+    margin-top: 50px;
+}
+
+.carousel-container .react-multi-carousel-list {
+    margin: 0 -10px;
+}
+
+.carousel-container .react-multi-carousel-item {
+    padding: 0 10px;
+}
+
+.carousel-container .react-multi-carousel-dot-list {
+    bottom: -30px;
+}
+
+.carousel-container .react-multi-carousel-dot button {
+    background-color: #bbb;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.carousel-container .react-multi-carousel-dot--active button {
+    background-color: #333;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 5px;
+}
+
+.footer a {
+    color: #fff;
+    margin: 0 5px;
+}
+
+.social-icon {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.footer p,
+.footer a {
+    font-size: 14px;
+}
+
+.footer .contact,
+.footer .social-media {
+    margin-bottom: 20px;
+}
