@@ -1,60 +1,103 @@
 .Overlay{
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top:-200px;
-    left:0;
-    background: rgba(0,0,0,.5);
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: left;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.297);
+    z-index: 999;
 }
 
 .ContenedorModal{
-    width: 1080px;
-    min-height: 100px;
-    background: #fff;
-    position: relative;
-    border-radius: 5px;
-    box-shadow: rgba(100, 100,111,0.2) 0px 7px 29px 0px;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: rgb(0, 2, 41);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(20, 147, 190);
+    width: fit-content;
+    max-width: 250px;
+    margin: 30px;
+    margin-top: 110px;
 
 }
 
 
 .EncabezadoModal{
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e8e8e8;
+    text-align: left;
+    margin-bottom: 10px;
+    color: rgb(246, 246, 246);
 }
 
-h3{
-    font-weight: 500;
-    font-size: 16px;
-    color: #1766DC
 
+.contenedor {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgb(246, 246, 246);
 }
-
 
 .BotonCerrar{
-    position: absolute;
-    top:30px;
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    border:  none;
-    background: none;
+    
+    text-align: center;
     cursor: pointer;
-    transition: .3s ease all;
-    border-radius: 5px;
-    color : #1766DC;
+    width: auto;
+    color: aquamarine;
+    font-size: larger;
 
 
 }
 
-.BotonCerrar:hover{
-    background: #F2F2F2;
+
+
+button[type="submit"] {
+    text-align: left;
+    background-color: #4ca0af;
+    color: rgb(7, 7, 7);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.select{
+    background-color: #000013;
+    font-size: large;
+    color:white;
+}
+
+.imaupload{
+    width: 100px;
+    height: 150px;
+ }
+
+
+
+input,
+select,
+button {
+    width: 100%;
+}
+
+/* Estilos responsive */
+@media screen and (max-width: 600px) {
+    .ContenedorModal {
+        width: 90%;
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .ContenedorModal {
+        margin: 20px;
+        margin-top: 70px;
+    }
 }

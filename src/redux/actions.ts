@@ -1,6 +1,5 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
 import { Pet,TypePet } from '../interfaces/Pets'
-import axios from 'axios';
 
 export const INCREMENT = 'INCREMENT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -19,7 +18,15 @@ export const POST_PRODUCT = 'POST_PRODUCT'
 export const CARSHOP = 'CARSHOP';
 export const TYPEPET = 'TYPEPET';
 export const POSTPET = 'POSTPET';
-export const GET_VACCINES = 'GET_VACCINES'
+export const FILLPRECMIN = 'FILLPRECMIN';
+export const FILLPRECMAX = 'FILLPRECMAX';
+export const FILLPROPREC = 'FILLPROPREC';
+export const FILTERS2 = 'FILTERS2';
+export const FILTERS3 = 'FILTERS3';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const FILTERS4 = 'FILTERS4';
+export const FILTERS5 = 'FILTERS5';
+
 
 export const increment = () => {
     return {
@@ -139,11 +146,60 @@ export const PostPet=(Pet:any)=> {
 
 }
 
-export const getVaccines = () => {
-    return async function (dispatch:any) {
-        const vaccines = await axios.get('/vaccines')
-        dispatch({
-            type: GET_VACCINES, payload: vaccines
-        })
+export const FillPrecmin=(min:number)=>{
+       return {
+          type:'FILLPRECMIN',
+          payload : min,
+       }
+}
+
+export const FillPrecmax=(max:number)=> {
+        console.log(max);
+       return {
+           type :'FILLPRECMAX',
+           payload: max,
+       }
+}
+
+export const FillPrecArray=()=>{
+      return {
+        type: 'FILLPROPREC',
+      }
+}
+
+export const filters2=(fill:string)=>{
+      return {
+        type: 'FILTERS2',
+        payload: fill
+      }
+}
+
+export const filter4=(fill:string)=>{
+     return {
+          type:'FILTERS3',
+          payload: fill
+     }
+}
+
+
+export const removeCart = (name:string)=> {
+    return {
+         type: 'REMOVE_FROM_CART',
+         payload: name
     }
+
+}
+
+export const filter5 = (fill:string)=> {
+     return {
+           type: 'FILTERS4',
+           payload: fill,
+     }
+}
+
+export const filter6 = (fill:string)=> {
+     return {
+            type: 'FILTERS5',
+            payload: fill
+     }
 }

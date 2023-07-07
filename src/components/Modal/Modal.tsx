@@ -27,7 +27,7 @@ const [form,setForm]= useState({
        price: 0.0,
        available:0,
        averageRating:1.0,
-       TypeProductId:""
+       typeId:""
 
 })
 
@@ -56,7 +56,7 @@ const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
         let property = evt.target.name;
         let value = evt.target.value;
     
-        
+        console.log(value);
 
         setForm({
             ...form,
@@ -102,7 +102,7 @@ const cargarImagen =  (event:any)=>{
            form.price &&
            form.available &&
            form.averageRating &&
-           form.TypeProductId ){
+           form.typeId ){
               console.log("hola");
              (async function(){
                 const response = await ProductService.PostProduct(form);
@@ -125,6 +125,8 @@ const cargarImagen =  (event:any)=>{
                             <h2>Producto</h2>
                         </div>
                         <div className={style.contendor}>
+                            <img src={form.imagen== "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps": form.imagen} className={style.imaupload}/>
+                            <br/>
                             <input type="file" onChange={handleImageUpload}></input>
                             <br/>
                             <button onClick={cargarImagen}>UPLOAD</button>
@@ -143,7 +145,7 @@ const cargarImagen =  (event:any)=>{
                             <br/>
                             <label>Categoría:</label>
                             <br/>
-                            <select name="TypeProductId" onChange={ChangeHandleSelect} >
+                            <select name="typeId" onChange={ChangeHandleSelect} >
                                 <option>Seleccione</option>
                                 {CateProd?.map((e:any)=>{
                                     return <option key={e.id} value={e.id}>{e.name}</option>  

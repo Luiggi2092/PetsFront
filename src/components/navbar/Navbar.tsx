@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
@@ -6,8 +6,7 @@ import ModalShop from "../../components/ModalShop/ModalShop"
 import { useSelector,useDispatch } from 'react-redux';
 import {FillName,Fill,SetPagina} from '../../redux/actions'
 import './navbar.css'
-import {Link} from "react-router-dom"
-import VaccinesFilter from '../Filters/Vaccines';
+import {Link, json} from "react-router-dom"
 
 interface Props {
   setPagina?: (value: number) => void;
@@ -21,23 +20,27 @@ const Navbar: React.FC<Props> = () => {
   const count = useSelector((state:any)=> state.count);
   const Car = useSelector((state:any)=> state.Shop);
   const dispatch = useDispatch();
-  
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if(searchQuery){
-    dispatch(FillName(searchQuery));
-    dispatch(Fill(true));
-    dispatch(SetPagina(1));
+  const [counts,setCount] = useState(count)
+  console.log(counts);
+   const getData = ()=> {
+      return localStorage.getItem('contShop')
     
-    
-    }else{
-      dispatch(Fill(false));
+   }
+
+
+   useEffect(()=>{
+       setCount(getData()); 
+   },[])
+ 
+   
+   useEffect(()=> {
+    if(Car){
+    localStorage.setItem('cartItems', JSON.stringify(Car))
     }
+ },[Car])
 
-    
-    // Agregar lógica para realizar la búsqueda de productos
-  };
+
 
   const handleCart = () => {
     setOpenModal(!openModal);
@@ -49,7 +52,7 @@ const Navbar: React.FC<Props> = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark ">
       <div className="container">
-        <Link to="/home" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           <img src={Logo} alt="Logo" />
         </Link>
         <ModalShop openModal={openModal} cambiarEstado={setOpenModal} Car={Car} />
@@ -69,7 +72,7 @@ const Navbar: React.FC<Props> = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a href="/" className="nav-link">
+                <a href="/home" className="nav-link">
                   <BsHouseDoorFill /> Home
                 </a>
               </li>
@@ -94,28 +97,13 @@ const Navbar: React.FC<Props> = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/registrato" className="nav-link">
+                <a href="/registro" className="nav-link">
                   <BsPersonPlus /> Registro
                 </a>
               </li>
             </ul>
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <form className="d-flex" onSubmit={handleSearch}>
-                  {/* <input
-                    className="form-control me-2"
-                    type="search"
-                    name="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  /> */}
-                  {/* <button className="btn btn-outline-light" type="submit">
-                    <BsSearch />
-                  </button> */}
-                </form>
-              </li>
+              
               <li className="nav-item">
                 <button className="btn btn-outline-light" onClick={handleCart}>
                   <BsCart3 />
@@ -125,7 +113,6 @@ const Navbar: React.FC<Props> = () => {
             </ul>
           </div>
         </Collapse>
-        <VaccinesFilter></VaccinesFilter>
       </div>
     </nav>
   );

@@ -1,70 +1,156 @@
-.titulo{
-    position: relative;
-    margin: 20px ;
-    padding: 20px 0;
-    color: #00539F;
-    text-shadow: 3px 3px 1px black;
-    text-align: center;
-    
+.containerformu {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.container{
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: -175px;
-    
+.input {
+    background-color: #000013;
+    font-size: large;
+    color:white
 }
 
+.select{
+    background-color: #000013;
+    font-size: large;
+    color:white;
+}
+
+.option{
+display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: rgb(0, 2, 41);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(20, 147, 190);
+    width: fit-content;
+    max-width: 250px;
+    margin: 30px;
+    margin-top: 110px;
+}
 
 .titulo {
-    text-align:center;
-    margin-left: 5rem;
-    padding: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-
-.cat{
-    margin-left: 15rem;
-    width: 200px;
-    /* position: absolute; */
-    margin-top: 12px;
-
-}
-
-.titCat{
-    /* margin-left: 16rem; */
-}
-
-
-.containerCat{
-    background-color: #DAFFFB ;
-    width: 200px;
-    display: inline-block;
-}
-
-.containerCat li {
-    list-style: none;
-}
-
-.newProd{
+.formcontainer {
     display: flex;
     align-items: center;
-    position: absolute;
+    margin-bottom: 10px;
 }
 
-.butNew{
-    margin-left: 0;
-    margin-top: 5px;
+.formcontainer h5 {
+    margin-right: 10px;
+    font-size: 16px;
 }
 
-
-.filters {
-    border: 1px solid red;
+.formcontainer input[type="text"],
+.formcontainer select,
+.butNew button {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
 }
 
-.ContenedorModal {
+.butNew {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+   
+}
+
+.newProd {
+    padding: 10px 20px;
+    background-color: #077e93;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.newProd:hover {
+background-color: #000013;
+}
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.containerc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.cardscontainer {
+    width: 100%;
+}
+
+.card {
+    width: 100px;
+    height:200px;
+    background-color: #ca4141;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card img {
+    width: 50%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.card h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.card p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.pagination button.active {
+    background-color: #4caf50;
+    color: white;
+}
+
+.pagination button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.modal{
 
 }

@@ -4,10 +4,12 @@ import Modal from "../../components/Modal/Modal"
 import { useSelector } from "react-redux";
 import { useEffect, useState,useRef } from "react";
 import { ProductService } from '../../services/ProductService'
-import { getProductos, getProductosxName, getTypesProducts, getProdType,filters,filters1 } from "../../redux/actions"
+import { getProductos, getProductosxName, getTypesProducts, getProdType,filters,filters1, SetPagina,FillPrecmin,FillPrecmax,FillPrecArray,filters2,filter4,filter5,filter6 } from "../../redux/actions"
 import Paginado from "../../components/Paginado/Paginado";
 import { useDispatch } from "react-redux";
 import Product from "../../interfaces/Products";
+import React from "react";
+
 
 const PetShop: React.FC = () => {
   const numPage = useSelector((state: any) => state.numPage);
@@ -18,47 +20,104 @@ const PetShop: React.FC = () => {
   const firstIndex = lastIndex - porPagina
   const [maxPageNumberLimit, setMaxpageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
-  const Fil = useSelector((state: any) => state.Fil);
   let products = useSelector((state: any) => state.products);
-  let prodName = useSelector((state: any) => state.productsxName);
   let CateProd = useSelector((state:any)=> state.productTypes);
-  let ProdCat = useSelector((state:any)=> state.ProdCat);
-  let [filtro,setFiltro]= useState(false);
-   let [filCat,setfilCat]= useState(false);
-  let [filtecom,setFiltecom]=useState(false);
-  let [filtercom1,setFillcom1]= useState(false);
-  let FILTROS = useSelector((state:any)=> state.Filters);
-  let FILTROS1 = useSelector((state:any)=> state.Filters1);
-  let [items,SetItems] = useState({
-     item:[]
-  })
+  let arrayprec = [[10,20],[20,60],[60,100]];
+  //const [productos, setProductos] = useState<Product[]>([]); // Array de productos
+  const [filtros, setFiltros] = useState<any>({
+          name: "",
+          TypeProductId:"",
+          price:[],
+  }); // Filtros aplicados
 
 
-   const [Search,setSearch]= useState({
-           name:"",
-           
-         
-   })
-
-   const [Category,setCategory]= useState({
-          category: "",
-   })
-
-  
-  const dispatch = useDispatch();
-
-  useEffect(() => {
+   useEffect(()=>{
     (async function () {
       const response = await ProductService.getProducts();
-      dispatch(getProductos(response.data))
+      console.log("todos los prod" , response.data);
+      const aplyFil = applyAllFilters(response.data,filtros);
+      console.log("filtros de aply" , aplyFil , filtros);
+      dispatch(getProductos(applyAllFilters(response.data,filtros)))
+
+      
     })();
-    (async function () {
-      const response = await ProductService.getTypesProducts();
-      dispatch(getTypesProducts(response.data));
-    })();
-  }, [])
+     
+   },[filtros])
 
 
+
+
+  type Product = {
+    id: number,
+    name: string,
+    imagen: string,
+    price: number,
+    available: number,
+    averageRating: number,
+    TypeProductId: string
+  }
+  
+  function applyAllFilters(arrayAllProducts: Product[], filters: Product): Product[] {
+    return arrayAllProducts.filter(product => {
+      let categoriaMatch = true;
+      let nombreMatch = true;
+      let precioMatch = true;
+  
+      // Filtro por categoria
+      
+      if (filters.TypeProductId !=="0" && 
+          filters.TypeProductId ) {
+      
+        categoriaMatch = product.TypeProductId === filters.TypeProductId;
+      }
+  
+      // Filtro por nombre
+      if (filters.name) {
+        nombreMatch = product.name.toLowerCase().includes(filters.name.toLowerCase());
+        
+      } 
+  
+      // Filtro por precio
+      if (filters.price) {
+        
+        if(Array.isArray(filters.price) && filters.price.length === 0 ){
+          
+        }
+      
+        else if(Array.isArray(filters.price) && filters.price.length){ 
+        precioMatch = product.price >= filters.price[0] && product.price <= filters.price[1];
+        
+        }
+        
+        else {
+          precioMatch = product.price > filters.price;
+        }
+      }
+  
+      return categoriaMatch && nombreMatch && precioMatch;
+    });
+  }
+
+
+  // useEffect(()=> {
+  //      setProductos(applyAllFilters(products,filtros))
+  // },[filtros])
+   
+ 
+
+  const dispatch = useDispatch();
+
+   useEffect(() => {
+   (async function () {
+       const response = await ProductService.getProducts();
+       dispatch(getProductos(response.data))
+     })();
+     (async function () {
+       const response = await ProductService.getTypesProducts();
+       dispatch(getTypesProducts(response.data));
+     })();
+   }, [])
+  
 
 
   const handleModal = () => {
@@ -67,134 +126,102 @@ const PetShop: React.FC = () => {
 
    const handleCat = (event: React.ChangeEvent<HTMLSelectElement>)=> {
 
-         if(Search.name){
-             setFiltro(false);
-               dispatch(filters(event.currentTarget.value))
-               SetItems({...items,item:[]})
-               setFiltecom(true)
-             setFillcom1(false);
-             setfilCat(false)
 
-        
-
-          }else{
     
-      const SearchCat = event.currentTarget.value;
-      if(SearchCat !== "0"){
-      dispatch(getProdType(SearchCat));
-      setFiltro(false)
-      setFillcom1(false);
-      setFiltecom(false);
+    const SearchCat = event.currentTarget.value;
 
-      setfilCat(true)
+     
+    
+    setFiltros({...filtros,TypeProductId:event.target.value})
 
-       setCategory({...Category,category:event.currentTarget.value});
-       
-      }else{
-        
-        setFiltro(false);
-        setFillcom1(false);
-        setfilCat(false);
-        setFiltecom(false);
-        
-       setCategory({...Category,category:""}); 
-      }
+    
+
+  }
+          
+          
+          
+          
+         
+  
+
+  const handleRango = (event: React.ChangeEvent<HTMLSelectElement>) => {
+
+    
+    if(event.target.value== "seleccion"){
+        setFiltros({...filtros,price:[]})
+        return
     }
    
-  }
+   if(parseInt(event.target.value) > arrayprec.length){
+       
+    setFiltros({...filtros,price:parseInt(event.target.value)})
+    return    
+   }  
+    setFiltros({...filtros,price:arrayprec[parseInt(event.target.value)]})
+
+      
+}
+
+
+
+
+
 
   const handleName= (event: React.ChangeEvent<HTMLInputElement>)=> 
   {
-     
-     if(Category.category){
-          setFiltro(false);
-          dispatch(filters1(event.currentTarget.value))
-          //SetItems({...items,item:[]})
-          setFiltecom(false);
-          setFillcom1(true);
-          setfilCat(false);
-        
-        } else{
-
-
     
-    const SeachName = event.currentTarget.value;
-    console.log(SeachName);
-    if(event.currentTarget.value !== ""){
-    (async function () {
-      const response = await ProductService.getProductsxName(SeachName)
-      .catch(response => alert(response.data.errors.error));
-      console.log(response.data)
-      setfilCat(false)
-      setFiltro(true)
-      
-      dispatch(getProductosxName(response.data))
-    }
-    )();
-     setSearch({...Search,name:event.currentTarget.value})
-    }
-    else{
-      //AllProducts();
-      setFiltro(false);
-      setFillcom1(false);
-      setfilCat(false);
-      setFiltecom(false);
-
-      setSearch({...Search,name:""});
-      //setFiltro(true);
-      
-    }
-    
-   }
-
+       setFiltros({...filtros,name:event.target.value})
   }
 
+
+
+
+
+
   return (
-    <div className={style.shopContain}>
+    <div className={style.containerformu}>
       <h1 className={style.titulo}>Pets Shop</h1>
-      
-      <div className={style.titCat}>
-        <h5>Nombre :</h5>
-        <input type="text" onChange={handleName} ref={inputRef} />
+      <div className={`${style.titCat} ${style.formcontainer}`}>
+      <h5>Nombre</h5>
+      <input className={style.input} type="text" onChange={handleName} ref={inputRef} placeholder="Busca tu Producto..." />
       </div>
-      <div className={style.titCat}>
-        <h5>Categorias: </h5>
-        <select onChange={handleCat}>
-          <option value="0">Seleccion :</option>
-           {CateProd.map((e:Product,index:any)=> {
-            return <option key={index}>{e.name}</option>
+      <div className={`${style.titCat} ${style.formcontainer} left-container`}>
+        <h5>Categorias</h5>
+        <select className={style.select} onChange={handleCat} id="selcat">
+          <option className={style.option} value="0">Seleccion :</option>
+           {CateProd.map((e:any,index:any)=> {
+            return <option className={style.option} key={index} value={e.id}>{e.name}</option>
            })}
         </select>
       </div>
-      <div className={style.butNew}>
+      <div className={`${style.Prec} ${style.formcontainer}`}>
+          <h5>Precios</h5>
+         <select className={style.select} onChange={handleRango}>
+            <option className={style.option} value="seleccion">Seleccion :</option>
+            <option className={style.option} value="0"> S/.10 a S/. 20 </option>
+            <option className={style.option} value="1"> S/.20 a S/.60</option>
+            <option className={style.option} value="2"> S/60 a S/.100</option>
+            <option className={style.option} value="200"> S/.200 a mas</option>
+         </select>
+      </div>
+      <div className={`${style.butNew} left-container`}>
         <button className={style.newProd} onClick={handleModal}>New Product</button>
         <Modal openModal={openModal} cambiarEstado={setOpenModal} CateProd={CateProd}></Modal>
       </div>
 
-      <div className={style.container}>
+      <div className={`${style.containerc} ${style.cardscontainer}`}>
 
-        {filtro ? <CardsShop products={prodName} firstIndex={firstIndex} lastIndex={lastIndex} /> :
-        filCat ? <CardsShop products={ProdCat} firstIndex={firstIndex} lastIndex={lastIndex} />:
-        filtecom ? <CardsShop products={FILTROS} firstIndex={firstIndex} lastIndex={lastIndex} />:  
-        filtercom1 ? <CardsShop products={FILTROS1} firstIndex={firstIndex} lastIndex={lastIndex} />: 
-         <CardsShop products={products} firstIndex={firstIndex} lastIndex={lastIndex} />}
+        
+         <CardsShop products={products} firstIndex={firstIndex} lastIndex={lastIndex} />
       </div>
       <Paginado pagina={numPage}
         maxPageNumberLimit={maxPageNumberLimit}
         products={products}
-        productFill={prodName}
         setMaxpageNumberLimit={setMaxpageNumberLimit}
         minPageNumberLimit={minPageNumberLimit}
         porPagina={porPagina}
         setMinPageNumberLimit={setMinPageNumberLimit}
-        Fil={filtro}
-        FillCat={filCat}
-        productsCat={ProdCat}
-        filtecom={filtecom}
-        productsfil={FILTROS}
-        filtecom1={filtercom1}
-        productsfil1={FILTROS1}
-      />
+              />
     </div>
   )
 }

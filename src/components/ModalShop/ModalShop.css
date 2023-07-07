@@ -4,14 +4,20 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, .5);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.449);
     display: flex;
+    justify-content: center;
+    align-items: center;
     align-items: center;
     justify-content: left;
     overflow: scroll;
 }
 
 .ContenedorModal {
+    background-color: #e1f3f3;
+    border-radius: 10px;
     width: 240px;
     min-height: 100px;
     background: #fff;
@@ -19,39 +25,45 @@
     border-radius: 5px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    max-width: 550px;
+    width: 100%;
 }
 
 .EncabezadoModal {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: center;
     margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e8e8e8;
-}
-
-h3 {
-    font-weight: 500;
-    font-size: 16px;
-    color: #1766DC
 }
 
 .BotonCerrar {
     position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    border: none;
-    background: none;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
-    transition: .3s ease all;
-    border-radius: 5px;
-    color: #1766DC;
+    font-weight: bold;
+    font-size: 18px;
 }
 
-.BotonCerrar:hover {
-    background: #F2F2F2;
+.contendor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contendor div {
+    margin-bottom: 10px;
+}
+
+.contendor img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.contendor p {
+    margin: 0px;
+    font-size: small;
 }
 
 .imageProd{

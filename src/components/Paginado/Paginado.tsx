@@ -2,6 +2,7 @@ import style from './paginado.module.css'
 import { useState} from "react"
 import { useDispatch } from 'react-redux';
 import {SetPagina} from "../../redux/actions"  
+import React from 'react';
 
 
 interface Props {
@@ -11,16 +12,8 @@ interface Props {
    minPageNumberLimit:number;
    setMinPageNumberLimit: (value:number)=> void; 
    porPagina:number;
-   Fil:boolean;
-   FillCat:boolean;
-   filtecom:boolean;
-   filtecom1:boolean;
    products : [],
-   productFill:[],
-   productsCat: [],
-   productsfil:[],
-   productsfil1:[],
-
+   
 
 }
 
@@ -30,68 +23,31 @@ const Paginado: React.FC<Props> = ({pagina,
                                     minPageNumberLimit,
                                     setMinPageNumberLimit,
                                     porPagina,
-                                    Fil,
-                                    FillCat,
-                                    filtecom,
-                                    filtecom1,
                                     products,
-                                    productFill,
-                                    productsCat,
-                                    productsfil,
-                                    productsfil1
                                     }) => {
     
 
 const [pageNumberLimit] = useState(5);
 const dispatch = useDispatch();
 
-let pageNumbers=[];
+let pageNumbers:any=[];
       
 
 
 
-console.log(Math.ceil(products.length/porPagina));
 
 
-if(Fil){
-    for(let i=1;i<=Math.ceil(productFill.length/porPagina);i++){
-        pageNumbers.push(i);
-    }}
-else if (FillCat){
-    for(let i=1;i<=Math.ceil(productsCat.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-
-}else if (filtecom){
-    for(let i=1;i<=Math.ceil(productsfil.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-
-}else if(filtecom1){
-    for(let i=1;i<=Math.ceil(productsfil1.length/porPagina);i++){
-        pageNumbers.push(i);
-    }
-
-}
-
-else{
     for(let i=1;i<=Math.ceil(products.length/porPagina);i++){
         pageNumbers.push(i);
-    }
-    
 }
 
-console.log(Math.ceil(products.length/porPagina))
-console.log(Math.ceil(productFill.length/9));
-console.log(pageNumbers.length);
-console.log(pageNumbers)
-console.log("cuanto es"  + pagina)
 
 
-
-const RendersPageItems = pageNumbers.map((number)=>{
-          
-    if(number < maxPageNumberLimit + 1 && number>minPageNumberLimit){        
+const RendersPageItems = pageNumbers.map((number:number)=>{
+       
+    if(number < maxPageNumberLimit + 1 && number>minPageNumberLimit ||
+        number < maxPageNumberLimit + 1 && number< minPageNumberLimit){ 
+        console.log(number);       
      return (
             <li key={number}  onClick={()=>dispatch(SetPagina(number))} className={pagina == number ? style.active: "null"}>
             {number} 

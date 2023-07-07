@@ -10,6 +10,11 @@
     justify-content: left;
 }
 
+.imaupload{
+    width: 100px;
+    height: 150px;
+ }
+
 .ContenedorModal {
     width: 240px;
     min-height: 100px;
