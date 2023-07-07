@@ -22,20 +22,36 @@ const PetShop: React.FC = () => {
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   let products = useSelector((state: any) => state.products);
   let CateProd = useSelector((state:any)=> state.productTypes);
- 
-  const [productos, setProductos] = useState<Product[]>([]); // Array de productos
+  let arrayprec = [[10,20],[20,60],[60,100]];
+  //const [productos, setProductos] = useState<Product[]>([]); // Array de productos
   const [filtros, setFiltros] = useState<any>({
           name: "",
           TypeProductId:"",
-          precio:[],
+          price:[],
   }); // Filtros aplicados
+
+
+   useEffect(()=>{
+    (async function () {
+      const response = await ProductService.getProducts();
+      console.log("todos los prod" , response.data);
+      const aplyFil = applyAllFilters(response.data,filtros);
+      console.log("filtros de aply" , aplyFil , filtros);
+      dispatch(getProductos(applyAllFilters(response.data,filtros)))
+
+      
+    })();
+     
+   },[filtros])
+
+
 
 
   type Product = {
     id: number,
     name: string,
     imagen: string,
-    price: any,
+    price: number,
     available: number,
     averageRating: number,
     TypeProductId: string
@@ -48,21 +64,34 @@ const PetShop: React.FC = () => {
       let precioMatch = true;
   
       // Filtro por categoria
-      if (filters.TypeProductId) {
+      
+      if (filters.TypeProductId !=="0" && 
+          filters.TypeProductId ) {
+      
         categoriaMatch = product.TypeProductId === filters.TypeProductId;
       }
   
       // Filtro por nombre
       if (filters.name) {
-        nombreMatch = product.name === filters.name;
-        console.log(nombreMatch);
-        console.log(product.name);
-        console.log(filters.name);
-      }
+        nombreMatch = product.name.toLowerCase().includes(filters.name.toLowerCase());
+        
+      } 
   
       // Filtro por precio
       if (filters.price) {
-        precioMatch = product.price[0] >= filters.price[0] && product.price[1] <= filters.price[1];
+        
+        if(Array.isArray(filters.price) && filters.price.length === 0 ){
+          
+        }
+      
+        else if(Array.isArray(filters.price) && filters.price.length){ 
+        precioMatch = product.price >= filters.price[0] && product.price <= filters.price[1];
+        
+        }
+        
+        else {
+          precioMatch = product.price > filters.price;
+        }
       }
   
       return categoriaMatch && nombreMatch && precioMatch;
@@ -70,24 +99,24 @@ const PetShop: React.FC = () => {
   }
 
 
-  useEffect(()=> {
-       setProductos(applyAllFilters(products,filtros))
-  },[filtros])
+  // useEffect(()=> {
+  //      setProductos(applyAllFilters(products,filtros))
+  // },[filtros])
    
  
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    (async function () {
-      const response = await ProductService.getProducts();
-      dispatch(getProductos(response.data))
-    })();
-    (async function () {
-      const response = await ProductService.getTypesProducts();
-      dispatch(getTypesProducts(response.data));
-    })();
-  }, [])
+   useEffect(() => {
+   (async function () {
+       const response = await ProductService.getProducts();
+       dispatch(getProductos(response.data))
+     })();
+     (async function () {
+       const response = await ProductService.getTypesProducts();
+       dispatch(getTypesProducts(response.data));
+     })();
+   }, [])
   
 
 
@@ -97,8 +126,16 @@ const PetShop: React.FC = () => {
 
    const handleCat = (event: React.ChangeEvent<HTMLSelectElement>)=> {
 
+
     
     const SearchCat = event.currentTarget.value;
+
+     
+    
+    setFiltros({...filtros,TypeProductId:event.target.value})
+
+    
+
   }
           
           
@@ -110,7 +147,17 @@ const PetShop: React.FC = () => {
   const handleRango = (event: React.ChangeEvent<HTMLSelectElement>) => {
 
     
-      
+    if(event.target.value== "seleccion"){
+        setFiltros({...filtros,price:[]})
+        return
+    }
+   
+   if(parseInt(event.target.value) > arrayprec.length){
+       
+    setFiltros({...filtros,price:parseInt(event.target.value)})
+    return    
+   }  
+    setFiltros({...filtros,price:arrayprec[parseInt(event.target.value)]})
 
       
 }
@@ -143,18 +190,18 @@ const PetShop: React.FC = () => {
         <select className={style.select} onChange={handleCat} id="selcat">
           <option className={style.option} value="0">Seleccion :</option>
            {CateProd.map((e:any,index:any)=> {
-            return <option className={style.option} key={index}>{e.name}</option>
+            return <option className={style.option} key={index} value={e.id}>{e.name}</option>
            })}
         </select>
       </div>
       <div className={`${style.Prec} ${style.formcontainer}`}>
           <h5>Precios</h5>
          <select className={style.select} onChange={handleRango}>
-            <option className={style.option} value="0">Seleccion :</option>
-            <option className={style.option} value="rango1"> S/.10 a S/. 20 </option>
-            <option className={style.option} value="rango2"> S/.20 a S/.30</option>
-            <option className={style.option} value="rango3"> S/60 a S/.100</option>
-            <option className={style.option} value="rango4"> S/.200 a mas</option>
+            <option className={style.option} value="seleccion">Seleccion :</option>
+            <option className={style.option} value="0"> S/.10 a S/. 20 </option>
+            <option className={style.option} value="1"> S/.20 a S/.60</option>
+            <option className={style.option} value="2"> S/60 a S/.100</option>
+            <option className={style.option} value="200"> S/.200 a mas</option>
          </select>
       </div>
       <div className={`${style.butNew} left-container`}>
@@ -165,7 +212,7 @@ const PetShop: React.FC = () => {
       <div className={`${style.containerc} ${style.cardscontainer}`}>
 
         
-         <CardsShop products={productos} firstIndex={firstIndex} lastIndex={lastIndex} />
+         <CardsShop products={products} firstIndex={firstIndex} lastIndex={lastIndex} />
       </div>
       <Paginado pagina={numPage}
         maxPageNumberLimit={maxPageNumberLimit}
