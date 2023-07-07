@@ -3,7 +3,7 @@ import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux"
 import {getTypesPet,PostPet,getPets}  from "../../redux/actions" 
 import { PetsService } from '../../services/PetsService';
-import {Pet} from "../../interfaces/Pets"
+
 
 interface Props {
     
@@ -134,8 +134,12 @@ const submitHandler=(event:any)=> {
             (async function(){
                 const response = await PetsService.PostPets(form);
                 const response1 = await PetsService.getPets();
-                dispatch(getPets(response1.data)); 
-                dispatch(PostPet(response.data))
+                if(response.data){
+                     
+                  dispatch(getPets(response1.data)); 
+                  dispatch(PostPet(response.data))
+                  alert("Mascota creada con Exito visita a " + " " + response.data.name)
+                }
             })()
          }
 }

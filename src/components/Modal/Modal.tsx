@@ -1,7 +1,7 @@
 import style from './modal.module.css';
 import {useState} from "react"
 import {useDispatch} from "react-redux"
-import { PostProduct } from "../../redux/actions"
+import { PostProduct,getProductos,getTypesProducts } from "../../redux/actions"
 import { ProductService } from '../../services/ProductService';
 
 interface Props {
@@ -103,10 +103,17 @@ const cargarImagen =  (event:any)=>{
            form.available &&
            form.averageRating &&
            form.typeId ){
-              console.log("hola");
              (async function(){
                 const response = await ProductService.PostProduct(form);
+                const response1 = await ProductService.getProducts();
+                const response2 = await ProductService.getTypesProducts();
+                if(response.data){   
                 dispatch(PostProduct(response.data))
+                dispatch(getProductos(response1.data))
+                dispatch(getTypesProducts(response2.data)); 
+                setForm({...form,imagen:"https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps"})
+                alert(`Su producto ${response.data.name} se creo con exito`);
+                }
              })();
              
            }  

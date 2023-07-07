@@ -41,7 +41,7 @@ const Registro = () => {
     passwordKey: '',
   });
 
-  const [userTypes, setUserTypes] = useState<string[]>([]);
+  const [userTypes] = useState<string[]>([]);
 
   useEffect(() => {
   }, []);

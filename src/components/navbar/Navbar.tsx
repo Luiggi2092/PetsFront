@@ -1,12 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import { Collapse } from 'react-bootstrap';
-import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
+import { BsHouseDoorFill, BsPersonPlus,BsBagFill, BsBoxArrowInRight, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
 import ModalShop from "../../components/ModalShop/ModalShop"
-import { useSelector,useDispatch } from 'react-redux';
-import {FillName,Fill,SetPagina} from '../../redux/actions'
+import { useSelector } from 'react-redux';
 import './navbar.css'
-import {Link, json} from "react-router-dom"
+import {Link,Outlet} from "react-router-dom"
 
 interface Props {
   setPagina?: (value: number) => void;
@@ -14,12 +13,11 @@ interface Props {
 
 
 const Navbar: React.FC<Props> = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const count = useSelector((state:any)=> state.count);
   const Car = useSelector((state:any)=> state.Shop);
-  const dispatch = useDispatch();
+ 
 
   const [counts,setCount] = useState(count)
   console.log(counts);
@@ -50,6 +48,7 @@ const Navbar: React.FC<Props> = () => {
   
 
   return (
+    <main>
     <nav className="navbar navbar-expand-lg navbar-dark ">
       <div className="container">
         <Link to="/" className="navbar-brand">
@@ -72,9 +71,9 @@ const Navbar: React.FC<Props> = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a href="/home" className="nav-link">
+                <Link to="/home" className="nav-link">
                   <BsHouseDoorFill /> Home
-                </a>
+                </Link>
               </li>
               {/* <li className="nav-item">
                 <a href="/join" className="nav-link">
@@ -87,19 +86,19 @@ const Navbar: React.FC<Props> = () => {
                 </a>
               </li> */}
               <li className="nav-item">
-                <a href="/petshop" className="nav-link">
+                <Link to="/petshop" className="nav-link">
                   <BsBagFill /> PetShop
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/login" className="nav-link">
+                <Link to="/login" className="nav-link">
                   <BsBoxArrowInRight /> Inicio
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/registro" className="nav-link">
+                <Link to="/registro" className="nav-link">
                   <BsPersonPlus /> Registro
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="navbar-nav ms-auto">
@@ -115,6 +114,8 @@ const Navbar: React.FC<Props> = () => {
         </Collapse>
       </div>
     </nav>
+    <Outlet/>
+    </main>
   );
 };
 

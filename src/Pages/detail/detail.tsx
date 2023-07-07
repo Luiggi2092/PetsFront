@@ -1,4 +1,3 @@
-import { Pet } from '../../interfaces/Pets'
 import React from 'react';
 import { getPetsid } from '../../redux/actions'
 import { useDispatch, useSelector } from "react-redux"
@@ -20,7 +19,7 @@ const PetDetail: React.FC = () => {
         })();
     }, [])
 
-    const obj: Pet = {
+    const obj: any = {
         id: Pe.id,
         name: Pe.name,
         age: Pe.age,

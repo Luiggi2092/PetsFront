@@ -1,12 +1,11 @@
 import style from './registrate.module.css'
 import { useState } from "react"
-import { useDispatch } from "react-redux";
 import { UserService } from "../../services/UserService";
+
 
 
 const FormRegistrate = () => {
 
-  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     passwordKey: "",
@@ -63,7 +62,12 @@ const FormRegistrate = () => {
       form.type) {
       (async function () {
         const response = await UserService.PostUser(form);
-        console.log(response.data);
+        if(response.data.name){
+            alert("Se registro con exito Bienvenido" + " " + response.data.name);
+            
+        }else{
+            return
+        }
       })();
     }
   }

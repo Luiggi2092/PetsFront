@@ -4,10 +4,9 @@ import Modal from "../../components/Modal/Modal"
 import { useSelector } from "react-redux";
 import { useEffect, useState,useRef } from "react";
 import { ProductService } from '../../services/ProductService'
-import { getProductos, getProductosxName, getTypesProducts, getProdType,filters,filters1, SetPagina,FillPrecmin,FillPrecmax,FillPrecArray,filters2,filter4,filter5,filter6 } from "../../redux/actions"
+import { getProductos, getTypesProducts,SetPagina } from "../../redux/actions"
 import Paginado from "../../components/Paginado/Paginado";
 import { useDispatch } from "react-redux";
-import Product from "../../interfaces/Products";
 import React from "react";
 
 
@@ -128,11 +127,10 @@ const PetShop: React.FC = () => {
 
 
     
-    const SearchCat = event.currentTarget.value;
-
      
     
     setFiltros({...filtros,TypeProductId:event.target.value})
+    dispatch(SetPagina(1))
 
     
 
@@ -155,10 +153,11 @@ const PetShop: React.FC = () => {
    if(parseInt(event.target.value) > arrayprec.length){
        
     setFiltros({...filtros,price:parseInt(event.target.value)})
+    dispatch(SetPagina(1))
     return    
    }  
     setFiltros({...filtros,price:arrayprec[parseInt(event.target.value)]})
-
+    dispatch(SetPagina(1)) 
       
 }
 
@@ -171,6 +170,7 @@ const PetShop: React.FC = () => {
   {
     
        setFiltros({...filtros,name:event.target.value})
+       dispatch(SetPagina(1))
   }
 
 

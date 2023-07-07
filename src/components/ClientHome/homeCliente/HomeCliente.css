@@ -1,0 +1,167 @@
+/* Agrega este código al archivo HomeCliente.css */
+
+.home-container {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+
+.welcome-message {
+    margin-bottom: 1px;
+}
+
+.welcome-message h2 {
+    font-size: 28px;
+    color: #333;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+.center-section, .pet-card, .articles-section {
+    margin-left: 20px;
+    /* Ajusta el valor según sea necesario */
+    margin-right: 20px;
+    /* Ajusta el valor según sea necesario */
+}
+
+.account-type p {
+    font-size: 20px;
+    color: #1a034f;
+    margin-bottom: 10px;
+}
+
+.adopted-pet-card {
+    background-color: #eff4f5;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(14, 2, 85, 0.907);
+}
+
+.adopted-pet-card img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.pet-card,
+.article-card,
+.recent-article-card,
+.recent-pet-card {
+    width: 300px;
+        /* Ajusta el ancho de las tarjetas según tus necesidades */
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-right: 5px;
+    box-shadow: 0 10px 25px rgba(14, 2, 85, 0.907);
+    margin-bottom: 60px;
+    margin: 10px;
+}
+
+.pet-card:last-child,
+.article-card:last-child,
+.recent-article-card:last-child,
+.recent-pet-card:last-child {
+    margin-right: 0;
+}
+
+.pet-card img,
+.article-card img,
+.recent-article-card img,
+.recent-pet-card img {
+width: 100%;
+    height: 200px;
+    /* Ajusta la altura de las imágenes según tus necesidades */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.pet-card p,
+.article-card p,
+.recent-article-card p,
+.recent-pet-card p {
+    font-size: 16px;
+    color: #02001a;
+    margin-bottom: 5px;
+}
+
+.articles-section h3,
+.recent-items-section h3 {
+    font-size: 30px;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.article-card button,
+.recent-article-card button {
+    background-color: #090237;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.recent-pet-card button {
+    background-color: #10bfcf;
+    font-size: 19px;
+}
+
+.carousel-container {
+    position: relative;
+    margin-top: 50px;
+}
+
+.carousel-container .react-multi-carousel-list {
+    margin: 0 -10px;
+}
+
+.carousel-container .react-multi-carousel-item {
+    padding: 0 10px;
+}
+
+.carousel-container .react-multi-carousel-dot-list {
+    bottom: -30px;
+}
+
+.carousel-container .react-multi-carousel-dot button {
+    background-color: #bbb;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.carousel-container .react-multi-carousel-dot--active button {
+    background-color: #333;
+}
+
+/* Agrega este código al archivo HomeCliente.css */
+
+.carousel-container .react-multi-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.carousel-container .react-multi-carousel-arrow--left {
+    left: 10px;
+    /* Ajusta el valor según sea necesario */
+}
+
+.carousel-container .react-multi-carousel-arrow--right {
+    right: 10px;
+    /* Ajusta el valor según sea necesario */
+}

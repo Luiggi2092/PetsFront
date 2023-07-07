@@ -7,7 +7,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
-    "build": "tsc && vite build --base=/Demo/",
+    "build": "tsc && vite build --base=/PetsFront/",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -33,7 +33,9 @@
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.10.1",
+    "react-multi-carousel": "^2.8.4",
     "react-redux": "^8.1.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.14.0",
     "react-slick": "^0.29.0",
     "redux": "^4.2.1",

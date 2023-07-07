@@ -113,10 +113,14 @@ export const filters1=(fill:string)=>{
 }
 
 export const PostProduct=(Pro:Product)=>{
-      return {
-           type: 'POST_PRODUCT',
-           payload: Pro
-      }
+
+        return {
+            type: 'POST_PRODUCT',
+            payload: Pro
+       }
+
+    
+
 }
 
 

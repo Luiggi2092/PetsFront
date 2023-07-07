@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { quienesSomos, nuestrosServ, sinFondoNegro, sinFondoBlanco, Amberlis, John, Luis, Ricardo, Matheus, Magali, David } from './imagenes/index';
-import { FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+//import { FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import fondo from './imagenes/landing.jpg';
 import { Link } from 'react-router-dom';
 import style from './Landing.module.css';
