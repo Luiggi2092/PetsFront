@@ -1,6 +1,6 @@
 import { Product, TypeProduct,Carrito } from "../interfaces/Products";
 import { Pet,TypePet } from "../interfaces/Pets"
-import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET } from "./actions"
+import { GET_PRODNAME, INCREMENT, GET_PRODUCTS, FILL_NAME, FILL_PROD, PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,FILTERS,FILTERS1,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET, GET_VACCINES } from "./actions"
 
 interface State {
     count: number;
@@ -19,7 +19,7 @@ interface State {
     ProdCat:Product[],
     TypePet:TypePet[],
     PostPet:Pet[],
-    
+    vaccines: [],
 }
 
 const initialState: State = {
@@ -39,7 +39,7 @@ const initialState: State = {
     ProdCat:[],
     TypePet:[],
     PostPet:[],
-
+    vaccines: [],
     
 
 }
@@ -147,6 +147,10 @@ const counterReducer = (state = initialState, action: any): State => {
                     PostPet:action.payload
 
                 }   
+            case GET_VACCINES:
+                return {
+                    ...state, vaccines: action.payload
+                }
         default:
             return state;
     }

@@ -7,6 +7,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import {FillName,Fill,SetPagina} from '../../redux/actions'
 import './navbar.css'
 import {Link} from "react-router-dom"
+import VaccinesFilter from '../Filters/Vaccines';
 
 interface Props {
   setPagina?: (value: number) => void;
@@ -124,6 +125,7 @@ const Navbar: React.FC<Props> = () => {
             </ul>
           </div>
         </Collapse>
+        <VaccinesFilter></VaccinesFilter>
       </div>
     </nav>
   );

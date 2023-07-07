@@ -1,5 +1,6 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
 import { Pet,TypePet } from '../interfaces/Pets'
+import axios from 'axios';
 
 export const INCREMENT = 'INCREMENT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -18,6 +19,7 @@ export const POST_PRODUCT = 'POST_PRODUCT'
 export const CARSHOP = 'CARSHOP';
 export const TYPEPET = 'TYPEPET';
 export const POSTPET = 'POSTPET';
+export const GET_VACCINES = 'GET_VACCINES'
 
 export const increment = () => {
     return {
@@ -135,4 +137,13 @@ export const PostPet=(Pet:any)=> {
             payload: Pet
        }
 
+}
+
+export const getVaccines = () => {
+    return async function (dispatch:any) {
+        const vaccines = await axios.get('/vaccines')
+        dispatch({
+            type: GET_VACCINES, payload: vaccines
+        })
+    }
 }
