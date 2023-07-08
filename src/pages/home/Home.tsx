@@ -5,14 +5,21 @@ import ModalPet from '../../components/ModalPet/ModalPet';
 import Pagination from '../../components/pagination/Pagination';
 import { useDispatch,useSelector } from 'react-redux';
 import { PetsService } from '../../services/PetsService';
-import {getPets} from '../../redux/actions' 
-import {Pet} from '../../interfaces/Pets'
+import {getPets,getTypesPet} from '../../redux/actions' 
+import {Pet,TypePet} from '../../interfaces/Pets'
 import './home.css';
 
 const Home: React.FC = () => {
 
+ const [filtros, setFiltros] = useState<any>({
+      breed: "",
+      PetTypeId:"",
+      age:"",
+  });
  
   let Pets = useSelector((state:any)=> state.Pets);
+  let TypePets = useSelector((state:any)=> state.TypePet);
+ 
 
   const dispatch = useDispatch();
 
@@ -21,7 +28,29 @@ const Home: React.FC = () => {
      const response = await PetsService.getPets();
       dispatch(getPets(response.data));   
     })();
-},[]) 
+    (async function(){
+      const response = await PetsService.getPetsTypes();
+       dispatch(getTypesPet(response.data));   
+     })();
+    
+     
+},[])
+   
+
+   useEffect(()=> {
+    (async function(){
+      const response = await PetsService.getPets();
+       dispatch(getPets(response.data)); 
+       const aplyFil = applyAllFilters(response.data,filtros);
+       console.log("filtros pet", aplyFil,filtros);
+       dispatch(getPets(applyAllFilters(response.data,filtros)))  
+     })();
+     
+
+
+
+   },[filtros])
+
 
 
 
@@ -36,16 +65,66 @@ const Home: React.FC = () => {
     setCurrentPage(page);
   };
 
+  const handleType = (event: React.ChangeEvent<HTMLSelectElement>)=>{
+   
+    setFiltros({...filtros,PetTypeId:event.target.value})
+ 
+  }
+
+  const handleVacu = (event: React.ChangeEvent<HTMLInputElement>)=> {
+      setFiltros({...filtros,age: parseInt(event.target.value)}) 
+  }
+
+  const handleRaza = (event: React.ChangeEvent<HTMLInputElement>)=> {
+      
+    setFiltros({...filtros,breed:event.target.value})
+
+  }
+
+
   const getPaginatedData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return Pets.slice(startIndex, endIndex);
   };
-
-  
+ 
   const handleModal = () => {
     setOpenModal(!openMolal);
  }
+
+  
+ function applyAllFilters(arrayAllPets:Pet[],filters:Pet): Pet[] {
+   return arrayAllPets.filter(pet=> {
+     let razaMatch = true;
+     let AgeMatch = true;
+     let typeMath  = true;
+
+
+     if(filters.PetTypeId !=="0" &&
+        filters.PetTypeId){
+          typeMath = pet.PetTypeId === filters.PetTypeId;
+        }
+     
+     if(filters.breed){
+          razaMatch = pet.breed.toLowerCase().includes(filters.breed.toLowerCase());
+     }
+     
+     if(filters.age){
+       
+      AgeMatch =  pet.age === filters.age;
+                 
+        } 
+    
+     return typeMath && razaMatch && AgeMatch;
+     
+
+   })
+
+    
+ }
+
+ 
+
 
 
   return (
@@ -70,19 +149,29 @@ const Home: React.FC = () => {
         <div className="sections">
           <div className="section">
             <button className="button">
-              <Link to="/servicios">Servicios</Link>
+              <label className='subtitulos'>Animal :</label>
+              <select onChange={handleType}>
+                <option value="0">Seleccione :</option>
+                {TypePets.map((e:TypePet,index:any)=>{
+                   return <option key={index} value={e.id}>{e.type}</option>
+                
+                })}
+                
+              </select>
             </button>
           </div>
 
           <div className="section">
             <button className="button">
-              <Link to="/proveedores">Proveedores</Link>
+              <label className='subtitulos'>Raza :</label>
+              <input type='text' onChange={handleRaza}/>
             </button>
           </div>
 
           <div className="section">
             <button className="button">
-              <Link to="/organizaciones">Organizaciones</Link>
+              <label className='subtitulos'>Age :</label>
+                <input type='number' onChange={handleVacu}/>
             </button>
           </div>
 

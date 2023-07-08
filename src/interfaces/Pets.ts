@@ -1,17 +1,24 @@
 export interface Pet {
-    id: string;
-    name: string;
-    age: number;
-    breed: string;
-    sterilization: boolean;
-    image: string;
-    Vaccines:[];
+    id: string,
+    name: string,
+    age: number,
+    breed: string,
+    sterilization: boolean,
+    image: string,
+    PetTypeId: string,
+    Vaccines:[]
 
 }
 
 export interface TypePet {
     id:string,
-    name:string    
+    type:string    
+}
+
+
+export interface Vaccines {
+    id:string,
+    name:string,
 }
 
 

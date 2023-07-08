@@ -1,9 +1,9 @@
 import style from "./Modalpet.module.css"
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux"
-import {getTypesPet,PostPet,getPets}  from "../../redux/actions" 
+import {getTypesPet,PostPet,getPets,getVaccines}  from "../../redux/actions" 
 import { PetsService } from '../../services/PetsService';
-
+import {Vaccines} from '../../interfaces/Pets';
 
 interface Props {
     
@@ -17,7 +17,7 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
 
     const [image,setImage] = useState<string | Blob>('');
     const petTypes = useSelector((state:any)=> state.TypePet);
-
+    let Vacu = useSelector((state:any)=> state.Vaccines);
     const dispatch = useDispatch();
 
     
@@ -28,7 +28,7 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
          age: 0,
          breed:"",
          sterilization:false,
-         vaccine:[],
+         vaccine:"",
          typeId:""
  
   })
@@ -38,6 +38,10 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
         const response = await PetsService.getPetsTypes();
           dispatch(getTypesPet(response.data))   
        })();
+       (async function(){
+        const response = await PetsService.getVaccines();
+          dispatch(getVaccines(response.data))   
+       })();     
  },[])
 
 
@@ -71,6 +75,22 @@ const ChangeHandleCheked = (evt: React.ChangeEvent<HTMLInputElement>)=> {
 }
 
 
+const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
+    let property = evt.target.name;
+    let value = evt.target.value;
+
+    console.log(value);
+
+    setForm({
+        ...form,
+        [property]:value
+    })
+   
+}
+
+
+
+
 
 const changeHandleCombo = (evt: React.ChangeEvent<HTMLSelectElement>)=>{
       
@@ -85,13 +105,6 @@ const changeHandleCombo = (evt: React.ChangeEvent<HTMLSelectElement>)=>{
         setForm({...form,vaccine:arr});
     }
 
-   
-
-    if(property == "typeId" && value!=="0"){
-        let arr = value;
-        console.log(arr);
-        setForm({...form,typeId:arr});
-    }
 
 }
 
@@ -133,6 +146,8 @@ const submitHandler=(event:any)=> {
          && form.typeId ){
             (async function(){
                 const response = await PetsService.PostPets(form);
+                console.log("formulario" + form);
+                console.log("data api" + response);
                 const response1 = await PetsService.getPets();
                 if(response.data){
                      
@@ -171,17 +186,17 @@ const submitHandler=(event:any)=> {
                       {/* <br/> */}
                      <label>Vaccines</label>
                      <select onChange={changeHandleCombo} className={style.select}>
-                          <option>Rabia</option>
-                          <option>Moquillo</option>
-                          <option>Parvovirosis</option>
-                          <option>Hepatitis</option>
-                     </select>
+                      {Vacu?.map((e:Vaccines)=>{
+                        return <option key={e.id}>{e.name}</option>
+                      })}                           
+                    </select>
                      {/* <br/>
                      <br/> 
                      <br/>    */}
                      <label>Tipo Mascota</label>
-                     <select onChange={changeHandleCombo} name="typeId" className={style.select}>
-                        {petTypes?.map((e:any)=> {
+                     <select name="typeId" onChange={ChangeHandleSelect}  className={style.select}>
+                     <option>Seleccione</option>
+                            {petTypes?.map((e:any)=> {
                             return <option key={e.id} value={e.id}>{e.type}</option>
                              
                         })}  

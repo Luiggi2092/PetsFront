@@ -66,6 +66,7 @@ const Login = () => {
       form.password) {
       (async function () {
         const response = await UserService.PostLogueo(form);
+        console.log(response.data);
         if (response.data) {
           console.log("GUUUA");
           navigate('/homecliente');
@@ -102,7 +103,7 @@ const Login = () => {
 
                 </div>
               <div className={user ? "profile" : "hidden"}>
-                {user.picture && <Link to={'/home'}>
+                {user.picture && <Link to={'/homecliente'}>
                   <img src={user.picture} alt="" />
                 </Link>}
               </div> 

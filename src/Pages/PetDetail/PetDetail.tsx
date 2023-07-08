@@ -28,14 +28,15 @@ const PetDetail: React.FC = () => {
     },[]) 
      
     const obj:Pet ={
-        id:Pe.id,
-        name:Pe.name,
-        age:Pe.age,
-        breed:Pe.breed,
-        sterilization:Pe.sterilization,
-        image:Pe.image,
-        Vaccines:Pe.Vaccines?.map((e:any)=> e.name && e.name + " ")
-
+        id: Pe.id,
+        name: Pe.name,
+        age: Pe.age,
+        breed: Pe.breed,
+        sterilization: Pe.sterilization,
+        image: Pe.image,
+        Vaccines: Pe.Vaccines?.map((e: any) => e.name && e.name + " "),
+        PetTypeId: '',
+        
     }
 
 

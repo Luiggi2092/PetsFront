@@ -17,5 +17,9 @@ export class PetsService {
         return axios.post('/pets',Pe)
     }
 
+    public static getVaccines():Promise<any>{
+        return axios.get('/Vaccines')
+    }
+
 
 }
