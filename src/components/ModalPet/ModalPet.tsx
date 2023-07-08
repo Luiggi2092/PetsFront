@@ -1,7 +1,7 @@
 import style from "./Modalpet.module.css"
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux"
-import {getTypesPet,PostPet,getPets,getVaccines}  from "../../redux/actions" 
+import {getTypesPet,PostPet,getPets}  from "../../redux/actions" 
 import { PetsService } from '../../services/PetsService';
 import {Vaccines} from '../../interfaces/Pets';
 

@@ -13,3 +13,9 @@ export class UserService {
         return axios.post('/login',Aut)
     } 
 }
+
+export class typeUsers {
+    public static getUsersType(): Promise<any> {
+        return axios.get('/usertype');
+    }
+}
