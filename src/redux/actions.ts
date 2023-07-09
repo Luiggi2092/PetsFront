@@ -1,6 +1,6 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
 import { Pet,TypePet } from '../interfaces/Pets'
-import { UsersType } from '../interfaces/Users'
+import { User, UsersType } from '../interfaces/Users'
 
 export const INCREMENT = 'INCREMENT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -27,7 +27,10 @@ export const FILTERS3 = 'FILTERS3';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const FILTERS4 = 'FILTERS4';
 export const FILTERS5 = 'FILTERS5';
-export const USERS_TYPE = 'USERS_TYPE'
+export const USERS_TYPE = 'USERS_TYPE';
+export const FETCH_USERS = 'FETCH_USERS';
+export const DELETE_USER = 'DELETE_USER';
+export const SUSPEND_USER = 'SUSPEND_USER';
 
 
 export const increment = () => {
@@ -208,4 +211,25 @@ export const filter6 = (fill:string)=> {
 
 export const getUsersType = (usersType: UsersType[]) => {
     return {type: 'USERS_TYPE', payload: usersType}
+}
+
+export const fetchUsers = (users: User[]) => {
+    return {
+        type: 'FETCH_USERS',
+        payload: users
+    }
+}
+
+export const deleteUser = (users: User[]) => {
+    return {
+        type: 'DELETE_USER',
+        payload: users
+    }
+}
+
+export const suspendUser = (users: User[]) => {
+    return {
+        type: 'SUSPEND_USER',
+        payload: users
+    }
 }
