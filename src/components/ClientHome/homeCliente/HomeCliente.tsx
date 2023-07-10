@@ -4,12 +4,20 @@ import './HomeCliente.css';
 import 'react-multi-carousel/lib/styles.css';
 import { FaInstagram, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import NavbarCliente from '.././Navbarcient/NavbarCliente'
+import { useEffect, useState } from 'react';
 
 
 const HomeCliente = () => {
   const welcomeMessage = 'Bienvenido a tu hogar de mascotas';
 
   const accountType = 'Cliente de mascota';
+
+
+
+  const [logueado,setLogueado] = useState<any>({
+       token:"",
+       tipo:"",
+  })
 
   const adoptedPet = {
     image: 'https://www.elblogdeyes.com/wp-content/uploads/2018/03/happy-young-woman-with-her-dog-in-the-summer-LSAJHKD.jpg',
@@ -20,12 +28,10 @@ const HomeCliente = () => {
     status: 'sano',
   };
 
-
- 
+  
  
   return (
     <>
-    <NavbarCliente/>
     <div className="home-container">
       <div className="welcome-message">
         <h2>{welcomeMessage}</h2>

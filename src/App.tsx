@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Navbar from './components/navbar/Navbar';
+import Nav from './components/Nav/Nav';
 import Home from './Pages/home/Home';
 import UneteANosotros from './Pages/nosotros/UneteANosotros';
 import PetShop from './Pages/Tienda/PetShop';
@@ -13,9 +13,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PetDetail from '../src/Pages/PetDetail/PetDetail';
 import HomeCliente from './components/ClientHome/homeCliente/HomeCliente';
 import Login from './Pages/inicio/InicioSesion';
+import FormularioAdopcion from '../src/components/ClientHome/formAdopcion/FormularioAdopcion'
 
 const App: React.FC = () => {
     const shouldRenderNavbar = true;
+
+    
+    
 
     return (
         <HashRouter>
@@ -23,17 +27,20 @@ const App: React.FC = () => {
             <Routes>
                 <Route index path="/" element={<Landing />} />
                 <Route path="/home" element={shouldRenderNavbar ? 
-                (<><Navbar /> <Home/></>) :( <Home/> )}/>
+                (<><Nav /> <Home/></>) :( <Home/> )}/>
                 <Route path="/nosotros" element={<UneteANosotros />} />
                 <Route path="/petshop" element={shouldRenderNavbar ? 
-                (<><Navbar/><PetShop /></>):(<PetShop/>)} />
+                (<><Nav/><PetShop /></> ):(<PetShop/>)} />
                 <Route path="/login" element={ shouldRenderNavbar ? 
-                (<><Navbar/><Login /> </>): (<Login/>)} />
+                (<><Nav/><Login /> </>): (<Login/>)} />
                 <Route path="/registro" element={ shouldRenderNavbar ?
-                 (<><Navbar/><FormRegistrate /></>):(<FormRegistrate/>)} />
-                <Route path="/homecliente" element={<HomeCliente />} />
+                 (<><Nav/><FormRegistrate /></>):(<FormRegistrate/>)} />
+                <Route path="/homecliente" element={ shouldRenderNavbar ?
+                (<><Nav/><HomeCliente /></>):(<HomeCliente />)} />
                 <Route path="/detail/:id" element={ shouldRenderNavbar ?
-                (<><Navbar/><PetDetail/></>):(<PetDetail/>)}/>
+                (<><Nav/><PetDetail/></>):(<PetDetail/>)}/>
+                <Route path="/formulario" element={ shouldRenderNavbar ? 
+                (<><Nav/><FormularioAdopcion/></>):(<FormularioAdopcion/>)}/>
 
             </Routes>
             </HashRouter>

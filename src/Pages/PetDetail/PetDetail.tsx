@@ -72,7 +72,9 @@ const PetDetail: React.FC = () => {
                 </div>
                 <div className={styles.btns}>
                     <button>Donativo</button>
+                    <Link to={"/formulario"}>
                     <button>Adoptar!</button>
+                    </Link>
                 </div>
             </div>
         </div>

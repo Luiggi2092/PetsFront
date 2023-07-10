@@ -55,17 +55,19 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
                             {Car?.map((e:Carrito,index)=>(
                                 <tr>   
                                  <td><img className='imageProd' key={index} src={e.imagen}/></td>
-                                 <td><p> {e.name}</p></td>
-                                 <td>{e.precio}</td>
-                                 <td>{e.cantidad}</td>
-                                 <td>{e.precio * e.cantidad}</td>
-                                 <td><button onClick={()=>handleRemove(e.name)}>Remove</button></td>
+                                 <td><p  key={index}> {e.name}</p></td>
+                                 <td  key={index}>{e.precio}</td>
+                                 <td  key={index}>{e.cantidad}</td>
+                                 <td  key={index}>{e.precio * e.cantidad}</td>
+                                 <td  key={index}><button onClick={()=>handleRemove(e.name)}>Remove</button></td>
                                  </tr>
                                  ))}
                                  </tbody>
                                  </table>  
                                <h3>Total : {calcularSubtotal()}</h3> 
+                               
                             </div>
+                            <button>Ir a Pagar</button>
                         </div>
                         
                 </div>
