@@ -13,6 +13,7 @@ import PetDetail from '../src/Pages/PetDetail/PetDetail';
 import HomeCliente from './components/ClientHome/homeCliente/HomeCliente';
 import Login from './Pages/inicio/InicioSesion';
 import Registro from './Pages/registro/Registrate';
+import OrgDashboard from './Pages/orgDashboard/orgDashboard';
 
 const App: React.FC = () => {
     const shouldRenderNavbar = true;
@@ -34,7 +35,8 @@ const App: React.FC = () => {
                 <Route path="/homecliente" element={<HomeCliente />} />
                 <Route path="/detail/:id" element={ shouldRenderNavbar ?
                 (<><Navbar/><PetDetail/></>):(<PetDetail/>)}/>
-
+                <Route path="/organizacion/:id" element={ shouldRenderNavbar ?
+                (<><Navbar/><OrgDashboard/></>):(<OrgDashboard/>)}/>
             </Routes>
             </HashRouter>
     );

@@ -3,7 +3,7 @@
     font-family: 'Acme', sans-serif;
     color: rgba(0, 28, 48, 1);
     width: 97vw;
-    height: 89vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,15 +12,17 @@
 
 .form{
     width: 40%;
-    height: 90%;
+    height:auto;
     background-color: rgba(100, 204, 197, 1);
     border-radius: 3rem;
     justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 3rem;
+    /* padding: 3rem; */
     box-sizing: border-box;
+    position: absolute;
+    margin-top: 250px;
 }
 
 .users{
