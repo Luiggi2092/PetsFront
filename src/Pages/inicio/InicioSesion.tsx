@@ -16,14 +16,18 @@ const Login = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
+    token: "",
+    Type:"",
   })
 
   const [user, setUser] = useState<any>({})
 
   function handleCallbackResponse(response: any) {
     console.log("Enconded JWT ID token" + response.credential)
-    const userObject = jwt_decode(response.credential);
-    console.log(userObject)
+    const userObject:any = jwt_decode(response.credential);
+    console.log(userObject.iss)
+    localStorage.setItem('TokenUsu', JSON.stringify(response.credential));
+    localStorage.setItem('TypoUsu', JSON.stringify(userObject.iss));      
     setUser(userObject)
   }
 
@@ -66,10 +70,12 @@ const Login = () => {
       form.password) {
       (async function () {
         const response = await UserService.PostLogueo(form);
-        console.log(response.data);
-        if (response.data) {
-          console.log("GUUUA");
-          navigate('/homecliente');
+        
+        if(response.data.accessToken){
+          localStorage.setItem('TokenUsu', JSON.stringify(response.data.accessToken));
+          localStorage.setItem('TypoUsu', JSON.stringify(response.data.user.UsersType.name));
+           navigate('/homecliente');
+         
         }
       })();
     }

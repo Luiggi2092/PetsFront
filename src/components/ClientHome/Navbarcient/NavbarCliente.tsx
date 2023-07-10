@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Collapse } from 'react-bootstrap';
 import {
     BsHouseDoorFill,
@@ -15,11 +15,36 @@ import {
 } from 'react-icons/bs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../../../assets/sinfondo.png';
+import ModalShop from "../../ModalShop/ModalShop"
 import './navbarCliente.css';
 import { Link } from 'react-router-dom';
+import { useSelector }from "react-redux"
 
 const Navbar: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [openModal, setOpenModal] = useState(false);
+    const count = useSelector((state:any)=> state.count);
+    const Car = useSelector((state:any)=> state.Shop);
+    const [counts,setCount] = useState(count);
+ 
+    const getData = ()=> {
+        return localStorage.getItem('contShop')
+      
+     }
+  
+     useEffect(()=>{
+        setCount(getData()); 
+    },[])
+  
+    
+   useEffect(()=> {
+    if(Car){
+    localStorage.setItem('cartItems', JSON.stringify(Car))
+    }
+ },[Car])
+
+ 
+  
     const [isCollapsed, setIsCollapsed] = useState(false);
     
     
@@ -46,6 +71,7 @@ const Navbar: React.FC = () => {
 
     const handleCart = () => {
         console.log('Mostrando carrito de compras...');
+        setOpenModal(!openModal);
         // Agregar lógica para mostrar el carrito de compras
     };
 
@@ -56,6 +82,9 @@ const Navbar: React.FC = () => {
 
     const handleLogout = () => {
         console.log('Cerrando sesión...');
+        localStorage.removeItem('TokenUsu');
+        localStorage.removeItem('TypoUsu');
+       
         // Agregar lógica para cerrar la sesión del usuario
     };
 
@@ -63,13 +92,15 @@ const Navbar: React.FC = () => {
     
     // Generar el enlace de pago con el total a pagar
    
+    
    
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
             <div className="container">
-                <Link to="/home" className="navbar-brand">
+                <Link to="/homecliente" className="navbar-brand">
                     <img src={Logo} alt="Logo" />
                 </Link>
+                <ModalShop openModal={openModal} cambiarEstado={setOpenModal} Car={Car} />
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -86,7 +117,7 @@ const Navbar: React.FC = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">
+                                <Link to="/homecliente" className="nav-link">
                                     <BsHouseDoorFill /> Home
                                 </Link>
                             </li>
@@ -115,15 +146,16 @@ const Navbar: React.FC = () => {
                             </li> */}
                             <li className={`nav-item dropdown ${activeMenu === 'stores' ? 'show' : ''}`}>
                                 <Link
-                                    to="#"
-                                    className="nav-link dropdown-toggle"
+                                    to="/petshop"
+                                    className="nav-link"
                                     role="button"
-                                    data-bs-toggle="dropdown"
+                                    //data-bs-toggle="dropdown"
                                     onClick={() => handleMenuToggle('stores')}
                                 >
                                     Tiendas
+                                    
                                 </Link>
-                                <ul className={`dropdown-menu ${activeMenu === 'stores' ? 'show' : ''}`}>
+                                {/* <ul className={`dropdown-menu ${activeMenu === 'stores' ? 'show' : ''}`}>
                                     {stores.map((store) => (
                                         <li key={store.id}>
                                             <Link to={store.link} className="dropdown-item">
@@ -131,7 +163,7 @@ const Navbar: React.FC = () => {
                                             </Link>
                                         </li>
                                     ))}
-                                </ul>
+                                </ul> */}
                             </li>
                             {/* <li className={`nav-item dropdown ${activeMenu === 'customers' ? 'show' : ''}`}>
                                 <Link
@@ -179,7 +211,7 @@ const Navbar: React.FC = () => {
                                 </ul>
                             </li>
                         </ul>
-                        <form className="d-flex" onSubmit={handleSearch}>
+                        {/* <form className="d-flex" onSubmit={handleSearch}>
                             <input
                                 className="form-control me-2"
                                 type="search"
@@ -191,11 +223,12 @@ const Navbar: React.FC = () => {
                             <button className="btn btn-outline-light" type="submit">
                                 <BsSearch />
                             </button>
-                        </form>
+                        </form> */}
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <button className="nav-link btn btn-link" onClick={handleCart}>
                                     <BsCart3 />
+                                    <span className='cart-count'>{count}</span>
                                 </button>
                             </li>
                             <li className={`nav-item dropdown ${activeMenu === 'profile' ? 'show' : ''}`}>

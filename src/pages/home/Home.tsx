@@ -130,6 +130,36 @@ const Home: React.FC = () => {
   return (
     <div className="home" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <button onClick={handleModal}>NEW MASCOTA</button>
+      <div className="sections">
+      <div className="section">
+            <button className="button">
+              <label className='subtitulos'>Animal :</label>
+              <select onChange={handleType}>
+                <option value="0">Seleccione :</option>
+                {TypePets.map((e:TypePet,index:any)=>{
+                   return <option key={index} value={e.id}>{e.type}</option>
+                
+                })}
+                
+              </select>
+            </button>
+          </div>
+          
+
+          <div className="section">
+            <button className="button">
+              <label className='subtitulos'>Raza :</label>
+              <input type='text' onChange={handleRaza}/>
+            </button>
+          </div>
+
+          <div className="section">
+            <button className="button">
+              <label className='subtitulos'>Age :</label>
+                <input type='text' onChange={handleVacu}/>
+            </button>
+          </div>
+        </div>
       <ModalPet openModal={openMolal} cambiarEstado={setOpenModal} />
       <div className="container">
         <h1 className="titulo">TU NUEVA MASCOTA</h1>
@@ -146,41 +176,7 @@ const Home: React.FC = () => {
           ))}
         </div>
 
-        <div className="sections">
-          <div className="section">
-            <button className="button">
-              <label className='subtitulos'>Animal :</label>
-              <select onChange={handleType}>
-                <option value="0">Seleccione :</option>
-                {TypePets.map((e:TypePet,index:any)=>{
-                   return <option key={index} value={e.id}>{e.type}</option>
-                
-                })}
-                
-              </select>
-            </button>
-          </div>
-
-          <div className="section">
-            <button className="button">
-              <label className='subtitulos'>Raza :</label>
-              <input type='text' onChange={handleRaza}/>
-            </button>
-          </div>
-
-          <div className="section">
-            <button className="button">
-              <label className='subtitulos'>Age :</label>
-                <input type='number' onChange={handleVacu}/>
-            </button>
-          </div>
-
-          <div className="section">
-            <button className="button">
-              <Link to="/otro">Algo mas</Link>
-            </button>
-          </div>
-        </div>
+        
 <div className='pagination'>
         <Pagination
           totalPages={totalPages}

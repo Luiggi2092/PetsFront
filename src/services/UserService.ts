@@ -9,7 +9,6 @@ export class UserService {
     }
 
     public static PostLogueo(Aut:any):Promise<any>{
-        console.log('revision', Aut)
         return axios.post('/login',Aut)
     } 
 }

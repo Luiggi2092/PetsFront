@@ -40,8 +40,7 @@ background-color: rgba(10, 10, 10, 0.8);
 
 .sections {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 40px;
 }
 

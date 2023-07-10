@@ -3,7 +3,7 @@ import { getPetsid } from '../../redux/actions'
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import styles from './detail.module.css'
-import { useParams, Link } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import { PetsService } from '../../services/PetsService';
 
 const PetDetail: React.FC = () => {
@@ -29,6 +29,8 @@ const PetDetail: React.FC = () => {
     }
 
 
+
+
     return (
         <>
             <div className={styles.detailContainer}>
@@ -52,13 +54,14 @@ const PetDetail: React.FC = () => {
                             <p>{pet[0].vaccines}</p> }
     </div> */}
                     </div>
+                   
                     <div className={styles.btns}>
                         <button>Donativo</button>
-                        <button>Adoptar!</button>
+                       
                     </div>
                 </div>
             </div>
-            <Link to={"/home"}>
+            <Link to={`/home`}>
                 <div className={styles.back}>
                     <button>Back</button>
                 </div>

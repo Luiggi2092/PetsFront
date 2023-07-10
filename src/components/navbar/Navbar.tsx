@@ -26,6 +26,31 @@ const Navbar: React.FC<Props> = () => {
     
    }
 
+   
+  const [logueado,setLogueado] = useState<any>({
+    token:"",
+    tipo:"",
+  })
+
+
+  const getToken = ()=> {
+    return localStorage.getItem('TokenUsu')
+  
+ }
+
+ const getTipo = ()=> {
+  return localStorage.getItem('TypoUsu')
+
+}
+
+
+  useEffect(()=> {
+
+      setLogueado({...logueado,token:getToken(),tipo:getTipo()})
+         
+  },[])
+ 
+
 
    useEffect(()=>{
        setCount(getData()); 
