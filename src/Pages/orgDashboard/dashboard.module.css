@@ -1,0 +1,37 @@
+.dashContain>* {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dashContain {
+    display: grid;
+    width: 90%;
+    color: white;
+    gap: 5px;
+    grid-template-areas:
+        "titulo"
+        "sidebar"
+        "contenido";
+}
+
+.titulo {
+    grid-area: titulo;
+    background-color: rgba(23, 107, 135, 1);
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: rgba(100, 204, 197, 1);
+}
+
+.content {
+    grid-area: contenido;
+    background-color: rgba(23, 107, 135, 1);
+}
+
+.dashContain {
+    grid-template:
+        "titulo titulo titulo" 100px
+        "sidebar contenido contenido" auto/
+        200px auto auto;
+}

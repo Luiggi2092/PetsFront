@@ -1,0 +1,21 @@
+.listContain {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    background-color:rgba(100, 204, 197, 1);
+    padding: 8px;
+    text-align: left;
+}
+
+tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}

@@ -35,7 +35,7 @@ const App: React.FC = () => {
                 <Route path="/homecliente" element={<HomeCliente />} />
                 <Route path="/detail/:id" element={ shouldRenderNavbar ?
                 (<><Navbar/><PetDetail/></>):(<PetDetail/>)}/>
-                <Route path="/organizacion/:id" element={ shouldRenderNavbar ?
+                <Route path="/organizacion" element={ shouldRenderNavbar ?
                 (<><Navbar/><OrgDashboard/></>):(<OrgDashboard/>)}/>
             </Routes>
             </HashRouter>
