@@ -3,6 +3,7 @@ import { Collapse } from 'react-bootstrap';
 import {
     BsHouseDoorFill,
     BsBoxArrowInRight,
+    BsSearch,
     BsCart3,
     BsPersonCircle,
     BsGearFill,
@@ -20,6 +21,7 @@ import { Link } from 'react-router-dom';
 import { useSelector }from "react-redux"
 
 const Navbar: React.FC = () => {
+    const [searchQuery, setSearchQuery] = useState('');
     const [openModal, setOpenModal] = useState(false);
     const count = useSelector((state:any)=> state.count);
     const Car = useSelector((state:any)=> state.Shop);
@@ -49,7 +51,11 @@ const Navbar: React.FC = () => {
     const [activeMenu, setActiveMenu] = useState('');
 
    
- 
+    const stores = [
+        { id: 1, name: 'Tienda 1', link: '/store1' },
+        { id: 2, name: 'Tienda 2', link: '/store2' },
+        { id: 3, name: 'Tienda 3', link: '/store3' },
+    ];
 
     const veterinaries = [
         { id: 1, name: 'Veterinaria A', link: '/veterinaria-a' },
@@ -57,6 +63,11 @@ const Navbar: React.FC = () => {
         { id: 3, name: 'Veterinaria C', link: '/veterinaria-c' },
     ];
 
+    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log('Search query:', searchQuery);
+        // Agregar lógica para realizar la búsqueda de productos
+    };
 
     const handleCart = () => {
         console.log('Mostrando carrito de compras...');
@@ -106,7 +117,6 @@ const Navbar: React.FC = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                
                                 <Link to="/homecliente" className="nav-link">
                                     <BsHouseDoorFill /> Home
                                 </Link>
@@ -218,7 +228,7 @@ const Navbar: React.FC = () => {
                             <li className="nav-item">
                                 <button className="nav-link btn btn-link" onClick={handleCart}>
                                     <BsCart3 />
-                                    <span className='cart-count'>{counts}</span>
+                                    <span className='cart-count'>{count}</span>
                                 </button>
                             </li>
                             <li className={`nav-item dropdown ${activeMenu === 'profile' ? 'show' : ''}`}>
@@ -263,7 +273,7 @@ const Navbar: React.FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/login" className="dropdown-item" onClick={handleLogout}>
+                                        <Link to="/" className="dropdown-item" onClick={handleLogout}>
                                             <BsBoxArrowInRight /> Cerrar sesión
                                         </Link>
                                     </li>

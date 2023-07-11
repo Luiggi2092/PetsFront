@@ -12,8 +12,8 @@ const Nav:React.FC = ()=> {
 
       
     if(isToken && convert === "usuario" || 
-       isToken && convert === "https://accounts.google.com" ||
-       isToken && convert === "organizacion"){
+       isToken && convert === "https://accounts.google.com"){
+        console.log("hola");
         return <NavbarLogueado/>;
     }else{
         return <Navbar/>
