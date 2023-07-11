@@ -12,9 +12,6 @@ const OrgDashboard: React.FC = () => {
 
     return (
         <div className={style.dashContain}>
-            <div className={style.titulo}>
-                <h1>Organización Dashboard</h1>
-            </div>
             <div className={style.sidebar}>
                 <div className={style.sidebutton}>
                     <button onClick={handleShowList}>Usuarios</button>
@@ -23,7 +20,12 @@ const OrgDashboard: React.FC = () => {
                     <button>Mascotas</button>
                 </div>
             </div>
-            <div className={style.content}>
+            <div className={style.contenido}>
+                <header>
+                    <div className={style.titulo}>
+                        <h1>Organización Dashboard</h1>
+                    </div>
+                </header>
                 {showList && <UserList />}
             </div>
             <div>
