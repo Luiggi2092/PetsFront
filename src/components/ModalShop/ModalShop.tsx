@@ -67,6 +67,7 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
                                <h3>Total : {calcularSubtotal()}</h3> 
                                
                             </div>
+                            <button>Ir a Pagar</button>
                         </div>
                         
                 </div>

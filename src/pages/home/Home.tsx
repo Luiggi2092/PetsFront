@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import ModalPet from '../../components/ModalPet/ModalPet';
 import Pagination from '../../components/pagination/Pagination';
@@ -67,18 +68,17 @@ const Home: React.FC = () => {
   const handleType = (event: React.ChangeEvent<HTMLSelectElement>)=>{
    
     setFiltros({...filtros,PetTypeId:event.target.value})
-    setCurrentPage(1);
+ 
   }
 
   const handleVacu = (event: React.ChangeEvent<HTMLInputElement>)=> {
       setFiltros({...filtros,age: parseInt(event.target.value)}) 
-      setCurrentPage(1);
-    }
+  }
 
   const handleRaza = (event: React.ChangeEvent<HTMLInputElement>)=> {
       
     setFiltros({...filtros,breed:event.target.value})
-    setCurrentPage(1);
+
   }
 
 

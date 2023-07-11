@@ -26,9 +26,9 @@ container {
 }
 
 .card {
-    
+    background-color: #b31f1f;
     border-radius: 8px;
-    padding: 10px; 
+    padding: 10px;
     /* padding-left: 5px; */
     /* padding-right: 5px; */
     box-shadow: 0 10px 4px rgb(7, 133, 165);

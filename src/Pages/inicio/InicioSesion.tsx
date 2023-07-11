@@ -74,16 +74,8 @@ const Login = () => {
         if(response.data.accessToken){
           localStorage.setItem('TokenUsu', JSON.stringify(response.data.accessToken));
           localStorage.setItem('TypoUsu', JSON.stringify(response.data.user.UsersType.name));
-          const isToken = localStorage.getItem('TokenUsu');
-          const Tipo = localStorage.getItem('TypoUsu');
-          const convert = Tipo ? JSON.parse(Tipo) : null;
-
-          if(isToken && convert === "usuario" || 
-          isToken && convert === "https://accounts.google.com"){ 
-          navigate('/homecliente');
-        }else{
-          navigate('/organizacion');  
-        }
+           navigate('/homecliente');
+         
         }
       })();
     }
