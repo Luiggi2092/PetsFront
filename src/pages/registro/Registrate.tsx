@@ -61,9 +61,7 @@ const Registro = () => {
       dispatch(getUsersType(response.data))
     })()
   }, [dispatch])
-
-  const usersType = useSelector((state:any) => state.UsersType)
-
+  
   const handlerChange = (event: ChangeEvent<HTMLInputElement>) => {
     const property = event.target.name
     const value = event.target.value
@@ -71,7 +69,7 @@ const Registro = () => {
     setError(validate({ ...form, [property]: value } as FormState))
     console.log(value)
   }
-
+  
   const validate = (input: FormState): FormState => {
     let error: FormState = {
       type: '',
@@ -86,7 +84,7 @@ const Registro = () => {
       email: '',
       passwordKey: '',
     };
-
+    
     if (!input.type) {
       error.type = 'Debe seleccionar un tipo de usuario'
     } else error.type = ''
@@ -94,7 +92,7 @@ const Registro = () => {
     if (!input.name.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
       error.name = 'No se permiten números ni símbolos de puntuación.'
     } else error.name = ''
-
+    
     
     /*if (!input.surname.match(/^[a-zA-Z_]+([a-zA-Z_]+)*$/)) {
       error.surname = 'Solo se permiten letras y no debe haber espacios al final.'
@@ -103,21 +101,23 @@ const Registro = () => {
     if (!input.phone.match(/^[0-9]+$/)) {
       error.phone = 'Solo se permiten números.'
     }
-
+    
     if (!input.address.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
       error.address = 'No se permiten números ni símbolos de puntuación.'
     } else error.address = ''
-
+    
     if (!input.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/)) {
       error.email = 'El correo es inválido.'
     } else error.email = ''
-
+    
     if (!input.passwordKey.match(/^(?=(?:.*\d))(?=.*[A-Z])(?=.*[a-z])(?=.*[.,*!?¿¡/#$%&])\S{8,64}$/)) {       
       error.passwordKey = 'Al menos un número 0-9, una mayúscula, al menos una minúscula, carácter especial, longitud mínima de 8 caracteres.'     
     } else error.passwordKey = ''
-
+    
     return error
   }
+  
+  const usersType = useSelector((state:any) => state.UsersType)
 
   const handlerSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()

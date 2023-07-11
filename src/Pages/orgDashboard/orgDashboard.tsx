@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UserList from "../../components/userList/userList";
+import AdoptionsList from '../../components/AdoptionsList/AdoptionsList'
 import style from './dashboard.module.css'
 
 const OrgDashboard: React.FC = () => {
@@ -24,6 +25,9 @@ const OrgDashboard: React.FC = () => {
             </div>
             <div className={style.content}>
                 {showList && <UserList />}
+            </div>
+            <div>
+                <AdoptionsList/>
             </div>
         </div>
     )
