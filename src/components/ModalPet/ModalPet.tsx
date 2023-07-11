@@ -154,7 +154,7 @@ const submitHandler=(event:any)=> {
                   dispatch(PostPet(response.data))
                   alert("Mascota creada con Exito visita a " + " " + response.data.name)
                   setForm({...form,name:"",image:"",breed:"",age:0,sterilization:false,vaccine:"0",typeId:""})
-                  cambiarEstado(false);
+               
                 }
             })()
          }
