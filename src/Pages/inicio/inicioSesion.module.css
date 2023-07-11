@@ -1,68 +1,109 @@
-.content{
+section {
     display: flex;
+    justify-content: center;
     align-items: center;
-    position: relative;
-    top:250px;
-}
-
-.containerForm {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #d4f3f1a1;
-    border-radius: 5px;
-    text-align: center;
-    background-color: #d4f3f19a;
-    margin-top: 9%;
-}
-
-.containerForm h2 {
-    margin-top: 0;
-}
-
-.containerForm input {
+    min-height: 85vh;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
-.containerForm button {
-    width: 100%;
+.content {
+    display: flex;
+    font-family: 'Acme', sans-serif;
+    flex-direction: row;
+    width: 750px;
+    height: 460px;
+    border-radius: 10px;
+    background: #64CCC5;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 250px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: linear-gradient(rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)),
+    url('../../assets/pexels-bekka-mongeau-1452717.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.left img {
+    width: 250px;
+}
+
+.right {
+    margin: 20px auto;
     padding: 10px;
-    margin-bottom: 10px;
-    background-color: #03367d;
-    color: #fff;
+}
+
+.inputBox {
+    margin: 8px 0px;
+    width: 350px;
+    height: fit-content;
+}
+
+.inputBox input {
+    margin-top: 4px;
+    padding: 5px;
+    width: 100%;
+    height: 28px;
+    text-indent: 9px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    color: white;
+    border-radius: 2px;
+    background-color: rgba(128, 128, 128, 0.2);
 }
 
-.containerForm button:hover {
-    background-color: #075d72;
+.inputBox input:hover {
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
-.containerForm p {
-    margin-bottom: 5px;
+.right .titulo h2 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 20px;
 }
 
-.containerForm a {
-    text-decoration: none;
-    color: #19dde3;
+.inputBox label {
+    font-size: 1.5em;
 }
 
-.containerForm a:hover {
-    text-decoration: underline;
+.inputBox input::placeholder {
+    text-indent: 10px;
 }
 
-.profile {
+.iniciar {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+}
+
+/* .iniciar button {
+    margin-top: 5px;
+    width: 250px;
+    height: 35px;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #0000;
+} */
+
+.adicional p {
     margin-top: 20px;
+    font-size: 19px;
+    text-align: center;
 }
 
-.profile img {
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
-    margin-right: 10px;
+.adicional p span {
+    color: blue;
+}
+
+.adicional p span:hover {
+    text-decoration: underline;
 }

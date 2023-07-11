@@ -4,7 +4,7 @@ import style from './inicioSesion.module.css'
 import { UserService } from "../../services/UserService";
 import { useEffect } from "react"
 import jwt_decode from "jwt-decode";
-//import logo from '../../assets/sinfondo blanco.png'
+import logo from '../../assets/sinfondo blanco.png'
 
 declare const google: any;
 
@@ -84,9 +84,9 @@ const Login = () => {
   return (
     <section>
       <div className={style.content}>
-        {/* <div className={style.left}>
+        <div className={style.left}>
           <img src={logo} alt='Logotipo-PetMatch' />
-        </div> */}
+        </div>
         <div className={style.right}>
           <div className={style.titulo}>
             <h2>Bienvenido de nuevo</h2>
@@ -114,7 +114,7 @@ const Login = () => {
                 </Link>}
               </div> 
               <div className={style.adicional}>
-                <p>¿No tienes cuenta? <Link to='/registrato'><span>Registrate</span></Link></p>
+                <p>¿No tienes cuenta? <Link to='/registro'><span>Registrate</span></Link></p>
               </div>
             </form>
           </div>
