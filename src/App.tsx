@@ -32,12 +32,12 @@ const App: React.FC = () => {
                 <Route path="/login" element={ shouldRenderNavbar ? 
                 (<><Nav/><Login /> </>): (<Login/>)} />
                 <Route path="/registro" element={ shouldRenderNavbar ?
-                 (<><Navbar/><Registro /></>):(<Registro/>)} />
+                 (<><Nav/><Registro /></>):(<Registro/>)} />
                 <Route path="/homecliente" element={<HomeCliente />} />
                 <Route path="/detail/:id" element={ shouldRenderNavbar ?
-                (<><Navbar/><PetDetail/></>):(<PetDetail/>)}/>
+                (<><Nav/><PetDetail/></>):(<PetDetail/>)}/>
                 <Route path="/organizacion" element={ shouldRenderNavbar ?
-                (<><Navbar/><OrgDashboard/></>):(<OrgDashboard/>)}/>
+                (<><Nav/><OrgDashboard/></>):(<OrgDashboard/>)}/>
                 <Route path="/homecliente" element={ shouldRenderNavbar ?
                 (<><Nav/><HomeCliente /></>):(<HomeCliente />)} />
                 <Route path="/detail/:id" element={ shouldRenderNavbar ?
