@@ -1,9 +1,10 @@
 import style from "./Modalpet.module.css"
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux"
-import {getTypesPet,PostPet,getPets}  from "../../redux/actions" 
+import {getTypesPet,PostPet,getPets,getVaccines}  from "../../redux/actions" 
 import { PetsService } from '../../services/PetsService';
 import {Vaccines} from '../../interfaces/Pets';
+import axios from "axios";
 
 interface Props {
     
@@ -12,14 +13,18 @@ interface Props {
 }
 
 
+const url = 'https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload'
+const UPLOAD_PRESET = 'PetsMat'
+
+
 
 const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
 
-    const [image,setImage] = useState<string | Blob>('');
+    //const [image,setImage] = useState<string | Blob>('');
     const petTypes = useSelector((state:any)=> state.TypePet);
     let Vacu = useSelector((state:any)=> state.Vaccines);
     const dispatch = useDispatch();
-
+    const [avance,setAvance]= useState(0);
     
 
      const [form,setForm]= useState({
@@ -40,16 +45,32 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
        })();
        (async function(){
         const response = await PetsService.getVaccines();
-          dispatch(getVaccines(response.data))   
+         dispatch(getVaccines(response.data))   
        })();     
  },[])
 
 
 
- const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if (evt.target.files != null) {
-      setImage(evt.target.files[0]); //error
-    }
+ const handleImageUpload = async (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const file:any = evt.target.files && evt.target.files[0];
+
+    const formData = new FormData();
+    formData.append('file',file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+
+    const res = await axios.post(url,formData,{
+         headers: {
+            'Content-Type': 'multipart/formData'
+         },
+         onUploadProgress(e){
+            const progress = Math.round((100 * e.loaded || 1) / (e.total || 1));
+            setAvance(progress);
+         }
+    });
+    console.log(res);
+    setForm({...form,image:res.data.secure_url})
+
+
   }; 
 
  const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>)=> {
@@ -109,29 +130,7 @@ const changeHandleCombo = (evt: React.ChangeEvent<HTMLSelectElement>)=>{
 }
 
  
- const cargarImagen =  (event:any)=>{
-    event.preventDefault();
-   
-   
-   const data = new FormData();
-   data.append("file",image);
-   data.append("upload_preset","PetsMat")
-   data.append("cloud-name","dpq8kiocc")
-
-   fetch("https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload",{
-       method: 'post',
-       body:data
-   })
-   .then((res)=> res.json())
-   .then(data => {
-       setForm({...form,image:data.url})
-       
-   })
-   .catch(error => {
-       console.log('Error al cargar',error);
-       
-   });
-};
+ 
 
 
 const submitHandler=(event:any)=> {
@@ -154,6 +153,8 @@ const submitHandler=(event:any)=> {
                   dispatch(getPets(response1.data)); 
                   dispatch(PostPet(response.data))
                   alert("Mascota creada con Exito visita a " + " " + response.data.name)
+                  setForm({...form,name:"",image:"",breed:"",age:0,sterilization:false,vaccine:"0",typeId:""})
+                  cambiarEstado(false);
                 }
             })()
          }
@@ -170,14 +171,14 @@ const submitHandler=(event:any)=> {
                 <div className={style.EncabezadoModal}>
                       <h2 className={style.h2}>New Pet</h2>
                       <img src={form.image== "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps": form.image} className={style.imaupload}/>      
-                      <input className={style.input} type="file" onChange={handleImageUpload}></input>
-                       <button className={style.upload} onClick={cargarImagen}>UPLOAD</button>
+                      <input className={style.input} type="file" onChange={handleImageUpload} accept="image/*"></input>
+                      <progress value={avance} max={100} id="progress-bar"/>       
                        <br/>
                       <label>Nombre :</label>
                       <input className={style.input} type="text" onChange={ChangeHandle} name="name"></input>
                       <br/>
                       <label>Age :</label>
-                      <input  className={style.input} type="number" onChange={ChangeHandle} name="age"></input>
+                      <input  className={style.input} type="number" onChange={ChangeHandle} name="age" value={form.age > 0 ? form.age : 0}></input>
                       <br/>
                       <label>breed :</label>
                      <input  className={style.input} type="string" onChange={ChangeHandle} name="breed"></input>

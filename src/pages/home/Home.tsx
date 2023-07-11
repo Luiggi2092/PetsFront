@@ -67,17 +67,18 @@ const Home: React.FC = () => {
   const handleType = (event: React.ChangeEvent<HTMLSelectElement>)=>{
    
     setFiltros({...filtros,PetTypeId:event.target.value})
- 
+    setCurrentPage(1);
   }
 
   const handleVacu = (event: React.ChangeEvent<HTMLInputElement>)=> {
       setFiltros({...filtros,age: parseInt(event.target.value)}) 
-  }
+      setCurrentPage(1);
+    }
 
   const handleRaza = (event: React.ChangeEvent<HTMLInputElement>)=> {
       
     setFiltros({...filtros,breed:event.target.value})
-
+    setCurrentPage(1);
   }
 
 

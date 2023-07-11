@@ -106,6 +106,7 @@ const Navbar: React.FC = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
+                                
                                 <Link to="/homecliente" className="nav-link">
                                     <BsHouseDoorFill /> Home
                                 </Link>
@@ -262,7 +263,7 @@ const Navbar: React.FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/" className="dropdown-item" onClick={handleLogout}>
+                                        <Link to="/login" className="dropdown-item" onClick={handleLogout}>
                                             <BsBoxArrowInRight /> Cerrar sesión
                                         </Link>
                                     </li>
