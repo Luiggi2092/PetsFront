@@ -110,7 +110,7 @@ const Registro = () => {
     } else error.email = ''
 
     if (!input.passwordKey.match(/^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/)) {
-      error.passwordKey = 'La contraseña debe tener unaa longitud total de al menos 8 caracteres, al menos un carácter especial, dos dígitos numéricos,  y al menos tres letras minúsculas.'
+      error.passwordKey = 'Mínimo 8 caracteres, al menos un carácter especial, tres letras minúsculas y dos dígitos numéricos.'
     }
 
     return error
@@ -198,7 +198,7 @@ const Registro = () => {
             <label htmlFor="passwordKey" className={style.label}>Contraseña: </label>
             <input type="password" name="passwordKey" value={form.passwordKey} onChange={handlerChange} className={style.input}/>
           </div>
-          {error.name && <p className={style.error}>{error.passwordKey}</p>}
+          {error.passwordKey && <p className={style.error}>{error.passwordKey}</p>}
 
           <button type="submit" onClick={handlerSubmit} className={style.boton}>
             Registrarme
