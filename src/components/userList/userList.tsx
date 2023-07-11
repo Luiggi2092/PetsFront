@@ -2,11 +2,13 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import style from './userList.module.css'
 
+
 interface User {
     id: string;
     name: string;
     email: string;
     address: string;
+    isSuspended: boolean;
 }
 
 const UserList: React.FC = () => {
@@ -24,6 +26,32 @@ const UserList: React.FC = () => {
         fetchUsers();
     }, []);
 
+    const handleSuspendUser = async (userId: string) => {
+        try {
+            await axios.put(`/user/${userId}/suspend`);
+            const updatedUsers = users.map((user) =>
+            user.id === userId ? {...user, isSuspended: true} : user
+            );
+            setUsers(updatedUsers);
+            alert('Usuario suspendido exitosamente.')
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const handleUnsuspendUser = async (userId: string) => {
+        try {
+            await axios.put(`/user/${userId}/unsuspend`);
+            const updatedUsers = users.map((user) =>
+            user.id === userId ? {...user, isSuspended: false} : user
+            );
+            setUsers(updatedUsers);
+            alert('Suspensión del usuario eliminada.')
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     const handleDeleteUser = async (userId: string) => {
         try {
             await axios.delete(`/user/${userId}`);
@@ -35,6 +63,7 @@ const UserList: React.FC = () => {
         }
     }
 
+
     return (
         <div className={style.listContain}>
             <h3>Lista de usuarios</h3>
@@ -44,8 +73,8 @@ const UserList: React.FC = () => {
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Dirección</th>
-                        <th>Suspender</th>
-                        <th>Eliminar</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +83,18 @@ const UserList: React.FC = () => {
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.address}</td>
-                            <td><button>suspender</button></td>
+                            <td>{user.isSuspended ? '🔴' : '🟢'}</td>
+                            <td>
+                                {user.isSuspended ? (
+                                    <button onClick={() => handleUnsuspendUser(user.id)}>
+                                        Quitar suspensión
+                                    </button>
+                                ) : (
+                                    <button onClick={() => handleSuspendUser(user.id)}>
+                                        Suspender
+                                    </button>
+                                )}
+                            </td>
                             <td><button onClick={() => handleDeleteUser(user.id)}>Eliminar</button></td>
                         </tr>
                     ))}
