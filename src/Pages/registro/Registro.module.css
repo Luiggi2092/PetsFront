@@ -70,3 +70,11 @@
     width: 7rem;
     margin-top: 1rem;
 }
+
+.alert {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+  }

@@ -109,9 +109,9 @@ const Registro = () => {
       error.email = 'El correo es inválido.'
     } else error.email = ''
 
-    if (!input.passwordKey.match(/^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/)) {
-      error.passwordKey = 'Mínimo 8 caracteres, al menos un carácter especial, tres letras minúsculas y dos dígitos numéricos.'
-    }
+    if (!input.passwordKey.match(/^(?=(?:.*\d))(?=.*[A-Z])(?=.*[a-z])(?=.*[.,*!?¿¡/#$%&])\S{8,64}$/)) {       
+      error.passwordKey = 'Al menos un número 0-9, una mayúscula, al menos una minúscula, carácter especial, longitud mínima de 8 caracteres.'     
+    } else error.passwordKey = ''
 
     return error
   }
