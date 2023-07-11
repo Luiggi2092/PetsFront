@@ -66,7 +66,7 @@ const UserList: React.FC = () => {
 
     return (
         <div className={style.listContain}>
-            <h3>Lista de usuarios</h3>
+            <h2>Lista de usuarios</h2>
             <table className={style.table}>
                 <thead>
                     <tr>
