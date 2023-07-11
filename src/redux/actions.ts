@@ -1,5 +1,6 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
-import { Pet,TypePet,Vaccines } from '../interfaces/Pets'
+
+import { Pet,TypePet, Vaccines } from '../interfaces/Pets'
 import { User, UsersType } from '../interfaces/Users'
 
 export const INCREMENT = 'INCREMENT';
@@ -32,6 +33,7 @@ export const FETCH_USERS = 'FETCH_USERS';
 export const DELETE_USER = 'DELETE_USER';
 export const SUSPEND_USER = 'SUSPEND_USER';
 export const GETVACU = 'GETVACU';
+
 
 
 export const increment = () => {
@@ -243,3 +245,4 @@ export const getVaccines=(Vac:Vaccines)=>{
         payload: Vac
     }
 }
+

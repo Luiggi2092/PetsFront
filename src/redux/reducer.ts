@@ -3,6 +3,7 @@ import { Pet,TypePet,Vaccines } from "../interfaces/Pets"
 import { User, UsersType } from "../interfaces/Users";
 import { GET_PRODUCTS,PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,REMOVE_FROM_CART, USERS_TYPE, FETCH_USERS, DELETE_USER, SUSPEND_USER,GETVACU} from "./actions"
 
+
 interface State {
     count: number;
     numPage: number;
@@ -136,6 +137,7 @@ const counterReducer = (state = initialState, action: any): State => {
                      Vaccines:action.payload
 
                   }
+
             case USERS_TYPE:
                 return {
                     ...state, UsersType: action.payload

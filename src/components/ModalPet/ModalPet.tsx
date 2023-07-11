@@ -12,11 +12,8 @@ interface Props {
     cambiarEstado : (value:boolean)=> void;
 }
 
-
 const url = 'https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload'
 const UPLOAD_PRESET = 'PetsMat'
-
-
 
 const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
 
@@ -73,63 +70,130 @@ const ModalPet:React.FC<Props> = ({openModal,cambiarEstado}) => {
 
   }; 
 
- const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>)=> {
-    let property = evt.target.name;
-    let value = evt.target.value;
-
-    setForm({
-      ...form,
-       [property]:value
-    })
-
-}
-
-const ChangeHandleCheked = (evt: React.ChangeEvent<HTMLInputElement>)=> {
-    let property = evt.target.name;
-    let value = evt.target.checked;
-
-    setForm({
-      ...form,
-       [property]:value
-    })
-
-}
-
-
-const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
-    let property = evt.target.name;
-    let value = evt.target.value;
-
-    console.log(value);
-
-    setForm({
-        ...form,
-        [property]:value
-    })
-   
-}
-
-
-
-
-
-const changeHandleCombo = (evt: React.ChangeEvent<HTMLSelectElement>)=>{
-      
-    let property = evt.target.name;
-    let value = evt.target.value;
-
-    if(property !== "typeId" && value!=="0" &&
-        property !== "sterization" && value!=="0"){
-        let arr:any=[];
-        arr.push(...form.vaccine,value);
-        console.log(arr);
-        setForm({...form,vaccine:arr});
+    interface FormState {
+        name: string;
+        image: string;
+        age: string;
+        breed: string;
+        sterilization: boolean;
+        vaccine: Vaccinas[];
+        typeId: string;
     }
 
 
-}
+    const [error, setError] = useState<FormState>({
+        name: "",
+        image:"",
+        age: "",
+        breed:"",
+        sterilization:false,
+        vaccine:[],
+        typeId:""
+    })
 
- 
+    useEffect (()=> {
+        (async function(){
+            const response = await PetsService.getPetsTypes();
+            dispatch(getTypesPet(response.data))   
+        })();
+        (async function(){
+            const response = await PetsService.getVaccines();
+            dispatch(getVacunas(response.data))   
+        })();     
+    },[])
+
+    const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        if (evt.target.files != null) {
+        setImage(evt.target.files[0]); //error
+        }
+    }; 
+
+    const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>)=> {
+        let property = evt.target.name;
+        let value = evt.target.value;
+
+        setForm({
+            ...form,
+            [property]:value
+        })
+        setError(validate({ 
+            ...form, 
+            [property]: value 
+        } as FormState))
+    }
+
+    // --------------- Validaciones ---------------------
+    const validate = (input: FormState) => {
+        let error: FormState = {
+            name: "",
+            image:"",
+            age:"",
+            breed:"",
+            sterilization:false,
+            vaccine:[],
+            typeId:""
+        }
+
+        if(!input.name.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
+            error.name = 'No se permiten números ni símbolos de puntuación.'
+        } else error.name = '';
+        
+        if (input.image === "") {
+            error.image = "Hay que seleccionar una imagen"
+        } else error.image = "";
+
+        const regexAge: RegExp = /^[0-9]+$/;
+        if( !input.age.match(regexAge)) {
+            error.age = "Solamente se permite numeros"
+        } else error.age = "";
+
+        if(!input.breed.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
+            error.breed = 'No se permiten números ni símbolos de puntuación.'
+        } else error.breed = '';
+
+        if(input.typeId === null) {
+            error.typeId = "Hay que seleccinonar un tipo de animal"
+        } else error.typeId = "";
+
+        return error;
+    }
+
+    const ChangeHandleCheked = (evt: React.ChangeEvent<HTMLInputElement>)=> {
+        let property = evt.target.name;
+        let value = evt.target.checked;
+
+        setForm({
+        ...form,
+        [property]:value
+        })
+    }
+
+    const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
+        let property = evt.target.name;
+        let value = evt.target.value;
+
+        console.log(value);
+
+        setForm({
+            ...form,
+            [property]:value
+        })
+    
+    }
+
+    const changeHandleCombo = (evt: React.ChangeEvent<HTMLSelectElement>)=>{
+        
+        let property = evt.target.name;
+        let value = evt.target.value;
+
+        if(property !== "typeId" && value!=="0" &&
+            property !== "sterization" && value!=="0"){
+            let arr:any=[];
+            arr.push(...form.vaccine,value);
+            console.log(arr);
+            setForm({...form,vaccine:arr});
+        }
+    }
  
 
 
@@ -203,31 +267,22 @@ const submitHandler=(event:any)=> {
                         })}  
                      </select>
                 </div>
-                </div>
+             </div>
                 
                       
-                 <div className={style.BotonCerrar} onClick={()=> cambiarEstado(false)}>
-                         X
-              </div> 
-              {/* <br/> 
-              <br/>         */}
-              <button type="submit"  onClick={submitHandler}>
-                Create Pet
-              </button>
+            <div className={style.BotonCerrar} onClick={()=> cambiarEstado(false)}>
+                X
+            </div> 
+                {/* <br/> 
+                <br/>         */}
+            <button type="submit"  onClick={submitHandler}>
+            Create Pet
+            </button>
 
 
-            </div>
-            </div>  
-                
-                
-                
-              
-            
-            
-            
-            
-            
-            </form>}
+        </div>
+    </div>          
+    </form>}
           
         </>
     )
@@ -237,3 +292,5 @@ const submitHandler=(event:any)=> {
 
 
 export default ModalPet;
+
+
