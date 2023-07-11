@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Nav from './components/Nav/Nav';
+import Home from './Pages/home/Home';
+import UneteANosotros from './Pages/nosotros/UneteANosotros';
+import PetShop from './Pages/Tienda/PetShop';
+import SocialIcons from './Pages/socialIcons/SocialIcons';
+import Landing from './Pages/Landing/Landing'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PetDetail from '../src/Pages/PetDetail/PetDetail';
+import HomeCliente from './components/ClientHome/homeCliente/HomeCliente';
+import Login from './Pages/inicio/InicioSesion';
+import Registro from './Pages/registro/Registrate';
+import OrgDashboard from './Pages/orgDashboard/orgDashboard';
+import FormularioAdopcion from '../src/components/ClientHome/formAdopcion/FormularioAdopcion'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+    const shouldRenderNavbar = true;
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    return (
+        <HashRouter>
+            <SocialIcons />
+            <Routes>
+                <Route index path="/" element={<Landing />} />
+                <Route path="/home" element={shouldRenderNavbar ? 
+                (<><Nav /> <Home/></>) :( <Home/> )}/>
+                <Route path="/nosotros" element={<UneteANosotros />} />
+                <Route path="/petshop" element={shouldRenderNavbar ? 
+                (<><Nav/><PetShop /></> ):(<PetShop/>)} />
+                <Route path="/login" element={ shouldRenderNavbar ? 
+                (<><Nav/><Login /> </>): (<Login/>)} />
+                <Route path="/registro" element={ shouldRenderNavbar ?
+                 (<><Nav/><Registro /></>):(<Registro/>)} />
+                <Route path="/homecliente" element={<HomeCliente />} />
+                <Route path="/detail/:id" element={ shouldRenderNavbar ?
+                (<><Nav/><PetDetail/></>):(<PetDetail/>)}/>
+                <Route path="/organizacion" element={ shouldRenderNavbar ?
+                (<><Nav/><OrgDashboard/></>):(<OrgDashboard/>)}/>
+                <Route path="/homecliente" element={ shouldRenderNavbar ?
+                (<><Nav/><HomeCliente /></>):(<HomeCliente />)} />
+                <Route path="/detail/:id" element={ shouldRenderNavbar ?
+                (<><Nav/><PetDetail/></>):(<PetDetail/>)}/>
+                <Route path="/formulario" element={ shouldRenderNavbar ? 
+                (<><Nav/><FormularioAdopcion/></>):(<FormularioAdopcion/>)}/>
+            </Routes>
+            </HashRouter>
+    );
+};
 
-export default App
+export default App;

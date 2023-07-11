@@ -1,0 +1,101 @@
+* {
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.home {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #0a0a0a;
+background-color: rgba(10, 10, 10, 0.8);
+}
+
+.pet-cards {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    margin-top: 10px;
+    gap: 10px;
+    padding: 0%;
+}
+
+@media (min-width: 768px) {
+    .pet-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .pet-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.sections {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.section {
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    box-shadow: 0 8px 10px rgb(6, 166, 191);
+    margin-bottom: 10px;
+    border-radius: 50%;
+}
+
+.section h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.section a {
+    text-decoration: none;
+    color: #0a0a0a;
+}
+
+.titulo {
+    color: #010a14;
+    padding: 1%;
+    background-color: #00000011;
+    border-radius: 100px;
+    margin: 20px;
+}
+
+
+.subtitulos{
+    color:black;
+}
+
+
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    /* Ajusta el valor de padding según tus necesidades */
+    margin-top: 10px;
+    /* Ajusta el valor de margin-top según tus necesidades */
+}
+/* .card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} */
+
+button {
+    margin: 0 10px;
+}

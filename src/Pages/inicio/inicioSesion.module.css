@@ -1,0 +1,137 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    font-family: 'Acme', sans-serif;
+    flex-direction: row;
+    width: 750px;
+    height: 460px;
+    border-radius: 10px;
+    background: #64CCC5;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 250px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: linear-gradient(rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)),
+    url('../../assets/pexels-bekka-mongeau-1452717.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.left img {
+    width: 250px;
+}
+
+.right {
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.inputBox {
+    margin: 8px 0px;
+    width: 350px;
+    height: fit-content;
+}
+
+.inputBox input {
+    margin-top: 4px;
+    padding: 5px;
+    width: 100%;
+    height: 28px;
+    text-indent: 9px;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.inputBox input:hover {
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.right .titulo h2 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.inputBox label {
+    font-size: 1.5em;
+}
+
+.inputBox input::placeholder {
+    text-indent: 10px;
+}
+
+.iniciar {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+}
+
+/* .iniciar button {
+    margin-top: 5px;
+    width: 250px;
+    height: 35px;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #0000;
+} */
+
+.adicional p {
+    margin-top: 20px;
+    font-size: 19px;
+    text-align: center;
+}
+
+.adicional p span {
+    color: blue;
+}
+
+.adicional p span:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width:780px) {
+    .content {
+        flex-direction: column;
+        width: 400px;
+        height: fit-content;
+        margin: 20px auto;
+    }
+    .left {
+        height: 250px;
+        width: 100%;
+        border-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .content {
+        width: 100%;
+        margin: 0;
+        border-radius: 0px;
+    }
+    .left {
+        width: 100%;
+        border-radius: 0px;
+    }
+}

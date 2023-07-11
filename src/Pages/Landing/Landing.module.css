@@ -1,0 +1,323 @@
+/* Landing.module.css */
+
+.contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #176b8716;
+}
+
+.primerDiv {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
+.fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+   align-items: flex-start;
+   display: flex;
+}
+
+.boton {
+    margin-top: 10px;
+    padding: 10px 30px;
+    background-color: #d2daeb9a;
+    color: #050505;
+    border: none;
+    border-radius: 100px;
+    font-size: 24px;
+    cursor: pointer;
+    width: 300px;
+    height: 100px;
+    margin: 100px;
+    
+}
+
+.boton:hover {
+background-color: #1a87d5;
+}
+
+.boton h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.boton h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.icono {
+    color: #f5efef;
+    font-size: 24px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.segundoDiv {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.circulo1,
+.circulo2 {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border-radius: 30%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.circulo2{
+    margin-left: 60px;
+}
+
+.imagenCirculo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.textoCirculo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 10px;
+    margin: 0;
+    font-size: 18px;
+}
+
+.segundoDivSub {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.descripción {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.p {
+    margin: 0;
+    color: #001C30;
+}
+
+.tercerDiv {
+    margin-top: 50px;
+    background-color: #001C30;
+}
+
+.equipo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.titulo {
+    margin-top: 50px;
+    color: #ecebee;
+    display: flex;
+    justify-content: center;
+}
+
+.titulo {
+    color: #001C30;
+}
+
+.miembro {
+    width: 200px;
+    margin: 15px;
+    margin-left: 5px;
+}
+
+.fotoMiembro {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+
+.fotoMiembro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(path-a-tu-logo) center/contain no-repeat;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fotoMiembro:hover::before {
+    opacity: 1;
+}
+
+.informacion {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.nombre {
+    margin: 0;
+    font-size: 18px;
+    color: #fbf8f8;
+}
+
+.puesto {
+    margin: 0;
+    font-size: 14px;
+    color: #fbf8f8;
+}
+
+.redes {
+    margin-top: 6px;
+    margin-bottom: 5px;
+    
+}
+
+.botonContacto {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #12ae9e;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    margin: 8px;
+}
+
+.footer {
+    background-color: #fdfdfd;
+    padding: 20px;
+    text-align: center;
+   
+}
+
+.links {
+    margin-bottom: 20px;
+}
+
+.links a {
+    margin-right: 10px;
+    color: #0b999e;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.links a:hover {
+    color: #030303;
+}
+
+.footerTexto {
+    font-size: 16px;
+    color: #100f0f;
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+    .logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .boton {
+        font-size: 18px;
+    }
+
+    .boton h1 {
+        font-size: 28px;
+    }
+
+    .boton h2 {
+        font-size: 18px;
+    }
+
+    .segundoDiv {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .circulo1,
+    .circulo2 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .segundoDivSub {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .miembro {
+        width: 150px;
+    }
+
+    .fotoMiembro {
+        width: 100px;
+        height: 100px;
+    }
+
+    .nombre {
+        font-size: 16px;
+    }
+
+    .puesto {
+        font-size: 12px;
+    }
+
+    .footerTexto {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
