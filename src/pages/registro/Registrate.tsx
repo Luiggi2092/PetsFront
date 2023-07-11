@@ -92,9 +92,18 @@ const Registro = () => {
       error.name = 'No se permiten números ni símbolos de puntuación.'
     } else error.name = ''
 
-/*     if (!input.surname.match(/^[a-zA-Z_]+([a-zA-Z_]+)*$/)) {
+    
+    /*if (!input.surname.match(/^[a-zA-Z_]+([a-zA-Z_]+)*$/)) {
       error.surname = 'Solo se permiten letras y no debe haber espacios al final.'
     } else error.surname = '' */
+    
+    if (!input.phone.match(/^[0-9]+$/)) {
+      error.phone = 'Solo se permiten números.'
+    }
+
+    if (!input.address.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
+      error.address = 'No se permiten números ni símbolos de puntuación.'
+    } else error.address = ''
 
     if (!input.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/)) {
       error.email = 'El correo es inválido.'
@@ -165,6 +174,7 @@ const Registro = () => {
             <label htmlFor="phone" className={style.label}>Teléfono: </label>
             <input type="tel" name="phone" value={form.phone} onChange={handlerChange} className={style.input}/>
           </div>
+          {error.phone && <p className={style.error}>{error.phone}</p>}
 
           <div >
             <label htmlFor="address" className={style.label}>Pais: </label>
@@ -175,6 +185,7 @@ const Registro = () => {
               <label htmlFor="ciudad">Ciudad: </label>
               <input type="text" name="ciudad" value={form.ciudad} onChange={handlerChange}/>
             </div> */}
+          {error.address && <p className={style.error}>{error.address}</p>}
           </div>
 
           <div>
@@ -187,6 +198,7 @@ const Registro = () => {
             <label htmlFor="passwordKey" className={style.label}>Contraseña: </label>
             <input type="password" name="passwordKey" value={form.passwordKey} onChange={handlerChange} className={style.input}/>
           </div>
+          {error.name && <p className={style.error}>{error.passwordKey}</p>}
 
           <button type="submit" onClick={handlerSubmit} className={style.boton}>
             Registrarme
