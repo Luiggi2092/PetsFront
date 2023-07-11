@@ -6,6 +6,7 @@ import { typeUsers } from '../../services/UserService'
 import { getUsersType } from '../../redux/actions'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { iconoPatita } from '../Landing/imagenes'
 
 
 interface FormState {
@@ -50,6 +51,8 @@ const Registro = () => {
     email: '',
     passwordKey: '',
   });
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -121,9 +124,11 @@ const Registro = () => {
     if (error.type === '' && error.name === '' && error.email === '') {
       (async function () {
         await UserService.PostUser(form)
-        
-      })()
-      alert('Usuario creado')
+      })() 
+      setShowAlert(true)
+      setTimeout(() => {
+        setShowAlert(false)
+      }, 2000)
       setForm({
         type: '',
         UsersTypeId: '',
@@ -208,6 +213,11 @@ const Registro = () => {
             ¿Ya tienes cuenta?<Link to="/login">Iniciar Sesión</Link>
           </h1>
         </form> 
+        {showAlert && (
+          <div className={style.alert}>Usuario creado exitosamente 
+            <img src={iconoPatita} alt="patita" className={style.img}/>
+          </div>
+        )}
     </div>
   )
 } 
