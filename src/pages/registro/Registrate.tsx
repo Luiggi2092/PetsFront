@@ -6,6 +6,7 @@ import { typeUsers } from '../../services/UserService'
 import { getUsersType } from '../../redux/actions'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { iconoPatita } from '../Landing/imagenes'
 
 
 interface FormState {
@@ -51,6 +52,8 @@ const Registro = () => {
     passwordKey: '',
   });
 
+  const [showAlert, setShowAlert] = useState(false);
+
   const dispatch = useDispatch()
   useEffect(() => {
     (async function(){
@@ -92,17 +95,26 @@ const Registro = () => {
       error.name = 'No se permiten números ni símbolos de puntuación.'
     } else error.name = ''
 
-/*     if (!input.surname.match(/^[a-zA-Z_]+([a-zA-Z_]+)*$/)) {
+    
+    /*if (!input.surname.match(/^[a-zA-Z_]+([a-zA-Z_]+)*$/)) {
       error.surname = 'Solo se permiten letras y no debe haber espacios al final.'
     } else error.surname = '' */
+    
+    if (!input.phone.match(/^[0-9]+$/)) {
+      error.phone = 'Solo se permiten números.'
+    }
+
+    if (!input.address.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
+      error.address = 'No se permiten números ni símbolos de puntuación.'
+    } else error.address = ''
 
     if (!input.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/)) {
       error.email = 'El correo es inválido.'
     } else error.email = ''
 
-    if (!input.passwordKey.match(/^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/)) {
-      error.passwordKey = 'La contraseña debe tener unaa longitud total de al menos 8 caracteres, al menos un carácter especial, dos dígitos numéricos,  y al menos tres letras minúsculas.'
-    }
+    if (!input.passwordKey.match(/^(?=(?:.*\d))(?=.*[A-Z])(?=.*[a-z])(?=.*[.,*!?¿¡/#$%&])\S{8,64}$/)) {       
+      error.passwordKey = 'Al menos un número 0-9, una mayúscula, al menos una minúscula, carácter especial, longitud mínima de 8 caracteres.'     
+    } else error.passwordKey = ''
 
     return error
   }
@@ -112,9 +124,11 @@ const Registro = () => {
     if (error.type === '' && error.name === '' && error.email === '') {
       (async function () {
         await UserService.PostUser(form)
-        
-      })()
-      alert('Usuario creado')
+      })() 
+      setShowAlert(true)
+      setTimeout(() => {
+        setShowAlert(false)
+      }, 2000)
       setForm({
         type: '',
         UsersTypeId: '',
@@ -165,6 +179,7 @@ const Registro = () => {
             <label htmlFor="phone" className={style.label}>Teléfono: </label>
             <input type="tel" name="phone" value={form.phone} onChange={handlerChange} className={style.input}/>
           </div>
+          {error.phone && <p className={style.error}>{error.phone}</p>}
 
           <div >
             <label htmlFor="address" className={style.label}>Pais: </label>
@@ -175,6 +190,7 @@ const Registro = () => {
               <label htmlFor="ciudad">Ciudad: </label>
               <input type="text" name="ciudad" value={form.ciudad} onChange={handlerChange}/>
             </div> */}
+          {error.address && <p className={style.error}>{error.address}</p>}
           </div>
 
           <div>
@@ -187,6 +203,7 @@ const Registro = () => {
             <label htmlFor="passwordKey" className={style.label}>Contraseña: </label>
             <input type="password" name="passwordKey" value={form.passwordKey} onChange={handlerChange} className={style.input}/>
           </div>
+          {error.passwordKey && <p className={style.error}>{error.passwordKey}</p>}
 
           <button type="submit" onClick={handlerSubmit} className={style.boton}>
             Registrarme
@@ -196,6 +213,11 @@ const Registro = () => {
             ¿Ya tienes cuenta?<Link to="/login">Iniciar Sesión</Link>
           </h1>
         </form> 
+        {showAlert && (
+          <div className={style.alert}>Usuario creado exitosamente 
+            <img src={iconoPatita} alt="patita" className={style.img}/>
+          </div>
+        )}
     </div>
   )
 } 
