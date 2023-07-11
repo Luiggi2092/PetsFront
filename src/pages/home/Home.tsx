@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import ModalPet from '../../components/ModalPet/ModalPet';
 import Pagination from '../../components/pagination/Pagination';

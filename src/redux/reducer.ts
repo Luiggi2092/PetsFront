@@ -98,10 +98,19 @@ const counterReducer = (state = initialState, action: any): State => {
                     PostProduct:action.payload
                  } 
            case CARSHOP : 
+               
+                 const product = action.payload;
+                 const productExists = state.Shop.some((e:any)=> e.name === product.name);
+                 
+                 if(productExists){
+                    return state;
+                 }else{
+
                  return {
                     ...state,
                     Shop: [...state.Shop , action.payload],
                     count : state.count + 1
+                 }
                  } 
            case TYPEPET : 
              return {

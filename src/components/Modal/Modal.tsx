@@ -10,8 +10,9 @@ interface Props {
     CateProd:[];
 }
 
-
-
+const cloudname = 'dpq8kiocc'
+const uploadPreset = 'Products'
+const url = `https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload`
 
 
 
@@ -33,10 +34,31 @@ const [form,setForm]= useState({
 
 
 
-const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if (evt.target.files != null) {
-      setImage(evt.target.files[0]); //error
+const handleImageUpload = async(file:any) => {
+    const data = new FormData();
+    data.append("file",file[0]);
+    data.append("upload_preset","Products")
+    data.append("cloud-name","dpq8kiocc")
+
+    try {
+         const response = await fetch (url,{
+            method: 'POST',
+            body:data,
+         })
+
+         if(response){
+            const data= await response.json();
+            const imageUrl = data.secure_url;
+            console.log('Url de la imagen cargada' + imageUrl);
+         }else{
+            console.log('Error al cargar la imagen', response);
+         }
+    }catch(error){
+        console.log('Error al Cargar la imagen',error);
     }
+
+
+
   }; 
 
 
@@ -69,29 +91,7 @@ const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
 
 }
 
-    
-const cargarImagen =  (event:any)=>{
-     event.preventDefault();
-    
-    
-    const data = new FormData();
-    data.append("file",image);
-    data.append("upload_preset","Products")
-    data.append("cloud-name","dpq8kiocc")
-
-    fetch("https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload",{
-        method: 'post',
-        body:data
-    })
-    .then((res)=> res.json())
-    .then(data => {
-        setForm({...form,imagen:data.url})
-    })
-    .catch(error => {
-        console.log('Error al cargar',error);
-        
-    });
-};
+  
 
 
     const submitHandler = (event:any)=> {
@@ -122,6 +122,16 @@ const cargarImagen =  (event:any)=>{
     }
     console.log(CateProd);
 
+    const imageText = document.querySelector('#imageInput');
+
+    imageText?.addEventListener('change',(event:any)=>{
+        const file = event.target.files[0];
+        if(file){
+            handleImageUpload(file);
+        }else{
+        console.log("No selecciono ninguna imagen");
+        }
+    })
 
     return (
         <>
@@ -134,9 +144,8 @@ const cargarImagen =  (event:any)=>{
                         <div className={style.contendor}>
                             <img src={form.imagen== "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps": form.imagen} className={style.imaupload}/>
                             <br/>
-                            <input type="file" onChange={handleImageUpload}></input>
+                            <input type="file" onChange={handleImageUpload} id="imageText" accept='image/*' />
                             <br/>
-                            <button onClick={cargarImagen}>UPLOAD</button>
                             <br/>
                             <label>Producto:</label>
                             <br/>

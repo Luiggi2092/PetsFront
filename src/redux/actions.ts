@@ -126,6 +126,8 @@ export const PostProduct=(Pro:Product)=>{
 
 
 export const CarritoCompas=(Car:Carrito)=>{
+       
+
        return {
              type: 'CARSHOP',
              payload: Car
