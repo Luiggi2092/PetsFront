@@ -1,6 +1,7 @@
 import style from './modal.module.css';
 import {useState} from "react"
 import {useDispatch} from "react-redux"
+import Swal from 'sweetalert2'
 import { PostProduct,getProductos,getTypesProducts } from "../../redux/actions"
 import { ProductService } from '../../services/ProductService';
 
@@ -112,7 +113,11 @@ const cargarImagen =  (event:any)=>{
                 dispatch(getProductos(response1.data))
                 dispatch(getTypesProducts(response2.data)); 
                 setForm({...form,imagen:"https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps"})
-                alert(`Su producto ${response.data.name} se creo con exito`);
+                cambiarEstado(false);
+                Swal.fire({
+                    title:`El producto ${response.data.name}`,
+                    icon:'success',
+                    confirmButtonText:'Ok'});
                 }
              })();
              
@@ -144,11 +149,11 @@ const cargarImagen =  (event:any)=>{
                             <br/>
                             <label>Precio:</label>
                             <br/>
-                            <input type="number" name="price" onChange={ChangeHandle}></input>
+                            <input type="number" name="price" onChange={ChangeHandle} value={form.price > 0 ? form.price : 0}></input>
                             <br/>
                             <label>Unidades dispobibles:</label>
                             <br/>
-                            <input type="number" name="available" onChange={ChangeHandle}></input>
+                            <input type="number" name="available" onChange={ChangeHandle} value={form.available > 0 ? form.available : 0}></input>
                             <br/>
                             <label>Categoría:</label>
                             <br/>

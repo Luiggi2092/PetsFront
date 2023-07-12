@@ -131,7 +131,7 @@ const Navbar: React.FC<Props> = () => {
               <li className="nav-item">
                 <button className="btn btn-outline-light" onClick={handleCart}>
                   <BsCart3 />
-                  <span className='cart-count'>{count}</span>
+                  <span className='cart-count'>{Car.length > 0 ? count: 0}</span>
                 </button>
               </li>
             </ul>

@@ -42,7 +42,8 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1",
-    "stripe": "^12.10.0"
+    "stripe": "^12.10.0",
+    "sweetalert2": "^11.7.16"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

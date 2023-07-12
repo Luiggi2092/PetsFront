@@ -1,6 +1,7 @@
 import style from "./Modalpet.module.css"
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
+import Swal from 'sweetalert2'
 import { getTypesPet, PostPet, getPets, getVaccines } from "../../redux/actions"
 import { PetsService } from '../../services/PetsService';
 import { Vaccines } from '../../interfaces/Pets';
@@ -25,17 +26,7 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
     const dispatch = useDispatch();
     const [avance, setAvance] = useState(0);
 
-    const [form,setForm]= useState<FormState>({
-        name: "",
-        image:"",
-        age: "",
-        breed:"",
-        sterilization:false,
-        vaccine:[],
-        typeId:""
- 
-    })
-
+    
     const [form, setForm] = useState({
         name: "",
         image: "",
@@ -134,7 +125,6 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
             form.image &&
             form.breed &&
             form.age &&
-            form.sterilization &&
             form.vaccine
             && form.typeId) {
             (async function () {
@@ -146,9 +136,12 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
 
                     dispatch(getPets(response1.data));
                     dispatch(PostPet(response.data))
-                    alert("Mascota creada con Exito visita a " + " " + response.data.name)
+                    Swal.fire({
+                        title:`Mascota creada con exito ${response.data.name}`,
+                        icon:'success',
+                        confirmButtonText:'Ok'});
                     setForm({ ...form, name: "", image: "", breed: "", age: 0, sterilization: false, vaccine: "0", typeId: "" })
-
+                    cambiarEstado(false);
                 }
             })()
         }

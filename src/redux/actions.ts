@@ -1,5 +1,5 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
-import { Pet,TypePet, Vaccines } from '../interfaces/Pets'
+import { Pet,TypePet,Vaccines } from '../interfaces/Pets'
 import { User, UsersType } from '../interfaces/Users'
 
 export const INCREMENT = 'INCREMENT';
@@ -31,7 +31,7 @@ export const USERS_TYPE = 'USERS_TYPE';
 export const FETCH_USERS = 'FETCH_USERS';
 export const DELETE_USER = 'DELETE_USER';
 export const SUSPEND_USER = 'SUSPEND_USER';
-export const GET_VACUNAS = 'GET_VACUNAS';
+export const GETVACU = 'GETVACU';
 
 
 export const increment = () => {
@@ -127,6 +127,8 @@ export const PostProduct=(Pro:Product)=>{
 
 
 export const CarritoCompas=(Car:Carrito)=>{
+       
+
        return {
              type: 'CARSHOP',
              payload: Car
@@ -235,9 +237,80 @@ export const suspendUser = (users: User[]) => {
     }
 }
 
-export const getVacunas = (id: Vaccines) => {
+export const getVaccines=(Vac:Vaccines)=>{
     return {
-        type: 'GET_VACUNAS',
-        payload: id
+        type : 'GETVACU',
+        payload: Vac
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

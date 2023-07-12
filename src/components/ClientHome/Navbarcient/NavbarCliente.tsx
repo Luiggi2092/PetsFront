@@ -190,7 +190,7 @@ const Navbar: React.FC = () => {
                                     Donaciones
                                 </Link>
                             </li>
-                            <li className={`nav-item dropdown ${activeMenu === 'veterinaries' ? 'show' : ''}`}>
+                            {/* <li className={`nav-item dropdown ${activeMenu === 'veterinaries' ? 'show' : ''}`}>
                                 <Link
                                     to="#"
                                     className="nav-link dropdown-toggle"
@@ -209,7 +209,7 @@ const Navbar: React.FC = () => {
                                         </li>
                                     ))}
                                 </ul>
-                            </li>
+                            </li> */}
                         </ul>
                         {/* <form className="d-flex" onSubmit={handleSearch}>
                             <input
@@ -273,7 +273,7 @@ const Navbar: React.FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/" className="dropdown-item" onClick={handleLogout}>
+                                        <Link to="/login" className="dropdown-item" onClick={handleLogout}>
                                             <BsBoxArrowInRight /> Cerrar sesión
                                         </Link>
                                     </li>
