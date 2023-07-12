@@ -12,7 +12,6 @@ interface Props {
     cambiarEstado: (value: boolean) => void;
 }
 
-
 const url = 'https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload'
 const UPLOAD_PRESET = 'PetsMat'
 
@@ -26,6 +25,16 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
     const dispatch = useDispatch();
     const [avance, setAvance] = useState(0);
 
+    const [form,setForm]= useState<FormState>({
+        name: "",
+        image:"",
+        age: "",
+        breed:"",
+        sterilization:false,
+        vaccine:[],
+        typeId:""
+ 
+    })
 
     const [form, setForm] = useState({
         name: "",
@@ -145,8 +154,6 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
         }
     }
 
-
-
     return (
         <>
             {openModal && <form onSubmit={submitHandler}>
@@ -190,7 +197,6 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
                             </div>
                         </div>
 
-
                         <div className={style.BotonCerrar} onClick={() => cambiarEstado(false)}>
                             X
                         </div>
@@ -199,17 +205,11 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
                         <button type="submit" onClick={submitHandler}>
                             Create Pet
                         </button>
-
-
                     </div>
                 </div>
             </form>}
-
         </>
     )
-
-
 }
-
 
 export default ModalPet;
