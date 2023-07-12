@@ -72,6 +72,7 @@ const Registro = () => {
     console.log(value)
   }
 
+  
   const validate = (input: FormState): FormState => {
     let error: FormState = {
       type: '',
@@ -121,7 +122,7 @@ const Registro = () => {
 
   const handlerSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    if (error.type === '' && error.name === '' && error.email === '') {
+    if (error.type === null && error.name === null && error.email === null && error.address === null && error.passwordKey === null && error.phone === null) {
       (async function () {
         await UserService.PostUser(form)
       })() 
