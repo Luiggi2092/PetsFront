@@ -66,10 +66,21 @@ const AdoptionFormList: React.FC = () => {
         }
     }
 
+    const getEstadoColor = (estado: string): string => {
+        if (estado === 'pendiente'){
+            return style.orange;
+        } else if (estado === 'aceptado') {
+            return style.green;
+        } else if (estado === 'rechazado') {
+            return style.red;
+        }
+        return '';
+    }
+
     return (
-        <div>
+        <div className={style.listContain}>
             <h2>Formularios de solicitud de adopción</h2>
-            <table>
+            <table className={style.table}>
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -97,9 +108,9 @@ const AdoptionFormList: React.FC = () => {
                             <td>{form.previousPetExperience}</td>
                             <td>{form.petAllergy}</td>
                             <td>{form.dailyPetTime}</td>
-                            <td>{form.estado}</td>
+                            <td className={getEstadoColor(form.estado)} >{form.estado}</td>
                             <td>
-                                {form.estado !== 'aceptado' && (
+                                {form.estado !== 'aceptado' && form.estado !== 'rechazado' && (
                                     <div className={style.butonsForm}>
                                         <button onClick={() => handleAceptar(form.id)}>Aceptar</button>
                                         <button onClick={() => handleRechazar(form.id)}>Rechazar</button>

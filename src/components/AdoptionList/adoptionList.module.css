@@ -1,4 +1,29 @@
 .butonsForm {
     display: flex;
-    
+}
+
+.listContain {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    align-items: center;
+    height: 600px;
+    overflow: auto;
+}
+
+.table {
+    padding: 5px;
+    width: 90%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.orange {
+    color: orange;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
 }
