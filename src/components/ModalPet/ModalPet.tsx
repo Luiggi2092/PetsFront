@@ -36,16 +36,16 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
  
     })
 
-    const [form, setForm] = useState({
-        name: "",
-        image: "",
-        age: 0,
-        breed: "",
-        sterilization: false,
-        vaccine: "",
-        typeId: ""
+    // const [form, setForm] = useState({
+    //     name: "",
+    //     image: "",
+    //     age: 0,
+    //     breed: "",
+    //     sterilization: false,
+    //     vaccine: "",
+    //     typeId: ""
 
-    })
+    // })
 
     useEffect(() => {
         (async function () {

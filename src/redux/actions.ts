@@ -1,6 +1,6 @@
 import { Product, TypeProduct,Carrito } from '../interfaces/Products'
-import { Pet,TypePet, Vaccines } from '../interfaces/Pets'
-import { User, UsersType } from '../interfaces/Users'
+import { Pet,TypePet,Vaccines } from '../interfaces/Pets'
+import { UsersType } from '../interfaces/Users'
 
 export const INCREMENT = 'INCREMENT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -28,10 +28,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const FILTERS4 = 'FILTERS4';
 export const FILTERS5 = 'FILTERS5';
 export const USERS_TYPE = 'USERS_TYPE';
-export const FETCH_USERS = 'FETCH_USERS';
-export const DELETE_USER = 'DELETE_USER';
-export const SUSPEND_USER = 'SUSPEND_USER';
-export const GET_VACUNAS = 'GET_VACUNAS';
+export const GETVACU = 'GETVACU';
 
 
 export const increment = () => {
@@ -127,6 +124,8 @@ export const PostProduct=(Pro:Product)=>{
 
 
 export const CarritoCompas=(Car:Carrito)=>{
+       
+
        return {
              type: 'CARSHOP',
              payload: Car
@@ -214,30 +213,9 @@ export const getUsersType = (usersType: UsersType[]) => {
     return {type: 'USERS_TYPE', payload: usersType}
 }
 
-export const fetchUsers = (users: User[]) => {
+export const getVaccines=(Vac:Vaccines)=>{
     return {
-        type: 'FETCH_USERS',
-        payload: users
-    }
-}
-
-export const deleteUser = (users: User[]) => {
-    return {
-        type: 'DELETE_USER',
-        payload: users
-    }
-}
-
-export const suspendUser = (users: User[]) => {
-    return {
-        type: 'SUSPEND_USER',
-        payload: users
-    }
-}
-
-export const getVacunas = (id: Vaccines) => {
-    return {
-        type: 'GET_VACUNAS',
-        payload: id
+        type : 'GETVACU',
+        payload: Vac
     }
 }

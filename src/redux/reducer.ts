@@ -1,7 +1,7 @@
 import { Product, TypeProduct,Carrito } from "../interfaces/Products";
 import { Pet,TypePet,Vaccines } from "../interfaces/Pets"
 import { User, UsersType } from "../interfaces/Users";
-import { GET_PRODUCTS,PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,REMOVE_FROM_CART, USERS_TYPE, FETCH_USERS, DELETE_USER, SUSPEND_USER, GET_VACUNAS} from "./actions"
+import { GET_PRODUCTS,PAGE_NUMBER, GET_TYPES_PRODUCTS, GET_PETS, GET_PETSID, GET_CAT,POST_PRODUCT,CARSHOP,TYPEPET,POSTPET,REMOVE_FROM_CART, USERS_TYPE, GETVACU} from "./actions"
 
 interface State {
     count: number;
@@ -98,10 +98,19 @@ const counterReducer = (state = initialState, action: any): State => {
                     PostProduct:action.payload
                  } 
            case CARSHOP : 
+               
+                 const product = action.payload;
+                 const productExists = state.Shop.some((e:any)=> e.name === product.name);
+                 
+                 if(productExists){
+                    return state;
+                 }else{
+
                  return {
                     ...state,
                     Shop: [...state.Shop , action.payload],
                     count : state.count + 1
+                 }
                  } 
            case TYPEPET : 
              return {
@@ -121,33 +130,18 @@ const counterReducer = (state = initialState, action: any): State => {
                     Shop: filteredItems,
                     count: state.count - 1,
                 }
-            case GET_VACUNAS:
-                 return {
-                    ...state,
-                    Vaccines:action.payload
+              case GETVACU:
+                  return {
+                     ...state,
+                     Vaccines:action.payload
 
-                }
+                  }
             case USERS_TYPE:
                 return {
                     ...state, UsersType: action.payload
                 }
             default:
             return state;
-
-            case FETCH_USERS:
-                return {
-                    ...state, users: action.payload
-                }
-            
-            case DELETE_USER:
-                return {
-                    ...state, users: action.payload
-                }
-            
-            case SUSPEND_USER:
-                return {
-                    ...state, users: action.payload
-                }
     }
 };
 
