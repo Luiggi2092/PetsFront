@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import style from './userList.module.css'
 
@@ -14,7 +14,7 @@ interface User {
 const UserList: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get<User[]>('/user');
@@ -30,7 +30,7 @@ const UserList: React.FC = () => {
         try {
             await axios.put(`/user/${userId}/suspend`);
             const updatedUsers = users.map((user) =>
-            user.id === userId ? {...user, isSuspended: true} : user
+                user.id === userId ? { ...user, isSuspended: true } : user
             );
             setUsers(updatedUsers);
             alert('Usuario suspendido exitosamente.')
@@ -43,7 +43,7 @@ const UserList: React.FC = () => {
         try {
             await axios.put(`/user/${userId}/unsuspend`);
             const updatedUsers = users.map((user) =>
-            user.id === userId ? {...user, isSuspended: false} : user
+                user.id === userId ? { ...user, isSuspended: false } : user
             );
             setUsers(updatedUsers);
             alert('Suspensión del usuario eliminada.')
@@ -55,7 +55,7 @@ const UserList: React.FC = () => {
     const handleDeleteUser = async (userId: string) => {
         try {
             await axios.delete(`/user/${userId}`);
-            const updatedUsers = users.filter((user)=>user.id !== userId);
+            const updatedUsers = users.filter((user) => user.id !== userId);
             setUsers(updatedUsers);
             alert('Usuario eliminado exitosamente.')
         } catch (error) {
@@ -85,17 +85,19 @@ const UserList: React.FC = () => {
                             <td>{user.address}</td>
                             <td>{user.isSuspended ? '🔴' : '🟢'}</td>
                             <td>
-                                {user.isSuspended ? (
-                                    <button onClick={() => handleUnsuspendUser(user.id)}>
-                                        Quitar suspensión
-                                    </button>
-                                ) : (
-                                    <button onClick={() => handleSuspendUser(user.id)}>
-                                        Suspender
-                                    </button>
-                                )}
+                                <div className={style.butonsUsers}>
+                                    {user.isSuspended ? (
+                                        <button onClick={() => handleUnsuspendUser(user.id)}>
+                                            Quitar suspensión
+                                        </button>
+                                    ) : (
+                                        <button onClick={() => handleSuspendUser(user.id)}>
+                                            Suspender
+                                        </button>
+                                    )}
+                                    <button onClick={() => handleDeleteUser(user.id)}>Eliminar</button>
+                                </div>
                             </td>
-                            <td><button onClick={() => handleDeleteUser(user.id)}>Eliminar</button></td>
                         </tr>
                     ))}
                 </tbody>

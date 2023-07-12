@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import UserList from "../../components/userList/userList";
+import AdoptionFormList from "../../components/AdoptionList/adoptionList";
 import style from './dashboard.module.css'
 
 const OrgDashboard: React.FC = () => {
     const [showList, setShowList] = useState(false);
+    const [showForms, setShowForms] = useState(false);
 
     const handleShowList = () => {
         setShowList(true);
+        setShowForms(false);
     };
+
+    const handleShowForms = () => {
+        console.log('muestra formularios')
+        setShowForms(true);
+        setShowList(false);
+    }
 
     return (
         <div className={style.dashContain}>
@@ -16,7 +25,7 @@ const OrgDashboard: React.FC = () => {
                     <button onClick={handleShowList}>Usuarios</button>
                 </div>
                 <div className={style.sidebutton}>
-                    <button>Mascotas</button>
+                    <button onClick={handleShowForms}>Solicitudes de adopcion</button>
                 </div>
             </div>
             <div className={style.contenido}>
@@ -26,6 +35,7 @@ const OrgDashboard: React.FC = () => {
                     </div>
                 </header>
                 {showList && <UserList />}
+                {showForms && <AdoptionFormList />}
             </div>
         </div>
     )
