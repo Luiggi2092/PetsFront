@@ -28,6 +28,11 @@ const PetShop: React.FC = () => {
           TypeProductId:"",
           price:[],
   }); // Filtros aplicados
+  
+  const isToken = localStorage.getItem('TokenUsu');
+  const Tipo = localStorage.getItem('TypoUsu');
+  const convert = Tipo ? JSON.parse(Tipo) : null;
+
 
 
    useEffect(()=>{
@@ -205,7 +210,7 @@ const PetShop: React.FC = () => {
          </select>
       </div>
       <div className={`${style.butNew} left-container`}>
-        <button className={style.newProd} onClick={handleModal}>New Product</button>
+      {isToken && convert === "organizacion" && <button className={style.newProd} onClick={handleModal}>New Product</button>}
         <Modal openModal={openModal} cambiarEstado={setOpenModal} CateProd={CateProd}></Modal>
       </div>
 

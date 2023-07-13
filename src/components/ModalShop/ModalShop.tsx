@@ -48,7 +48,7 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
     const handleSubmit = async(e:any)=> {
        e.preventDefault();
 
-     const {error,paymentMethod} = await stripe.createPaymentMethod({
+     const {paymentMethod} = await stripe.createPaymentMethod({
           type:'card',
           card: elements?.getElement(CardElement)   
        })
@@ -63,7 +63,7 @@ const ModalShop: React.FC<Props> = ({openModal,cambiarEstado,Car}) => {
 
     if(isToken && convert === "usuario" || 
     isToken && convert === "https://accounts.google.com"){
-      const res = await axios.post('http://localhost:3001/api/checkout',{
+      const res = await axios.post('/api/checkout',{
         id,
         amount:Math.round(calcularSubtotal() * 100)
       })

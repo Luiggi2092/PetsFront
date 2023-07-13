@@ -1,11 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import ModalPet from '../../components/ModalPet/ModalPet';
 import Pagination from '../../components/pagination/Pagination';
 import { useDispatch,useSelector } from 'react-redux';
 import { PetsService } from '../../services/PetsService';
-import {getPets,getTypesPet} from '../../redux/actions' 
+import { getPets,getTypesPet} from '../../redux/actions' 
 import {Pet,TypePet} from '../../interfaces/Pets'
 import './home.css';
 
@@ -16,6 +15,12 @@ const Home: React.FC = () => {
       PetTypeId:"",
       age:"",
   });
+
+
+  const isToken = localStorage.getItem('TokenUsu');
+  const Tipo = localStorage.getItem('TypoUsu');
+  const convert = Tipo ? JSON.parse(Tipo) : null;
+
  
   let Pets = useSelector((state:any)=> state.Pets);
   let TypePets = useSelector((state:any)=> state.TypePet);
@@ -66,18 +71,23 @@ const Home: React.FC = () => {
   };
 
   const handleType = (event: React.ChangeEvent<HTMLSelectElement>)=>{
-   
+    setCurrentPage(1);
     setFiltros({...filtros,PetTypeId:event.target.value})
+    
  
   }
 
   const handleVacu = (event: React.ChangeEvent<HTMLInputElement>)=> {
+    setCurrentPage(1);
       setFiltros({...filtros,age: parseInt(event.target.value)}) 
+      
   }
 
   const handleRaza = (event: React.ChangeEvent<HTMLInputElement>)=> {
       
+    setCurrentPage(1);
     setFiltros({...filtros,breed:event.target.value})
+    
 
   }
 
@@ -129,7 +139,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="home" style={{ backgroundImage: `url(${backgroundImage})` }}>
-      <button onClick={handleModal}>NEW MASCOTA</button>
+      {isToken && convert === "organizacion" && <button onClick={handleModal}>NEW MASCOTA</button>}
       <div className="sections">
       <div className="section">
             <button className="button">

@@ -22,9 +22,8 @@ const Navbar: React.FC<Props> = () => {
   const [counts,setCount] = useState(count)
   console.log(counts);
    const getData = ()=> {
-      return localStorage.getItem('contShop')
-    
-   }
+       return localStorage.getItem('contShop')
+  }
 
    
   const [logueado,setLogueado] = useState<any>({
@@ -53,7 +52,7 @@ const Navbar: React.FC<Props> = () => {
 
 
    useEffect(()=>{
-       setCount(getData()); 
+      setCount(getData()); 
    },[])
  
    

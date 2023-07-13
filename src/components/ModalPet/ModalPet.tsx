@@ -151,9 +151,10 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
         <>
             {openModal && <form onSubmit={submitHandler}>
                 <div className={`${style.Overlay}`}>
-                    <div className={style.contenedor}>
                         <div className={style.ContenedorModal}>
                             <div className={style.EncabezadoModal}>
+                            <div className={style.contenedor}>
+                    
                                 <h2 className={style.h2}>New Pet</h2>
                                 <img src={form.image == "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps" : form.image} className={style.imaupload} />
                                 <input className={style.input} type="file" onChange={handleImageUpload} accept="image/*"></input>
@@ -187,17 +188,16 @@ const ModalPet: React.FC<Props> = ({ openModal, cambiarEstado }) => {
 
                                     })}
                                 </select>
-                            </div>
-                        </div>
-
-                        <div className={style.BotonCerrar} onClick={() => cambiarEstado(false)}>
-                            X
-                        </div>
-                        {/* <br/> 
-              <br/>         */}
-                        <button type="submit" onClick={submitHandler}>
+                                </div>
+                         <button type="submit" onClick={submitHandler} className={style.but}>
                             Create Pet
                         </button>
+                            </div>
+                        
+
+                        {/* <br/> 
+              <br/>         */}
+                        
                     </div>
                 </div>
             </form>}

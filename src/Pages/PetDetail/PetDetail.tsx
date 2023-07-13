@@ -17,6 +17,8 @@ const PetDetail: React.FC = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const Pe = useSelector((state:any)=>state.PetsFill);
+    const Tipo = localStorage.getItem('TypoUsu');
+    const convert = Tipo ? JSON.parse(Tipo) : null;
     
     useEffect(()=> {
         (async function(){
@@ -61,20 +63,17 @@ const PetDetail: React.FC = () => {
                     <p>Esterelización: {obj.sterilization ? 'Si' : 'No'}</p>
                     
                         <div>
-                            <h3>Especie:</h3>
-                            { <p>{obj.breed}</p> }
+                            { <p> Raza: {obj.breed}</p> }
                         </div>
                     
                          <div>
-                            <h3>Vacunado:</h3>
-                            <p>{obj.Vaccines}</p>
+                            <p> Vacunado: {obj.Vaccines}</p>
     </div> 
                 </div>
                 <div className={styles.btns}>
-                    <button>Donativo</button>
-                    <Link to={"/formulario"}>
+                {convert === "usuario" && <Link to={`/formulario/${id}`}>
                     <button>Adoptar!</button>
-                    </Link>
+                    </Link>}
                 </div>
             </div>
         </div>

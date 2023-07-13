@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
-import { FaGoogle } from 'react-icons/fa';
+import { useParams} from 'react-router-dom';
+import { PetsService } from '../../../services/PetsService';
+
 import './form.css'
 
 const FormularioAdopcion = () => {
@@ -8,62 +10,34 @@ const FormularioAdopcion = () => {
     // const [direccion, setDireccion] = useState('');
     // const [email, setEmail] = useState('');
     // const [numeroContacto, setNumeroContacto] = useState('');
-    const [codigoPais, setCodigoPais] = useState('');
+    //const [codigoPais, setCodigoPais] = useState('');
     // const [situacionEconomica, setSituacionEconomica] = useState('');
-    const [experienciaMascotas, setExperienciaMascotas] = useState('');
-    const [reaccionAlergica, setReaccionAlergica] = useState('');
-    const [hogarAdecuado, setHogarAdecuado] = useState(false);
+    //const [experienciaMascotas, setExperienciaMascotas] = useState('');
+    //const [reaccionAlergica, setReaccionAlergica] = useState('');
+    //const [hogarAdecuado, setHogarAdecuado] = useState(false);
     // const [tiempoDedicado, setTiempoDedicado] = useState('');
     const [terminosCondiciones, setTerminosCondiciones] = useState(false);
-    const [mayorEdad, setMayorEdad] = useState(false);
+    //const [mayorEdad, setMayorEdad] = useState(false);
     const [enviado, setEnviado] = useState(false);
 
-    const obtenerCodigoArea = () => {
-        const codigosArea: { [key: string]: string } = {
-            AR: '+54', // Argentina
-            BR: '+55', // Brasil
-            CL: '+56', // Chile
-            CO: '+57', // Colombia
-            CR: '+506', // Costa Rica
-            CU: '+53', // Cuba
-            DO: '+1-809', // República Dominicana
-            EC: '+593', // Ecuador
-            ES: '+34', // España
-            GT: '+502', // Guatemala
-            HN: '+504', // Honduras
-            MX: '+52', // México
-            NI: '+505', // Nicaragua
-            PA: '+507', // Panamá
-            PE: '+51', // Perú
-            PY: '+595', // Paraguay
-            SV: '+503', // El Salvador
-            UY: '+598', // Uruguay
-            VE: '+58', // Venezuela
-        };
+    const isToken:string = localStorage.getItem('idUsu') || "" ;
 
-        const opcionesCodigoArea = Object.entries(codigosArea).map(([pais, codigoArea]) => (
-            <option key={pais} value={codigoArea}>
-                {pais} - {codigoArea}
-            </option>
-        ));
+    const cleanedUUIDString = isToken.replace(/"/g, '');
 
-        return (
-            <select
-                id="codigo-pais"
-                value={codigoPais}
-                onChange={(e) => setCodigoPais(e.target.value)}
-            >
-                <option value="">Selecciona un país</option>
-                {opcionesCodigoArea}
-            </select>
-        );
-    };
+    
+    const {id} = useParams();
+
+    console.log(id);
+    console.log(isToken);
+        
+    
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log("hola");
         // Validaciones
-        if (!form.nombre || !form.apellido || !form.direccion || !form.email || !form.numeroContacto || !codigoPais || !form.situacionEconomica || !experienciaMascotas || !form.tiempoDedicado) {
-            console.log("nombre: " + form.nombre, "di: " + form.direccion, " email " + form.email, " nume "+form.numeroContacto, " cod "+codigoPais," situa "+ form.situacionEconomica,"exp "+experienciaMascotas, "tiempo "+form.tiempoDedicado);
+        if (!form.name || !form.lastName || !form.address || !form.email || !form.phone || !form.pais || !form.economicSituation || !form.previousPetExperience || !form.dailyPetTime) {
+            console.log("nombre: " + form.name, "di: " + form.address, " email " + form.email, " nume "+form.phone, " cod "+ form.pais," situa "+ form.economicSituation,"exp "+form.previousPetExperience, "tiempo "+form.dailyPetTime);
             
             alert('Por favor, completa todos los campos obligatorios.');
             return;
@@ -74,50 +48,76 @@ const FormularioAdopcion = () => {
             return;
         }
 
-        if (!mayorEdad) {
+        if (!form.over18) {
             alert('Debes ser mayor de 18 años para enviar el formulario.');
             return;
         }
 
         // Marcarel formulario como enviado exitosamente
+        (async function () {
+
+            const response = await PetsService.PostForm(form);
+            console.log(response.data);
+            
+        })();
         setEnviado(true);
+
     };
 
     //  ------------------- validaciones -----------------------------
     interface FormState {
-        nombre: string;
-        apellido: string;
-        direccion: string;
+        name: string;
+        lastName: string;
+        address: string;
         email: string;
-        numeroContacto: string;
-        codigoPais: string;
-        situacionEconomica: string;
-        // experienciaMascotas: string;
-        tiempoDedicado: string;
+        phone: string;
+        economicSituation: string;
+        previousPetExperience: string;
+        petAllergy:string;
+        id:string;
+        petId:string;
+        dailyPetTime: string;
+        properHome:boolean;
+        over18:boolean;
+        pais:string;
+
+
     }
         
     const [form, setForm] = useState<FormState>({
-        nombre: "",
-        apellido: "",
-        direccion: "",
+        name: "",
+        lastName: "",
+        address: "",
         email: "",
-        numeroContacto: "",
-        codigoPais: "",
-        situacionEconomica: "",
-        // experienciaMascotas: "",
-        tiempoDedicado: "",
+        phone: "",
+        economicSituation: "",
+        previousPetExperience: "",
+        petAllergy:"",
+        id:cleanedUUIDString,
+        petId:id || "",
+        dailyPetTime: "",
+        properHome:false,
+        over18:false,
+        pais:""
     })
 
+
+
     const [error, setError] = useState<FormState>({
-        nombre: "",
-        apellido: "",
-        direccion: "",
+        name: "",
+        lastName: "",
+        address: "",
         email: "",
-        numeroContacto: "",
-        codigoPais: "",
-        situacionEconomica: "",
-        // experienciaMascotas: "",
-        tiempoDedicado: "",
+        phone: "",
+        economicSituation: "",
+        previousPetExperience: "",
+        petAllergy:"",
+        id:"",
+        petId:"",
+        dailyPetTime: "",
+        properHome:false,
+        over18:false,
+        pais:""
     });
 
     const handlerChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -128,59 +128,64 @@ const FormularioAdopcion = () => {
         console.log(value)
     }
 
-    const handlerChangeText = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-        const property = event.target.name;
-        const value = event.target.value;
-        setForm({ ...form, [property]: value });
-        setError(validate({ ...form, [property]: value } as FormState));
-        console.log(value);
-      };
+    // const handlerChangeText = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+    //     const property = event.target.name;
+    //     const value = event.target.value;
+    //     setForm({ ...form, [property]: value });
+    //     setError(validate({ ...form, [property]: value } as FormState));
+    //     console.log(value);
+    //   };
 
     const validate = (input: FormState): FormState => {
         let error: FormState = {
-            nombre: "",
-            apellido: "",
-            direccion: "",
+            name: "",
+            lastName: "",
+            address: "",
             email: "",
-            numeroContacto: "",
-            codigoPais: "",
-            situacionEconomica: "",
-            // experienciaMascotas: "",
-            tiempoDedicado: "",
+            phone: "",
+            economicSituation: "",
+            previousPetExperience: "",
+            petAllergy:"",
+            id:"",
+            petId:"",
+            dailyPetTime: "",
+            properHome:false,
+            over18:false,
+            pais:""
         }
 
-        if(!input.nombre.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
-            error.nombre = "No se permiten numeros o caracteres especiales";
-        } else error.nombre = "";
+        if(!input.name.match(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/)) {
+            error.name = "No se permiten numeros o caracteres especiales";
+        } else error.name = "";
         
         const regexApellido: RegExp = /^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/;
-        if(!input.apellido.match(regexApellido)) {
-            error.apellido = "No se permiten numeros o caracteres especiales";
-        } else error.apellido = "";
+        if(!input.lastName.match(regexApellido)) {
+            error.lastName = "No se permiten numeros o caracteres especiales";
+        } else error.lastName = "";
         
-        if(!input.direccion.match(/^[a-zA-Z0-9,]+$/)) {
-            error.direccion = "No se permiten caracteres especiales";
-        } else error.direccion = "";
+        // if(!input.address.match(/^[a-zA-Z0-9,]+$/)) {
+        //     error.address = "No se permiten caracteres especiales";
+        // } else error.address = "";
         
-        if(!input.email.match(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i)) {
-            error.email = "formato esperado: ejemplo@hotmail.com";
-        } else error.email = "";
+        // if(!input.email.match(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i)) {
+        //     error.email = "formato esperado: ejemplo@hotmail.com";
+        // } else error.email = "";
         
-        if(!input.numeroContacto.match(/^[0-9-]{11}$/)) {
-            error.numeroContacto = "Formato esperado ejemplo: 22222-22222 . No se permiten caracteres especiales o letras";
-        } else error.numeroContacto = "";
+        // if(!input.phone.match(/^[0-9-]{11}$/)) {
+        //     error.phone = "Formato esperado ejemplo: 22222-22222 . No se permiten caracteres especiales o letras";
+        // } else error.phone = "";
         
-        if(!input.situacionEconomica.match(/^[a-zA-Z0-9() ,.]+$/)) {
-            error.situacionEconomica = "No se permiten caracteres especiales";
-        } else error.situacionEconomica = "";
+        // if(!input.economicSituation.match(/^[a-zA-Z0-9() ,.]+$/)) {
+        //     error.economicSituation = "No se permiten caracteres especiales";
+        // } else error.economicSituation = "";
 
         // if(!input.experienciaMascotas === true) {
         //     error.experienciaMascotas = "No se permiten caracteres especiales";
         // } else error.experienciaMascotas = "";
 
-        if(!input.tiempoDedicado.match(/^[a-zA-Z0-9() ,.]+$/)) {
-            error.tiempoDedicado = "No se permiten caracteres especiales";
-        } else error.tiempoDedicado = "";
+        // if(!input.dailyPetTime.match(/^[a-zA-Z0-9() ,.]+$/)) {
+        //     error.dailyPetTime = "No se permiten caracteres especiales";
+        // } else error.dailyPetTime = "";
 
         return error;
     }
@@ -195,40 +200,45 @@ const FormularioAdopcion = () => {
                     <label htmlFor="nombre">Nombre:</label>
                     <input
                         type="text"
-                        id="nombre"
-                        name="nombre"
-                        value={form.nombre}
-                        onChange={handlerChange}
+                        id="name"
+                        name="name"
+                        value={form.name}
+                        onChange={(e) => setForm({...form,name:e.target.value})}
                     />
-                    {error.nombre && <span >{error.nombre}</span>} 
+                    {error.name && <span >{error.name}</span>} 
                     {/* ^-Ejemplo no mas-^*/}
 
-                    <label htmlFor="apellido">Apellido:</label>
+                    <label htmlFor="lastName">Apellido:</label>
                     <input
                         type="text"
-                        id="apellido"
-                        name='apellido'
-                        value={form.apellido}
-                        onChange={handlerChange}
+                        id="lastName"
+                        name='lastName'
+                        value={form.lastName}
+                        onChange={(e) => setForm({...form,lastName:e.target.value})}
                     />
-                    {error.apellido && <span >{error.apellido}</span>}
+                    {error.lastName && <span >{error.lastName}</span>}
 
                     <label htmlFor="direccion">Dirección:</label>
                     <input
                         type="text"
-                        id="direccion"
-                        name='direccion'
-                        value={form.direccion}
-                        onChange={handlerChange}
+                        id="address"
+                        name='address'
+                        value={form.address}
+                        onChange={(e) => setForm({...form,address:e.target.value})}
                     />
-                    {error.direccion && <span >{error.direccion}</span>} 
-
+                    {error.address && <span >{error.address}</span>} 
+                    
+                    <label htmlFor="pais">Pais :</label>
+                    <input
+                        type="text"
+                        id="pais"
+                        name='pais'
+                        value={form.pais}
+                        onChange={(e) => setForm({...form,pais:e.target.value})}
+                    />
 
                     <label htmlFor="email">Email:</label>
                     <div className="input-group">
-                        <span className="input-group-addon">
-                            <FaGoogle />
-                        </span>
                         <input
                             type="email"
                             id="email"
@@ -242,16 +252,15 @@ const FormularioAdopcion = () => {
 
                     <label htmlFor="numero-contacto">Número de contacto:</label>
                     <div className="input-group">
-                        {obtenerCodigoArea()}
                         <input
                             type="text"
                             id="numero-contacto"
                             placeholder="Número de contacto"
                             name='numeroContacto'
-                            value={form.numeroContacto}
-                            onChange={handlerChange}
+                            value={form.phone}
+                            onChange={(e) => setForm({...form,phone:e.target.value})}
                         />
-                        {error.numeroContacto && <span >{error.numeroContacto}</span>} 
+                        {error.phone && <span >{error.phone}</span>} 
 
                     </div>
 
@@ -259,16 +268,16 @@ const FormularioAdopcion = () => {
                     <textarea
                         id="situacion-economica"
                         name='situacionEconomica'
-                        value={form.situacionEconomica}
-                        onChange={handlerChangeText}
+                        value={form.economicSituation}
+                        onChange={(e) => setForm({...form,economicSituation:e.target.value})}
                     ></textarea>
-                    {error.situacionEconomica && <span >{error.situacionEconomica}</span>} 
+                    {error.economicSituation && <span >{error.economicSituation}</span>} 
 
                     <label htmlFor="experiencia-mascotas">¿Tienes experiencia previa con mascotas?</label>
                     <select
                         id="experiencia-mascotas"
-                        value={experienciaMascotas}
-                        onChange={(e) => setExperienciaMascotas(e.target.value)}
+                        value={form.previousPetExperience}
+                        onChange={(e) => setForm({...form,previousPetExperience:e.target.value})}
                     >
                         <option value="">Selecciona una opción</option>
                         <option value="Si">Sí</option>
@@ -282,8 +291,8 @@ const FormularioAdopcion = () => {
                             id="reaccion-alergica-si"
                             name="reaccion-alergica"
                             value="si"
-                            checked={reaccionAlergica === 'si'}
-                            onChange={() => setReaccionAlergica('si')}
+                            checked={form.petAllergy === 'si'}
+                            onChange={() => setForm({...form,petAllergy:'si'})}
                         />
                         <label htmlFor="reaccion-alergica-si">Sí</label>
                           </div>
@@ -293,8 +302,8 @@ const FormularioAdopcion = () => {
                             id="reaccion-alergica-no"
                             name="reaccion-alergica"
                             value="no"
-                            checked={reaccionAlergica === 'no'}
-                            onChange={() => setReaccionAlergica('no')}
+                            checked={form.petAllergy === 'no'}
+                            onChange={() => setForm({...form,petAllergy:'no'})}
                         />
                         <label htmlFor="reaccion-alergica-no">No</label>
                    
@@ -304,19 +313,19 @@ const FormularioAdopcion = () => {
                     <input
                         type="checkbox"
                         id="hogar-adecuado"
-                        checked={hogarAdecuado}
-                        onChange={(e) => setHogarAdecuado(e.target.checked)}
+                        checked={form.properHome}
+                        onChange={(e) => setForm({...form,properHome:e.target.checked})}
                     />
                         </div>
-                    <label htmlFor="tiempo-dedicado">¿Cuánto tiempo podrías dedicarle a la mascota diariamente?</label>
+                    <label htmlFor="dailyPetTime">¿Cuánto tiempo podrías dedicarle a la mascota diariamente?</label>
                     <input
                         type="text"
-                        id="tiempo-dedicado"
-                        name='tiempoDedicado'
-                        value={form.tiempoDedicado}
-                        onChange={handlerChange}
+                        id="dailyPetTime"
+                        name='dailyPetTime'
+                        value={form.dailyPetTime}
+                        onChange={(e) => setForm({...form,dailyPetTime:e.target.value})}
                     />
-                    {error.tiempoDedicado && <span >{error.tiempoDedicado}</span>}
+                    {error.dailyPetTime && <span >{error.dailyPetTime}</span>}
 
                     <label>
                         
@@ -331,8 +340,8 @@ const FormularioAdopcion = () => {
                     <label>
                         <input
                             type="checkbox"
-                            checked={mayorEdad}
-                            onChange={(e) => setMayorEdad(e.target.checked)}
+                            checked={form.over18}
+                            onChange={(e) => setForm({...form,over18:e.target.checked})}
                         />
                         Declaro que soy mayor de 18 años
                     </label>

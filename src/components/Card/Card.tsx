@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaHeart, FaStar, FaInfoCircle, FaBook } from 'react-icons/fa';
+import React from 'react';
+//import { FaHeart, FaStar, FaInfoCircle, FaBook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './petCards.css';
 
@@ -13,22 +13,22 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
     //const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-    const [likes, setLikes] = useState(0);
-    const [isFavorite, setIsFavorite] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
+  //  const [likes, setLikes] = useState(0);
+   // const [isFavorite, setIsFavorite] = useState(false);
+   // const [isLiked, setIsLiked] = useState(false);
 
-    const handleLikeClick = () => {
-        setLikes((prevLikes) => prevLikes + 1);
-        setIsLiked(true);
-    };
+    // const handleLikeClick = () => {
+    //     setLikes((prevLikes) => prevLikes + 1);
+    //     setIsLiked(true);
+    // };
 
-    const handleFavoriteClick = () => {
-        setIsFavorite((prevIsFavorite) => !prevIsFavorite);
-    };
+    // const handleFavoriteClick = () => {
+    //     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    // };
 
-    const handleDetailClick = () => {
-        console.log(`Redirigiendo al detalle de ${name}`);
-    };
+    // const handleDetailClick = () => {
+    //     console.log(`Redirigiendo al detalle de ${name}`);
+    // };
 
    // const handlePrevClick = () => {
     //     setSelectedImageIndex((prevIndex) => {
@@ -93,15 +93,16 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
                 </div>
                 <div className="age">Edad: {age}</div>
                 <div className="icons">
-                    <FaHeart className={`icon ${isLiked ? 'liked' : ''}`} onClick={handleLikeClick} />
+                    {/* <FaHeart className={`icon ${isLiked ? 'liked' : ''}`} onClick={handleLikeClick} />
                     <FaStar className={`icon ${isFavorite ? 'favorite' : ''}`} onClick={handleFavoriteClick} />
-                    <FaInfoCircle className="icon" onClick={handleDetailClick} />
+                    <FaInfoCircle className="icon" onClick={handleDetailClick} /> */}
                     <Link to={`/detail/${id}`} className="detail-link">
-                        <FaBook />
+                        Detalles
+                        
                     </Link>
                 </div>
             </div>
-            <div className="likes">Likes: {likes}</div>
+            {/* <div className="likes">Likes: {likes}</div> */}
         </div>
     );
 };

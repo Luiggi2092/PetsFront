@@ -2,6 +2,7 @@ import style from './modal.module.css';
 import {useState} from "react"
 import {useDispatch} from "react-redux"
 import Swal from 'sweetalert2'
+import axios from "axios";
 import { PostProduct,getProductos,getTypesProducts } from "../../redux/actions"
 import { ProductService } from '../../services/ProductService';
 
@@ -13,13 +14,15 @@ interface Props {
 
 
 
+const url = 'https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload'
+const UPLOAD_PRESET = 'Products'
 
 
 
 
 const Modal: React.FC<Props> = ({ openModal, cambiarEstado,CateProd }) => {
     
-const [image,setImage] = useState<string | Blob>('');
+const [avance, setAvance] = useState(0);
 const dispatch = useDispatch();
 
 const [form,setForm]= useState({
@@ -34,10 +37,25 @@ const [form,setForm]= useState({
 
 
 
-const handleImageUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if (evt.target.files != null) {
-      setImage(evt.target.files[0]); //error
-    }
+const handleImageUpload = async(evt: React.ChangeEvent<HTMLInputElement>) => {
+    const file: any = evt.target.files && evt.target.files[0];
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+
+    const res = await axios.post(url, formData, {
+        headers: {
+            'Content-Type': 'multipart/formData'
+        },
+        onUploadProgress(e) {
+            const progress = Math.round((100 * e.loaded || 1) / (e.total || 1));
+            setAvance(progress);
+        }
+    });
+    console.log(res);
+    setForm({ ...form, imagen: res.data.secure_url })
+
   }; 
 
 
@@ -71,28 +89,7 @@ const ChangeHandleSelect = (evt: React.ChangeEvent<HTMLSelectElement>)=> {
 }
 
     
-const cargarImagen =  (event:any)=>{
-     event.preventDefault();
-    
-    
-    const data = new FormData();
-    data.append("file",image);
-    data.append("upload_preset","Products")
-    data.append("cloud-name","dpq8kiocc")
 
-    fetch("https://api.cloudinary.com/v1_1/dpq8kiocc/image/upload",{
-        method: 'post',
-        body:data
-    })
-    .then((res)=> res.json())
-    .then(data => {
-        setForm({...form,imagen:data.url})
-    })
-    .catch(error => {
-        console.log('Error al cargar',error);
-        
-    });
-};
 
 
     const submitHandler = (event:any)=> {
@@ -140,8 +137,8 @@ const cargarImagen =  (event:any)=>{
                             <img src={form.imagen== "" ? "https://res.cloudinary.com/dpq8kiocc/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688335705/Products/uqejaqpcos3lp630roqi.jpg?_s=public-apps": form.imagen} className={style.imaupload}/>
                             <br/>
                             <input type="file" onChange={handleImageUpload}></input>
+                            <progress value={avance} max={100} id="progress-bar" />    
                             <br/>
-                            <button onClick={cargarImagen}>UPLOAD</button>
                             <br/>
                             <label>Producto:</label>
                             <br/>

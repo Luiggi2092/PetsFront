@@ -1,17 +1,16 @@
 import React, { useState,useEffect } from 'react';
 import { Collapse } from 'react-bootstrap';
+
 import {
     BsHouseDoorFill,
     BsBoxArrowInRight,
-    BsSearch,
     BsCart3,
     BsPersonCircle,
-    BsGearFill,
-    BsChatDotsFill,
+    //BsGearFill,
+    //BsChatDotsFill,
     BsPerson,
     BsHeart,
-    BsCart,
-    BsPencilSquare,
+    //BsPencilSquare,
 } from 'react-icons/bs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../../../assets/sinfondo.png';
@@ -21,19 +20,20 @@ import { Link } from 'react-router-dom';
 import { useSelector }from "react-redux"
 
 const Navbar: React.FC = () => {
-    const [searchQuery, setSearchQuery] = useState('');
     const [openModal, setOpenModal] = useState(false);
+    
     const count = useSelector((state:any)=> state.count);
     const Car = useSelector((state:any)=> state.Shop);
-    const [counts,setCount] = useState(count);
+    //const [counts] = useState(count);
  
-    const getData = ()=> {
-        return localStorage.getItem('contShop')
+    // const getData = ()=> {
+        
+    //     return localStorage.getItem('contShop')
       
-     }
+    //  }
   
      useEffect(()=>{
-        setCount(getData()); 
+      // setCount(getData()); 
     },[])
   
     
@@ -47,27 +47,13 @@ const Navbar: React.FC = () => {
   
     const [isCollapsed, setIsCollapsed] = useState(false);
     
-    
     const [activeMenu, setActiveMenu] = useState('');
 
    
-    const stores = [
-        { id: 1, name: 'Tienda 1', link: '/store1' },
-        { id: 2, name: 'Tienda 2', link: '/store2' },
-        { id: 3, name: 'Tienda 3', link: '/store3' },
-    ];
+    
 
-    const veterinaries = [
-        { id: 1, name: 'Veterinaria A', link: '/veterinaria-a' },
-        { id: 2, name: 'Veterinaria B', link: '/veterinaria-b' },
-        { id: 3, name: 'Veterinaria C', link: '/veterinaria-c' },
-    ];
-
-    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        console.log('Search query:', searchQuery);
-        // Agregar lógica para realizar la búsqueda de productos
-    };
+    
+    
 
     const handleCart = () => {
         console.log('Mostrando carrito de compras...');
@@ -90,6 +76,8 @@ const Navbar: React.FC = () => {
 
     // Calcular el total a pagar sumando los precios de los productos en el carrito
     
+  
+
     // Generar el enlace de pago con el total a pagar
    
     
@@ -97,7 +85,7 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
             <div className="container">
-                <Link to="/homecliente" className="navbar-brand">
+                <Link to="/home" className="navbar-brand">
                     <img src={Logo} alt="Logo" />
                 </Link>
                 <ModalShop openModal={openModal} cambiarEstado={setOpenModal} Car={Car} />
@@ -117,7 +105,7 @@ const Navbar: React.FC = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link to="/homecliente" className="nav-link">
+                                <Link to="/home" className="nav-link">
                                     <BsHouseDoorFill /> Home
                                 </Link>
                             </li>
@@ -185,11 +173,11 @@ const Navbar: React.FC = () => {
                                     ))}
                                 </ul>
                             </li> */}
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link to="/donations" className="nav-link">
                                     Donaciones
                                 </Link>
-                            </li>
+                            </li> */}
                             {/* <li className={`nav-item dropdown ${activeMenu === 'veterinaries' ? 'show' : ''}`}>
                                 <Link
                                     to="#"
@@ -243,33 +231,14 @@ const Navbar: React.FC = () => {
                                 </Link>
                                 <ul className={`dropdown-menu ${activeMenu === 'profile' ? 'show' : ''}`}>
                                     <li>
-                                        <Link to="/purchases" className="nav-link">
-                                            <BsPerson /> Mi Perfil
+                                        <Link to="/home" className="nav-link" >
+                                            <BsPerson />Mascotas
                                         </Link>
                                     </li>
+                                   
                                     <li>
-                                        <Link to="/purchases" className="nav-link">
-                                            <BsCart /> Mis Compras
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/purchases" className="nav-link">
-                                            <BsHeart /> Favoritos
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/purchases" className="nav-link">
-                                            <BsPencilSquare /> Publicar una Mascota
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/settings" className="dropdown-item">
-                                            <BsGearFill /> Configuración
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/messages" className="dropdown-item">
-                                            <BsChatDotsFill /> Mensajes
+                                        <Link to="/petshop" className="nav-link">
+                                            <BsHeart />Productos
                                         </Link>
                                     </li>
                                     <li>

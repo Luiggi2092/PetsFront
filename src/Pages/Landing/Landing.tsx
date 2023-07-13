@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { quienesSomos, nuestrosServ, sinFondoNegro, sinFondoBlanco, Amberlis, John, Luis, Ricardo, Matheus, Magali, David } from './imagenes/index';
@@ -192,7 +191,7 @@ const Landing = () => {
                             onMouseLeave={handleMouseLeave}
                         />
                         <div className={style.informacion}>
-                            <h3 className={style.nombre}>David Hernández</h3>
+                            <h3 className={style.nombre}>David Perez</h3>
                             <p className={style.puesto}>Desarrollador Backend</p>
                             <div className={style.redes}>
                                 <a href="https://www.linkedin.com/in/reydavid1/" target="_blank"><i className="fab fa-linkedin icono-red"></i></a>
@@ -227,4 +226,3 @@ const Landing = () => {
 };
 
 export default Landing;
-

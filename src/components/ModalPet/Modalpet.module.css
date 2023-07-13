@@ -79,6 +79,11 @@ input[type="file"] {
     height: 150px;
  }
 
+ .but{
+    margin-left: 0px;
+    margin-top: 12px;
+}
+
 
 
 input,

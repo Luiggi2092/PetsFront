@@ -31,6 +31,7 @@ const Login = () => {
     setUser(userObject)
   }
 
+
   useEffect(() => {
     // global google
     google.accounts.id.initialize({
@@ -51,7 +52,7 @@ const Login = () => {
   // }
 
   const handleHome = () => {
-    navigate('/');
+    navigate('/home');
   }
 
   const ChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,18 +65,48 @@ const Login = () => {
     })
   }
 
+
+
+
   const submitHandler = (event: any) => {
+    
     event.preventDefault();
     if (form.email &&
       form.password) {
       (async function () {
         const response = await UserService.PostLogueo(form);
+
+        console.log(response.data);
         
-        if(response.data.accessToken){
+        
+          
+        if(response.data){
+           
           localStorage.setItem('TokenUsu', JSON.stringify(response.data.accessToken));
           localStorage.setItem('TypoUsu', JSON.stringify(response.data.user.UsersType.name));
-           navigate('/homecliente');
-         
+          localStorage.setItem('idUsu', JSON.stringify(response.data.user.UsersTypeId)); 
+
+          const isToken = localStorage.getItem('TokenUsu');
+          const Tipo = localStorage.getItem('TypoUsu');
+          const convert = Tipo ? JSON.parse(Tipo) : null;
+       
+
+         if(isToken && convert === "usuario" || 
+          isToken && convert === "https://accounts.google.com") {  
+
+          console.log("holi")
+           navigate('/home');
+          }
+          
+
+          if(isToken && convert === "organizacion"){
+            navigate('/organizacion')     
+          }
+
+          if(isToken && convert === "admin"){
+            navigate('/admin')
+          }
+
         }
       })();
     }
@@ -109,7 +140,7 @@ const Login = () => {
 
                 </div>
               <div className={user ? "profile" : "hidden"}>
-                {user.picture && <Link to={'/homecliente'}>
+                {user.picture && <Link to={'/home'}>
                   <img src={user.picture} alt="" />
                 </Link>}
               </div> 

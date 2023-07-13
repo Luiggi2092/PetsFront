@@ -21,5 +21,13 @@ export class PetsService {
         return axios.get('/Vaccines')
     }
 
+    public static async PostForm(Fo:any):Promise<any>{
+       
+         return axios.post('/forms', Fo)
 
+        }
+          
+    
+
+    
 }
