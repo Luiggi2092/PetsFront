@@ -15,6 +15,7 @@ interface Forms {
     petAllergy: string,
     dailyPetTime: string,
     estado: string,
+    petId: string,
 }
 
 const AdoptionFormList: React.FC = () => {
@@ -24,7 +25,16 @@ const AdoptionFormList: React.FC = () => {
         const fetchAdoptionsForms = async () => {
             try {
                 const response = await axios.get<Forms[]>('/forms');
-                setForms(response.data);
+                const formsWithPets = await Promise.all(
+                    response.data.map(async (form) => {
+                        const petsResponse = await axios.get('/pets');
+                        const pets = petsResponse.data;
+                        const pet = pets.find((pet: any) => pet.id === form.petId);
+                        const petName = pet ? pet.name : 'Nombre no encontrado';
+                        return { ...form, petId: petName };
+                    })
+                );
+                setForms(formsWithPets);
             } catch (error) {
                 console.error(error);
             }
@@ -92,6 +102,7 @@ const AdoptionFormList: React.FC = () => {
                         <th>Experiencia previa <br /> con mascotas</th>
                         <th>Alergia a <br /> mascotas</th>
                         <th>Tiempo a dedicar <br /> a la mascota</th>
+                        <th>Id pet</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -108,6 +119,7 @@ const AdoptionFormList: React.FC = () => {
                             <td>{form.previousPetExperience}</td>
                             <td>{form.petAllergy}</td>
                             <td>{form.dailyPetTime}</td>
+                            <td>{form.petId}</td>
                             <td className={getEstadoColor(form.estado)} >{form.estado}</td>
                             <td>
                                 {form.estado !== 'aceptado' && form.estado !== 'rechazado' && (
