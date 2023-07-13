@@ -18,3 +18,9 @@ export class typeUsers {
         return axios.get('/usertype');
     }
 }
+
+export class FormAdoption{
+    public static createForm(form:any): Promise<any>{
+        return axios.post('/forms', form)
+    }
+}

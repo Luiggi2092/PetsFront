@@ -1,97 +1,25 @@
-import React, { ChangeEvent, useState } from 'react';
+import { useState, ChangeEvent, MouseEvent } from "react";
+import { FormAdoption } from "../../../services/UserService";
 import { FaGoogle } from 'react-icons/fa';
 import './form.css'
-import { FormAdoption } from '../../../services/UserService';
 
-const FormularioAdopcion = () => {
-    /* const [codigoPais, setCodigoPais] = useState('');
-    const [hogarAdecuado, setHogarAdecuado] = useState(false); */
-    // const [tiempoDedicado, setTiempoDedicado] = useState('');
-    const [terminosCondiciones, setTerminosCondiciones] = useState(false);
-    const [enviado, setEnviado] = useState(false);
+interface FormState {
+    name: string;
+    lastName: string;
+    address: string;
+    pais: string;
+    email: string;
+    phone: string;
+    economicSituation: string;
+    previousPetExperience: string;
+    petAllergy: string;
+    properHome: boolean;
+    dailyPetTime: string;
+    over18: boolean;
+}
 
-    /* const obtenerCodigoArea = () => {
-        const codigosArea: { [key: string]: string } = {
-            AR: '+54', // Argentina
-            BR: '+55', // Brasil
-            CL: '+56', // Chile
-            CO: '+57', // Colombia
-            CR: '+506', // Costa Rica
-            CU: '+53', // Cuba
-            DO: '+1-809', // República Dominicana
-            EC: '+593', // Ecuador
-            ES: '+34', // España
-            GT: '+502', // Guatemala
-            HN: '+504', // Honduras
-            MX: '+52', // México
-            NI: '+505', // Nicaragua
-            PA: '+507', // Panamá
-            PE: '+51', // Perú
-            PY: '+595', // Paraguay
-            SV: '+503', // El Salvador
-            UY: '+598', // Uruguay
-            VE: '+58', // Venezuela
-        };
+const FormularioAdopcion2 = () => {
 
-        const opcionesCodigoArea = Object.entries(codigosArea).map(([pais, codigoArea]) => (
-            <option key={pais} value={codigoArea}>
-                {pais} - {codigoArea}
-            </option>
-        ));
-
-        return (
-            <select
-                id="codigo-pais"
-                value={codigoPais}
-                onChange={(e) => setCodigoPais(e.target.value)}
-            >
-                <option value="">Selecciona un país</option>
-                {opcionesCodigoArea}
-            </select>
-        );
-    }; */
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        // Validaciones
-        if (!form.name || !form.lastName || !form.address || !form.email || !form.phone || !form.economicSituation || !form.previousPetExperience || !form.dailyPetTime || !form.petAllergy) {
-            alert('Por favor, completa todos los campos obligatorios.');
-            return;
-        }
-
-        if (!terminosCondiciones) {
-            alert('Debes aceptar los términos y condiciones.');
-            return;
-        }
-
-        if (!form.over18) {
-            alert('Debes ser mayor de 18 años para enviar el formulario.');
-            return;
-        }
-
-        if (!form.properHome) {
-            alert('Debes contar con un hogar apto para tu mascota.')
-        }
-        // Marcarel formulario como enviado exitosamente
-        setEnviado(true);
-    }; 
-
-    //  ------------------- validaciones -----------------------------
-    interface FormState {
-        name: string;
-        lastName: string;
-        address: string;
-        pais: string;
-        email: string;
-        phone: string;
-        economicSituation: string;
-        previousPetExperience: string;
-        petAllergy: string;
-        properHome: boolean;
-        dailyPetTime: string;
-        over18: boolean;
-    }
-        
     const [form, setForm] = useState<FormState>({
         name: "",
         lastName: "",
@@ -136,14 +64,6 @@ const FormularioAdopcion = () => {
         console.log(value)
     }
 
-    const handlerChangeText = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-        const property = event.target.name;
-        const value = event.target.value;
-        setForm({ ...form, [property]: value });
-        setError(validate({ ...form, [property]: value } as FormState));
-        console.log(value);
-      };
-
     const validate = (input: FormState): FormState => {
         let error: FormState = {
             name: "",
@@ -181,9 +101,9 @@ const FormularioAdopcion = () => {
             error.email = "formato esperado: ejemplo@hotmail.com";
         } else error.email = "";
         
-        /* if(!input.phone.match(/^[0-9-]{11}$/)) {
+        if(!input.phone.match(/^[0-9-]{11}$/)) {
             error.phone = "Formato esperado ejemplo: 22222-22222 . No se permiten caracteres especiales o letras";
-        } else error.phone = ""; */
+        } else error.phone = ""; 
         
         if(!input.economicSituation.match(/^[a-zA-Z0-9() ,.]+$/)) {
             error.economicSituation = "No se permiten caracteres especiales";
@@ -197,9 +117,20 @@ const FormularioAdopcion = () => {
             error.dailyPetTime = "No se permiten caracteres especiales";
         } else error.dailyPetTime = "";
 
+        /* if (!form.terminosCondiciones) {
+            alert('Debes aceptar los términos y condiciones.');
+        } */
+
+        if (!form.over18) {
+            alert('Debes ser mayor de 18 años para enviar el formulario.');
+        }
+
+        if (!form.properHome) {
+            alert('Debes contar con un hogar apto para tu mascota.')
+        }
+
         return error;
     }
-
     const handlerSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         if (error.name === null && error.lastName === null && error.address === null &&error.email === null && error.phone === null && error.economicSituation === null && error.dailyPetTime === null){
@@ -222,17 +153,15 @@ const FormularioAdopcion = () => {
             over18: false,
         })}
         else {alert("Completar los campos requeridos.")
-        
     }
     }
     
-
     return (
         <div className='formulario-adopcion'>
             <h2>Formulario de Adopción</h2>
-            {enviado ? (
+            {/* {enviado ? (
                 <p>Formulario enviado exitosamente. Nos pondremos en contacto contigo pronto.</p>
-            ) : (
+            ) : ( */}
                 <form className='form' /* onSubmit={handleSubmit} */>
                     <label htmlFor="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="name" value={form.name} onChange={handlerChange}/>
@@ -268,8 +197,8 @@ const FormularioAdopcion = () => {
                     </div>
 
                     <label htmlFor="situacion-economica">Situación económica o estabilidad laboral:</label>
-                    <textarea id="situacion-economica" name='economicSituation' value={form.economicSituation} onChange={handlerChangeText}
-                    ></textarea> 
+                    <input id="situacion-economica" name='economicSituation' value={form.economicSituation} onChange={handlerChange}
+                    ></input> 
                     {error.economicSituation && <span >{error.economicSituation}</span>} 
 
                     <label htmlFor="experiencia-mascotas">¿Tienes experiencia previa con mascotas?</label>
@@ -310,15 +239,14 @@ const FormularioAdopcion = () => {
                     <input type="text" id="tiempo-dedicado" name='dailyPetTime' value={form.dailyPetTime} onChange={handlerChange}/>
                     {error.dailyPetTime && <span >{error.dailyPetTime}</span>}
 
-                    <label>
-                        
+                    {/* <label>
                         <input
                             type="checkbox"
                             checked={terminosCondiciones}
                             onChange={(e) => setTerminosCondiciones(e.target.checked)}
                         />
                         Acepto los términos y condiciones
-                    </label>
+                    </label> */}
 
                     <label>
                         <input
@@ -331,9 +259,9 @@ const FormularioAdopcion = () => {
 
                     <button type="submit" onClick={handlerSubmit}>Enviar</button>
                 </form>
-            )} 
+            {/* )} */}
         </div>
     );
-};
+}
 
-export default FormularioAdopcion;
+export default FormularioAdopcion2
