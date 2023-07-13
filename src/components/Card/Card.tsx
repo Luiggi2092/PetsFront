@@ -93,15 +93,16 @@ const Card: React.FC<CardProps> = ({ id,name, age, image }) => {
                 </div>
                 <div className="age">Edad: {age}</div>
                 <div className="icons">
-                    <FaHeart className={`icon ${isLiked ? 'liked' : ''}`} onClick={handleLikeClick} />
+                    {/* <FaHeart className={`icon ${isLiked ? 'liked' : ''}`} onClick={handleLikeClick} />
                     <FaStar className={`icon ${isFavorite ? 'favorite' : ''}`} onClick={handleFavoriteClick} />
-                    <FaInfoCircle className="icon" onClick={handleDetailClick} />
+                    <FaInfoCircle className="icon" onClick={handleDetailClick} /> */}
                     <Link to={`/detail/${id}`} className="detail-link">
+                        Detalles
                         <FaBook />
                     </Link>
                 </div>
             </div>
-            <div className="likes">Likes: {likes}</div>
+            {/* <div className="likes">Likes: {likes}</div> */}
         </div>
     );
 };

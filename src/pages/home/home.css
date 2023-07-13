@@ -10,6 +10,7 @@
 }
 
 .home {
+    height: 1000px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -83,11 +84,11 @@ background-color: rgba(10, 10, 10, 0.8);
 .home {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     padding: 15px;
     /* Ajusta el valor de padding según tus necesidades */
-    margin-top: 10px;
+    /* margin-top: 10px; */
     /* Ajusta el valor de margin-top según tus necesidades */
 }
 /* .card-container {
