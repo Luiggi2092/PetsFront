@@ -15,6 +15,7 @@ import Login from './Pages/inicio/InicioSesion';
 import Registro from './Pages/registro/Registrate';
 import OrgDashboard from './Pages/orgDashboard/orgDashboard';
 import FormularioAdopcion from '../src/components/ClientHome/formAdopcion/FormularioAdopcion'
+import AdminView from './Pages/Admin/AdminView';
 
 const App: React.FC = () => {
     const shouldRenderNavbar = true;
@@ -39,6 +40,7 @@ const App: React.FC = () => {
                 (<><Nav/><PetDetail/></>):(<PetDetail/>)}/>
                 <Route path="/organizacion" element={ shouldRenderNavbar ?
                 (<><Nav/><OrgDashboard/></>):(<OrgDashboard/>)}/>
+                <Route path="/admin" element={<AdminView />} />
                 <Route path="/homecliente" element={ shouldRenderNavbar ?
                 (<><Nav/><HomeCliente /></>):(<HomeCliente />)} />
                 <Route path="/detail/:id" element={ shouldRenderNavbar ?

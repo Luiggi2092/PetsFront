@@ -192,7 +192,7 @@ const Landing = () => {
                             onMouseLeave={handleMouseLeave}
                         />
                         <div className={style.informacion}>
-                            <h3 className={style.nombre}>David Hernández</h3>
+                            <h3 className={style.nombre}>David Perez</h3>
                             <p className={style.puesto}>Desarrollador Backend</p>
                             <div className={style.redes}>
                                 <a href="https://www.linkedin.com/in/reydavid1/" target="_blank"><i className="fab fa-linkedin icono-red"></i></a>
